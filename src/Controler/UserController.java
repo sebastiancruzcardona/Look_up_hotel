@@ -25,25 +25,23 @@ public class UserController {
 
     }
 
-//metodo que guarda un usuario en la base de datos
-    public void Insert(String name, int edad, String email) {
-
-// Creamos un objeto de la clase ConexionMySQL
-        // Establecemos la conexión con la base de datos
+    //This method inserts a new row in table "User" with de provided data of a new user 
+    public void Insert(String name, String  email, String password, String contact) {
         try (Connection conn = conexion.conectarMySQL()) {
             // Verificamos si la conexión fue exitosa
             if (conn != null) {
                 // Ejemplo de INSERT
-                String insertSQL = "INSERT INTO Users (nombre,correo,edad) VALUES (?, ?,?  )";
+                String insertSQL = "INSERT INTO User (full_name,email,password,contact) VALUES (?,?,?,?)";
                 try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
                     pstmt.setString(1, name);
                     pstmt.setString(2, email);
-                    pstmt.setInt(3, edad);
+                    pstmt.setString(3, password);
+                    pstmt.setString(4, contact);
                     
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        System.out.println("Insert successful ");
+                        System.out.println("Insert successful");
                     } else {
                         System.out.println("i cant insert the data");
                     }
@@ -64,7 +62,7 @@ public class UserController {
         try (Connection conn = conexion.conectarMySQL()) {
 
             if (conn != null) {
-                String updateSQL = "UPDATE Users SET nombre = ?,  edad = ?  WHERE correo= ?";
+                String updateSQL = "UPDATE User SET nombre = ?,  edad = ?  WHERE correo= ?";
                 try (PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
                     pstmt.setString(1, name);
                     pstmt.setString(3, email);
@@ -87,7 +85,7 @@ public class UserController {
         try (Connection conn = conexion.conectarMySQL()) {
             if (conn != null) {
 
-                String selectSQL = "SELECT * FROM Users";
+                String selectSQL = "SELECT * FROM User";
 
                 try (PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
                     ResultSet rs = pstmt.executeQuery();
@@ -110,7 +108,7 @@ public class UserController {
     public void delete(String nombre) {
         try (Connection conn = conexion.conectarMySQL()) {
             if (conn != null) {
-                String deleteSQL = "DELETE FROM Users WHERE nombre = ?";
+                String deleteSQL = "DELETE FROM User WHERE nombre = ?";
                 try (PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
                     pstmt.setString(1, nombre);
                     pstmt.executeUpdate();
