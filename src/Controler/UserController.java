@@ -5,6 +5,7 @@
 package Controler;
 
 import Connetion.ConexionMySQL;
+import exceptions.NullConnectionException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,101 +26,86 @@ public class UserController {
 
     }
 
-    //This method inserts a new row in table "User" with de provided data of a new user 
-    public void Insert(String name, String  email, String password, String contact) {
-        try (Connection conn = conexion.conectarMySQL()) {
-            // Verificamos si la conexión fue exitosa
-            if (conn != null) {
-                // Ejemplo de INSERT
-                String insertSQL = "INSERT INTO User (full_name,email,password,contact) VALUES (?,?,?,?)";
-                try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
-                    pstmt.setString(1, name);
-                    pstmt.setString(2, email);
-                    pstmt.setString(3, password);
-                    pstmt.setString(4, contact);
-                    
-                    int rowsAffected = pstmt.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        System.out.println("Insert successful");
-                    } else {
-                        System.out.println("i cant insert the data");
-                    }
-                }
-
-            } else {
-                System.out.println("No se puedo establecer la conexion con la base de datos");
-            }
-        } catch (SQLException e) {
-            System.out.println("Ocurrio un error al relizar la seleccion de la base de datos");
-            e.printStackTrace();
+    //This method establishes the connection to database, which is necessary to execute the other methods.
+    //If connection is null, throws a NullConnectionException
+    public Connection connect() { 
+        Connection conn = conexion.conectarMySQL();//Al no estar este dentro de un try with resources sí se ejecuta el metodo .close()? habría que hacer un singleton de conexión?
+        if (conn != null) {
+            return conn;
         }
-
+        throw new NullConnectionException();
     }
 
-    public void Update(String name, int edad, String email) throws SQLException {
+    //This method inserts a new row in table "User" with de provided data of a new user 
+    public void Insert(String name, String email, String password, String contact) { //paste: 
+        String insertSQL = "INSERT INTO User (full_name,email,password,contact) VALUES (?,?,?,?)";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
+            pstmt.setString(4, contact);
 
-        try (Connection conn = conexion.conectarMySQL()) {
+            int rowsAffected = pstmt.executeUpdate();
 
-            if (conn != null) {
-                String updateSQL = "UPDATE User SET nombre = ?,  edad = ?  WHERE correo= ?";
-                try (PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
-                    pstmt.setString(1, name);
-                    pstmt.setString(3, email);
-                    pstmt.setInt(2, edad);
-                    pstmt.executeUpdate();
-
-                    int rowsAffected = pstmt.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        System.out.println("Inser");
-                    }
-
-                }
-
+            if (rowsAffected > 0) {
+                System.out.println("Successful insertion");
+            } else {
+                System.out.println("No insertion was made");
             }
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for data insertion");
+            e.printStackTrace();
+        }
+    }
+
+    //
+    public void Update(String name, String email, String password, String contact) {
+        String updateSQL = "UPDATE User SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
+            pstmt.setString(4, contact);
+            pstmt.setString(5, email);
+            pstmt.executeUpdate();
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Successfull update");
+            } else {
+                System.out.println("No update was made");
+            }
+
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for data update");
+            e.printStackTrace();
         }
     }
 
     public void select() {
-        try (Connection conn = conexion.conectarMySQL()) {
-            if (conn != null) {
+        String selectSQL = "SELECT * FROM User";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+            ResultSet rs = pstmt.executeQuery();
 
-                String selectSQL = "SELECT * FROM User";
-
-                try (PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
-                    ResultSet rs = pstmt.executeQuery();
-
-                    while (rs.next()) {
-                        System.out.println("Name: " + rs.getString("nombre") + ",email: " + rs.getString("correo") + ", edad: " + rs.getString("edad"));
-                    }
-
-                }
-            } else {
-                System.out.println("No se puedo establecer la conexion con la base de datos");
+            while (rs.next()) {
+                System.out.println("Id: " + rs.getInt("id") + ", name: " + rs.getString("full_name") + ", email: " + rs.getString("email") + ", password: " + rs.getString("password") + ", contact info: " + rs.getString("contact"));
             }
 
-        } catch (SQLException e) {
-            System.out.println("Ocurrio un error al relizar la seleccion de la base de datos");
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for selection");
             e.printStackTrace();
         }
     }
 
-    public void delete(String nombre) {
-        try (Connection conn = conexion.conectarMySQL()) {
-            if (conn != null) {
-                String deleteSQL = "DELETE FROM User WHERE nombre = ?";
-                try (PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
-                    pstmt.setString(1, nombre);
-                    pstmt.executeUpdate();
-                }
-            } else {
-                System.out.println("No se puedo establecer la conexion con la base de datos");
-            }
-        } catch (SQLException e) {
-            System.out.println("Ocurrio un error al relizar la seleccion de la base de datos");
+    public void delete(int id) {
+        String deleteSQL = "DELETE FROM User WHERE id = ?";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
-
     }
 }

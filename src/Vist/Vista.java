@@ -184,7 +184,10 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
-        userControler.select();
+        for(int i = 0; i < 2000; i++){
+            userControler.select();
+        }
+        
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

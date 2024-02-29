@@ -28,13 +28,13 @@ public class ConexionMySQL {
     private static final String PORT = "3306";
 
     // Ruta de nuestra base de datos (desactivamos el uso de SSL con "?useSSL=false")
-    private static final String URL = "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE + "?useSSL=false";
+    private static final String URL = "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE + "?useSSL=false&allowPublicKeyRetrieval=True";
 
     // Nombre de usuario
     private static final String USERNAME = "root";
 
     // Clave de usuario
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "clavecita1357";
 
     /**
      * Este método se encarga de establecer la conexión con la base de datos.
