@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author lugo
+ * @author Fabián Lugo - Sebastián Cruz
  */
 public class Reservation {
     

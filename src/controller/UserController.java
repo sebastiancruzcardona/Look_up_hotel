@@ -13,14 +13,14 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author fabian-lugo
+ * @author Fabián Lugo - Sebastián Cruz
  */
 public class UserController {
 
-// Creamos un objeto de la clase ConexionMySQL
+    
     public MySQLConnection conexion = new MySQLConnection();
 
-    // Establecemos la conexión con la base de datos
+    //Stablish connection to database
     public UserController() {
         this.conexion = new MySQLConnection();
 
@@ -58,7 +58,7 @@ public class UserController {
         }
     }
 
-    //
+    //This method modifies information of a previously registered user in table "User"
     public void Update(String name, String email, String password, String contact) {
         String updateSQL = "UPDATE User SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
@@ -83,6 +83,7 @@ public class UserController {
         }
     }
 
+    //This method prints out all rows from table "Users"
     public void select() {
         String selectSQL = "SELECT * FROM User";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
@@ -98,6 +99,7 @@ public class UserController {
         }
     }
 
+    //This method deletes a row of a previously registered user in table "User" searching by it's id
     public void delete(int id) {
         String deleteSQL = "DELETE FROM User WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {

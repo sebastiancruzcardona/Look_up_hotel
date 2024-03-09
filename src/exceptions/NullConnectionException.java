@@ -6,7 +6,7 @@ package exceptions;
 
 /**
  *
- * @author ASUS - JOSE
+ * @author Fabián Lugo - Sebastián Cruz
  */
 public class NullConnectionException extends RuntimeException{
 
