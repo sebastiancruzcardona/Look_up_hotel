@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controler;
+package controller;
 
-import Connetion.ConexionMySQL;
+import connection.MySQLConnection;
 import exceptions.NullConnectionException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,11 @@ import java.sql.ResultSet;
 public class UserController {
 
 // Creamos un objeto de la clase ConexionMySQL
-    public ConexionMySQL conexion = new ConexionMySQL();
+    public MySQLConnection conexion = new MySQLConnection();
 
     // Establecemos la conexión con la base de datos
     public UserController() {
-        this.conexion = new ConexionMySQL();
+        this.conexion = new MySQLConnection();
 
     }
 

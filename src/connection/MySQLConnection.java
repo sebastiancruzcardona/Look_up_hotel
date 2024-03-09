@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Connetion;
+package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author fabian-lugo
  */
-public class ConexionMySQL {
+public class MySQLConnection {
     // Librería de MySQL
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
