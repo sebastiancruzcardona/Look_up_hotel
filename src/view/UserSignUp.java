@@ -118,6 +118,11 @@ public class UserSignUp extends javax.swing.JFrame {
         btn_login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btn_login.setForeground(new java.awt.Color(67, 45, 115));
         btn_login.setText("Log in");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setBackground(new java.awt.Color(67, 45, 115));
 
@@ -227,6 +232,13 @@ public class UserSignUp extends javax.swing.JFrame {
     private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_passwordActionPerformed
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        // TODO add your handling code here:
+        UserLogin userLogin = new UserLogin();
+        userLogin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
      * @param args the command line arguments
