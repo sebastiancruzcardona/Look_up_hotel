@@ -15,6 +15,7 @@ public class UserSignUp extends javax.swing.JFrame {
      */
     public UserSignUp() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
