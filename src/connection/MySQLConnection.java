@@ -27,7 +27,7 @@ public class MySQLConnection {
     //Port
     private static final String PORT = "3306";
 
-    //Path to our database (desable SSL use with "?useSSL=false")
+    //Path to our database (disable SSL use with "?useSSL=false")
     private static final String URL = "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE + "?useSSL=false&allowPublicKeyRetrieval=True";
 
     //User name
@@ -53,7 +53,7 @@ public class MySQLConnection {
             e.printStackTrace();
         }
 
-        // Devolvemos la conexión
+        //Return the connection
         return conn;
     }
 }
