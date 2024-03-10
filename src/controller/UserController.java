@@ -36,9 +36,9 @@ public class UserController {
         throw new NullConnectionException();
     }
 
-    //This method inserts a new row in table "User" with de provided data of a new user 
+    //This method inserts a new row in table "users" with de provided data of a new user 
     public void Insert(String name, String email, String password, String contact) { //paste: 
-        String insertSQL = "INSERT INTO User (full_name,email,password,contact) VALUES (?,?,?,?)";
+        String insertSQL = "INSERT INTO users (full_name,email,password,contact) VALUES (?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
@@ -58,9 +58,9 @@ public class UserController {
         }
     }
 
-    //This method modifies information of a previously registered user in table "User"
+    //This method modifies information of a previously registered user in table "users"
     public void Update(String name, String email, String password, String contact) {
-        String updateSQL = "UPDATE User SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
+        String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
@@ -83,9 +83,9 @@ public class UserController {
         }
     }
 
-    //This method prints out all rows from table "Users"
+    //This method prints out all rows from table "users"
     public void select() {
-        String selectSQL = "SELECT * FROM User";
+        String selectSQL = "SELECT * FROM users";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             ResultSet rs = pstmt.executeQuery();
 
@@ -99,9 +99,9 @@ public class UserController {
         }
     }
 
-    //This method deletes a row of a previously registered user in table "User" searching by it's id
+    //This method deletes a row of a previously registered user in table "users" searching by it's id
     public void delete(int id) {
-        String deleteSQL = "DELETE FROM User WHERE id = ?";
+        String deleteSQL = "DELETE FROM users WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
