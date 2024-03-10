@@ -4,18 +4,19 @@
  */
 package view;
 
+import controller.UserController;
+
 /**
  *
  * @author lugo
  */
 public class UserSignUp extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UserSignUp
-     */
+    controller.UserController userController;
     public UserSignUp() {
         initComponents();
         setLocationRelativeTo(this);
+        userController = new UserController();
     }
 
     /**
@@ -202,6 +203,15 @@ public class UserSignUp extends javax.swing.JFrame {
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
         // TODO add your handling code here:
+        String username = txt_username.getText();
+        String email = txt_email.getText();
+        String password = txt_password.getText();
+        String contact = txa_contact.getText();
+        
+        userController.Insert(username, email, password, contact);
+        UserLogin userLogin = new UserLogin();
+        userLogin.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_signupActionPerformed
 
     private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
