@@ -29,7 +29,7 @@ public class UserController {
     //This method establishes the connection to database, which is necessary to execute the other methods.
     //If connection is null, throws a NullConnectionException
     public Connection connect() { 
-        Connection conn = conexion.conectarMySQL();//Al no estar este dentro de un try with resources sí se ejecuta el metodo .close()? habría que hacer un singleton de conexión?
+        Connection conn = conexion.connectMySQL();
         if (conn != null) {
             return conn;
         }

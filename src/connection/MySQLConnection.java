@@ -40,7 +40,7 @@ public class MySQLConnection {
      * This method stablishes the connection to database
      * @return Connection to database.
      */
-    public static Connection conectarMySQL() {
+    public static Connection connectMySQL() {
         Connection conn = null;
 
         try {
