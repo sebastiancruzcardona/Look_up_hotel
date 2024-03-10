@@ -14,6 +14,7 @@ public class Room {
     private String number;
     private String type;
     private double pricePerNight;
+    private boolean availability;
     private String amenities;
 
     //Constructor to create the object
@@ -22,16 +23,19 @@ public class Room {
         this.type = type;
         this.pricePerNight = pricePerNight;
         this.amenities = amenities;
+        availability = true;
     }
 
     //Constructor that brings out the object from database
-    public Room(int id, String number, String type, double pricePerNight, String amenities) {
+    public Room(int id, String number, String type, double pricePerNight, boolean availability, String amenities) {
         this.id = id;
         this.number = number;
         this.type = type;
         this.pricePerNight = pricePerNight;
+        this.availability = availability;
         this.amenities = amenities;
     }
+    
 
     public int getId() {
         return id;
@@ -59,6 +63,14 @@ public class Room {
 
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public String getAmenities() {
