@@ -9,12 +9,22 @@ package model;
  * @author Fabián Lugo - Sebastián Cruz
  */
 public class User {
+
     private int id;
     private String userName;
     private String email;
     private String password;
     private String details;
 
+//Constructor to create the object
+    public User(String userName, String email, String password, String details) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.details = details;
+    }
+
+//Constructor that brings out the object from database
     public User(int id, String userName, String email, String password, String details) {
         this.id = id;
         this.userName = userName;
@@ -62,7 +72,5 @@ public class User {
     public void setDetails(String details) {
         this.details = details;
     }
-    
-    
-    
+
 }

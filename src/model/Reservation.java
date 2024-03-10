@@ -21,6 +21,18 @@ public class Reservation {
     private String reservationStatus;
     private double totalPrice;
 
+//Constructor to create the object
+    public Reservation(User user, Hotel hotel, Room room, Date entryDate, Date departureDate, String reservationStatus, double totalPrice) {
+        this.user = user;
+        this.hotel = hotel;
+        this.room = room;
+        this.entryDate = entryDate;
+        this.departureDate = departureDate;
+        this.reservationStatus = reservationStatus;
+        this.totalPrice = totalPrice;
+    }
+
+    //Constructor that brings out the object from database
     public Reservation(int id, User user, Hotel hotel, Room room, Date entryDate, Date departureDate, String reservationStatus, double totalPrice) {
         this.id = id;
         this.user = user;
@@ -95,7 +107,5 @@ public class Reservation {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-    
-    
 
 }
