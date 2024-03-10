@@ -41,7 +41,7 @@ public class UserLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(206, 236, 242));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/4795513_2383990.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/login.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -170,6 +170,9 @@ public class UserLogin extends javax.swing.JFrame {
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
         // TODO add your handling code here:
+        UserSignUp userSignUp = new UserSignUp();
+        userSignUp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_signupActionPerformed
 
     /**
