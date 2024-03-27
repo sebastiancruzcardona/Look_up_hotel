@@ -73,6 +73,7 @@ public class RoomDAO implements RoomDAOInterface {
             pstmt.setDouble(3, pricePerNigth);
             pstmt.setBoolean(4,availability );
             pstmt.setString(5, amenitiesDetails);
+            pstmt.setString(6, roomNumber);
             
             pstmt.executeUpdate();
 

@@ -71,6 +71,7 @@ public class ImageDAO implements ImageDAOInterface {
             pstmt.setString(1, name);
             pstmt.setString(2, url);
             pstmt.setInt(3, idHotel);
+            pstmt.setInt(4, idHotel);
             pstmt.executeUpdate();
 
             int rowsAffected = pstmt.executeUpdate();

@@ -79,6 +79,7 @@ public class ReservationDAO implements ReservationDAOInterface{
             pstmt.setDate(5, (java.sql.Date) departureDate);
             pstmt.setString(6, status);
             pstmt.setDouble(7, totalPrice);
+            pstmt.setInt(8, idUser);
             pstmt.executeUpdate();
 
             int rowsAffected = pstmt.executeUpdate();
