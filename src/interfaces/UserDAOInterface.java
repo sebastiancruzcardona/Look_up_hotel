@@ -4,12 +4,20 @@
  */
 package interfaces;
 
+import java.util.Map;
+
 /**
  *
  * @author lugo
  */
 public interface UserDAOInterface {
     
+    void insert(String name, String email, String password, String contact);
     
+    void Update(String name, String email, String password, String contact);
+    
+    Map<String, Object> select();
+    
+    void delete(int id);    
     
 }
