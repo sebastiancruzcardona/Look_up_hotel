@@ -5,7 +5,7 @@
 package view;
 
 
-import daos.UserDAO;
+import services.UserService;
 
 /**
  *
@@ -13,12 +13,12 @@ import daos.UserDAO;
  */
 public class UserSignUp extends javax.swing.JFrame {
 
-    UserDAO userDAO;
+    UserService userService;
     
     public UserSignUp() {
         initComponents();
         setLocationRelativeTo(this);
-        userDAO = new UserDAO();
+        userService = new UserService();
     }
 
     /**
@@ -210,7 +210,7 @@ public class UserSignUp extends javax.swing.JFrame {
         String password = txt_password.getText();
         String contact = txa_contact.getText();
         
-        userDAO.insert(username, email, password, contact);
+        userService.insert(username, email, password, contact);
         UserLogin userLogin = new UserLogin();
         userLogin.setVisible(true);
         this.dispose();

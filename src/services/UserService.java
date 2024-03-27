@@ -15,7 +15,7 @@ public class UserService {
     
     UserDAO userDAO;
 
-    public UserService(UserDAO userDAO) {
+    public UserService() {
         userDAO = new UserDAO();
     }
     
