@@ -41,7 +41,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         throw new NullConnectionException();
     }
 
-    //This method inserts a new row in table "users" with de provided data of a new user 
+    //This method inserts a new row in table "reservations" with de provided data of a new reservation 
     @Override
     public void Insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, String status, double totalPrice) { //paste: 
         String insertSQL = "INSERT INTO reservations (id_user,id_hotel,id_room,entry_date,departure_date,status,total_price) VALUES (?,?,?,?,?,?,?)";
@@ -67,7 +67,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         }
     }
 
-    //This method modifies information of a previously registered user in table "users"
+    //This method modifies information of a previously registered user in table "reservations"
     @Override
     public void Update(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, String status, double totalPrice) {
         String updateSQL = "UPDATE reservations SET id_user = ?,  id_hotel = ?, id_room = ?, entry_date = ?, departure_date = ?, status = ?, total_price = ?  WHERE id_user = ?";
@@ -79,6 +79,7 @@ public class ReservationDAO implements ReservationDAOInterface{
             pstmt.setDate(5, (java.sql.Date) departureDate);
             pstmt.setString(6, status);
             pstmt.setDouble(7, totalPrice);
+            pstmt.setInt(8, idUser);
             pstmt.executeUpdate();
 
             int rowsAffected = pstmt.executeUpdate();
@@ -150,7 +151,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         return result ;
     }
 
-    //This method deletes a row of a previously registered user in table "users" searching by it's id
+    //This method deletes a row of a previously registered user in table "reservations" searching by it's id
     @Override
     public void delete(int id) {
         String deleteSQL = "DELETE FROM reservations WHERE id = ?";
