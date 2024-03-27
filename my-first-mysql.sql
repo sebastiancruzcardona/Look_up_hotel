@@ -31,6 +31,18 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+DROP TABLE IF EXISTS `reservation_statuses`;
+CREATE TABLE `reservation_statuses` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `reservation_statuses` (`id`, `name`) VALUES
+(1,	'Pending'),
+(2,	'Confirmed'),
+(3,	'Canceled');
+
 DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -39,15 +51,17 @@ CREATE TABLE `reservations` (
   `id_room` int NOT NULL,
   `entry_date` date NOT NULL,
   `departure_date` date NOT NULL,
-  `status` varchar(20) NOT NULL,
   `total_Price` double NOT NULL,
+  `id_reservation_statuses` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   KEY `id_hotel` (`id_hotel`),
   KEY `id_room` (`id_room`),
+  KEY `id_reservation_statuses` (`id_reservation_statuses`),
   CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`),
   CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`id_hotel`) REFERENCES `hotels` (`id`),
-  CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`id_room`) REFERENCES `rooms` (`id`)
+  CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`id_room`) REFERENCES `rooms` (`id`),
+  CONSTRAINT `reservations_ibfk_4` FOREIGN KEY (`id_reservation_statuses`) REFERENCES `reservation_statuses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -102,6 +116,12 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`
 (15,	'test7',	'test7',	'test7',	'test7',	NULL),
 (16,	'test8',	'test8',	'test8',	'test8',	NULL),
 (17,	'test10',	'test10',	'test10',	'test10',	NULL),
-(18,	'prueba11',	'prueba11',	'prueba11',	'prueba11',	NULL);
+(18,	'prueba11',	'prueba11',	'prueba11',	'prueba11',	NULL),
+(19,	'prueba12',	'prueba12',	'prueba12',	'prueba12',	NULL),
+(20,	'prueba13',	'prueba13',	'prueba13',	'prueba13',	2),
+(21,	'prueba14',	'prueba14',	'prueba14',	'prueba14',	2),
+(23,	'prueba15',	'prueba15',	'prueba15',	'prueba15',	2),
+(24,	'prueba16',	'prueba16',	'prueba16',	'prueba16',	2),
+(25,	'prueba17',	'prueba17',	'prueba17',	'prueba17',	2);
 
--- 2024-03-27 01:37:39
+-- 2024-03-27 22:16:38
