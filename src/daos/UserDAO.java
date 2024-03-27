@@ -23,17 +23,17 @@ import java.util.Map;
  */
 public class UserDAO implements UserDAOInterface{
     
-    public MySQLConnection conexion;
+    public MySQLConnection connection;
 
     //Stablish connection to database
     public UserDAO() {
-        this.conexion = new MySQLConnection();
+        this.connection = new MySQLConnection();
     }
     
     //This method establishes the connection to database, which is necessary to execute the other methods.
     //If connection is null, throws a NullConnectionException
     public Connection connect() { 
-        Connection conn = conexion.connectMySQL();
+        Connection conn = connection.connectMySQL();
         if (conn != null) {
             return conn;
         }
