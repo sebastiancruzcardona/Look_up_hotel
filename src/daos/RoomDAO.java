@@ -41,7 +41,7 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method inserts a new row in table "rooms" with de provided data of a new room
     @Override
-    public void Insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) { //paste: 
+    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) { //paste: 
         String insertSQL = "INSERT INTO rooms (room_number,type_room,price_per_night,availability,amenities_details) VALUES (?,?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, roomNumber);
@@ -65,15 +65,15 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method modifies information of a previously registered user in table "rooms"
     @Override
-    public void Update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) {
-        String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ?  WHERE room_number = ?";
+    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id) {
+        String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ?  WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
             pstmt.setDouble(3, pricePerNigth);
             pstmt.setBoolean(4,availability );
             pstmt.setString(5, amenitiesDetails);
-            pstmt.setString(6, roomNumber);
+            pstmt.setInt(6, id);
             
             pstmt.executeUpdate();
 

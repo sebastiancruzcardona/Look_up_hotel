@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public interface RoomDAOInterface {
     
-    public void Insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails);
+    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails);
     
-    public void Update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails);
+    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id);
     
     public Map<String,Object> select();
     
