@@ -10,6 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -83,20 +88,58 @@ public class UserController {
         }
     }
 
-    //This method prints out all rows from table "users"
-    public void select() {
-        String selectSQL = "SELECT * FROM users";
+    //This method returns a HashMap that contains data and metadata from table "users"  
+    public Map<String, Object> select() {
+        //Initialize result HashMap. This map wil contain column names, number of columns and table data
+        //Map<keyDataType, valueDataType>
+        Map<String, Object> result = new HashMap<>();
+        String selectSQL = "SELECT u.id, u.full_name, u.email, u.password, u.contact, r.name FROM users u JOIN rols r on u.id_rol = r.id";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+            //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()) {
-                System.out.println("Id: " + rs.getInt("id") + ", name: " + rs.getString("full_name") + ", email: " + rs.getString("email") + ", password: " + rs.getString("password") + ", contact info: " + rs.getString("contact"));
+            //Get metadata from ResultSet. Metadata contains information about results such as number of columns an column names
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            //Get number of columns from metadata
+            int numColumns = rsmd.getColumnCount();
+
+            //Create a list to save column names
+            List<String> columnNames = new ArrayList<>();
+            for (int i = 1; i <= numColumns; i++) {
+                //Get each column name from metadata and add them to columnNames list
+                columnNames.add(rsmd.getColumnName(i));
             }
 
-        } catch (SQLException | NullConnectionException e) {
+            //Create a list of lists to save table data
+            List<List<Object>> tableData = new ArrayList<>();
+            while (rs.next()) {
+                //Create a list to save data from the current row
+                List<Object> rowData = new ArrayList<>();
+                for (int i = 1; i <= numColumns; i++) {
+                    //Get every colum data and add it them to list
+                    rowData.add(rs.getObject(i));
+                }
+                //Add data list (that represents a row from table) to de tableData list
+                tableData.add(rowData);
+            }
+
+            //Add number of columns, column names and table data to de result HasMap
+            result.put("numColumns", numColumns);
+            result.put("columnNames", columnNames);
+            result.put("tableData", tableData);
+            
+        }catch (SQLException | NullConnectionException e) {
+            //If an exception occurs
             System.out.println("An error occurred while connecting to database for selection");
-            e.printStackTrace();
+        e.printStackTrace();
         }
+        
+        //Print the result map for debugging
+        System.out.println (result);
+
+        //Return the result Map
+        return result ;
     }
 
     //This method deletes a row of a previously registered user in table "users" searching by it's id
