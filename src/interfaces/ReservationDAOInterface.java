@@ -12,11 +12,14 @@ import java.util.Map;
  * @author lugo
  */
 public interface ReservationDAOInterface {
-    public void Insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, String status, double totalPrice);
     
-    public void Update(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, String status, double totalPrice);
+    public void insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice);
     
-    public Map<String,Object> select();
+    public void update(int status, int id);
+    
+    public Map<String,Object> clientSelect(int id);
+    
+    public Map<String,Object> adminSelect(int status);
     
     public void delete(int id);
 }
