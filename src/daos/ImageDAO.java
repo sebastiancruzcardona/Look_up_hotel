@@ -6,6 +6,7 @@ package daos;
 
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
+import interfaces.ImageDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import java.util.Map;
  *
  * @author lugo
  */
-public class ImageDAO {
+public class ImageDAO implements ImageDAOInterface {
      public MySQLConnection connection;
 
     //Stablish connection to database
@@ -153,5 +154,7 @@ public class ImageDAO {
             e.printStackTrace();
         }
     }
+
+   
     
 }
