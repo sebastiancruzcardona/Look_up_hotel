@@ -8,6 +8,8 @@ package interfaces;
  *
  * @author lugo
  */
-public class UserInterface {
+public interface UserDAOInterface {
+    
+    
     
 }
