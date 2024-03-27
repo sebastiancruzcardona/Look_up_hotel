@@ -6,6 +6,7 @@ package daos;
 
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
+import interfaces.ReservationDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ import java.util.Map;
  *
  * @author lugo
  */
-public class ReservationDAO {
+public class ReservationDAO implements ReservationDAOInterface{
     public MySQLConnection conexion = new MySQLConnection();
     
     //Stablish connection to database
