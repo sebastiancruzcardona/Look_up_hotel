@@ -40,7 +40,7 @@ public class ImageDAO implements ImageDAOInterface {
     }
 
     @Override
-    //This method inserts a new row in table "users" with de provided data of a new user
+    //This method inserts a new row in table "images" with de provided data of a new image
     public void insert(String name, String url, int idHotel) {
         String insertSQL = "INSERT INTO images (name,url,id_hotel) VALUES (?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
@@ -64,7 +64,7 @@ public class ImageDAO implements ImageDAOInterface {
     }
 
     @Override
-    //This method modifies information of a previously registered user in table "users"
+    //This method modifies information of a previously registered user in table "images"
     public void update(String name, String url, int idHotel) {
         String updateSQL = "UPDATE images SET name = ?,  url = ?, id_hotel = ?  WHERE id_hotel = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
@@ -88,7 +88,7 @@ public class ImageDAO implements ImageDAOInterface {
     }
 
     @Override
-    //This method returns a HashMap that contains data and metadata from table "users"  
+    //This method returns a HashMap that contains data and metadata from table "images"  
     public Map<String, Object> select() {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
@@ -143,7 +143,7 @@ public class ImageDAO implements ImageDAOInterface {
     }
 
     @Override
-    //This method deletes a row of a previously registered user in table "users" searching by it's id
+    //This method deletes a row of a previously registered user in table "images" searching by it's id
     public void delete(int id) {
         String deleteSQL = "DELETE FROM images WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {

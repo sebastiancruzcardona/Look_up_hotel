@@ -17,10 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author lugo
- */
+
 public class RoomDAO implements RoomDAOInterface {
     
     
@@ -42,7 +39,7 @@ public class RoomDAO implements RoomDAOInterface {
         throw new NullConnectionException();
     }
 
-    //This method inserts a new row in table "users" with de provided data of a new user 
+    //This method inserts a new row in table "rooms" with de provided data of a new room
     @Override
     public void Insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) { //paste: 
         String insertSQL = "INSERT INTO rooms (room_number,type_room,price_per_night,availability,amenities_details) VALUES (?,?,?,?,?)";
@@ -66,7 +63,7 @@ public class RoomDAO implements RoomDAOInterface {
         }
     }
 
-    //This method modifies information of a previously registered user in table "users"
+    //This method modifies information of a previously registered user in table "rooms"
     @Override
     public void Update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) {
         String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ?  WHERE room_number = ?";
@@ -76,6 +73,7 @@ public class RoomDAO implements RoomDAOInterface {
             pstmt.setDouble(3, pricePerNigth);
             pstmt.setBoolean(4,availability );
             pstmt.setString(5, amenitiesDetails);
+            
             pstmt.executeUpdate();
 
             int rowsAffected = pstmt.executeUpdate();
@@ -92,7 +90,7 @@ public class RoomDAO implements RoomDAOInterface {
         }
     }
 
-    //This method returns a HashMap that contains data and metadata from table "users"  
+    //This method returns a HashMap that contains data and metadata from table "rooms"  
     @Override
     public Map<String, Object> select() {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
@@ -147,7 +145,7 @@ public class RoomDAO implements RoomDAOInterface {
         return result ;
     }
 
-    //This method deletes a row of a previously registered user in table "users" searching by it's id
+    //This method deletes a row of a previously registered user in table "rooms" searching by it's id
     @Override
     public void delete(int id) {
         String deleteSQL = "DELETE FROM rooms WHERE id = ?";
