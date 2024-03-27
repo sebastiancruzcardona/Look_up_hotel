@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public interface ImageDAOInterface {
     
-    public void insert(String name, String url, int idHotel);
+    public void insert(String name, String uri, int idHotel);
     
-    public void update(String name, String url, int idHotel);
+    public void update(String name, String uri, int idHotel);
     
     public Map<String,Object> select();
     

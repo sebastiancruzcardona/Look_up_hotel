@@ -41,14 +41,12 @@ public class ImageDAO implements ImageDAOInterface {
 
     @Override
     //This method inserts a new row in table "images" with de provided data of a new image
-    public void insert(String name, String url, int idHotel) {
-        String insertSQL = "INSERT INTO images (name,url,id_hotel) VALUES (?,?,?)";
+    public void insert(String name, String uri, int idHotel) {
+        String insertSQL = "INSERT INTO images (name,uri,id_hotel) VALUES (?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
-            pstmt.setString(2, url);
-            pstmt.setInt(3, idHotel);
-            
-      
+            pstmt.setString(2, uri);
+            pstmt.setInt(3, idHotel);  
 
             int rowsAffected = pstmt.executeUpdate();
 
@@ -94,7 +92,7 @@ public class ImageDAO implements ImageDAOInterface {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT  id, name,  url, id_hotel  FROM images";
+        String selectSQL = "SELECT  id, name, uri, id_hotel FROM images";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
