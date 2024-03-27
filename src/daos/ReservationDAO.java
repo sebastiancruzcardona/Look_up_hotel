@@ -3,16 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package daos;
+
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
-import interfaces.RoomDAOInterface;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +21,11 @@ import java.util.Map;
  *
  * @author lugo
  */
-public class RoomDAO implements RoomDAOInterface {
-    
-    
+public class ReservationDAO {
     public MySQLConnection conexion = new MySQLConnection();
     
     //Stablish connection to database
-    public RoomDAO() {
+    public ReservationDAO() {
         this.conexion = new MySQLConnection();
 
     }
@@ -44,14 +42,16 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method inserts a new row in table "users" with de provided data of a new user 
     @Override
-    public void Insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) { //paste: 
-        String insertSQL = "INSERT INTO rooms (room_number,type_room,price_per_night,availability,amenities_details) VALUES (?,?,?,?,?)";
+    public void Insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, String status, double totalPrice) { //paste: 
+        String insertSQL = "INSERT INTO reservations (id_user,id_hotel,id_room,entry_date,departure_date,status,total_price) VALUES (?,?,?,?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
-            pstmt.setString(1, roomNumber);
-            pstmt.setString(2, typeRoom);
-            pstmt.setDouble(3, pricePerNigth);
-            pstmt.setBoolean(4,availability );
-            pstmt.setString(5, amenitiesDetails);
+            pstmt.setInt(1, idUser);
+            pstmt.setInt(2, idHotel);
+            pstmt.setInt(3, idRoom);
+            pstmt.setDate(4, (java.sql.Date) entryDate);
+            pstmt.setDate(5, (java.sql.Date) departureDate);
+            pstmt.setString(6, status);
+            pstmt.setDouble(7, totalPrice);
 
             int rowsAffected = pstmt.executeUpdate();
 
@@ -68,14 +68,16 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method modifies information of a previously registered user in table "users"
     @Override
-    public void Update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails) {
-        String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ?  WHERE room_number = ?";
+    public void Update(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, String status, double totalPrice) {
+        String updateSQL = "UPDATE reservations SET id_user = ?,  id_hotel = ?, id_room = ?, entry_date = ?, departure_date = ?, status = ?, total_price = ?  WHERE id_user = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
-            pstmt.setString(1, roomNumber);
-            pstmt.setString(2, typeRoom);
-            pstmt.setDouble(3, pricePerNigth);
-            pstmt.setBoolean(4,availability );
-            pstmt.setString(5, amenitiesDetails);
+            pstmt.setInt(1, idUser);
+            pstmt.setInt(2, idHotel);
+            pstmt.setInt(3, idRoom);
+            pstmt.setDate(4, (java.sql.Date) entryDate);
+            pstmt.setDate(5, (java.sql.Date) departureDate);
+            pstmt.setString(6, status);
+            pstmt.setDouble(7, totalPrice);
             pstmt.executeUpdate();
 
             int rowsAffected = pstmt.executeUpdate();
@@ -98,7 +100,7 @@ public class RoomDAO implements RoomDAOInterface {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT id, room_number, type_room, price_per_nigth, availability, amenities_details  FROM rooms";
+        String selectSQL = "SELECT id_user ,  id_hotel, id_room, entry_date, departure_date, status, total_price FROM reservations";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
@@ -150,7 +152,7 @@ public class RoomDAO implements RoomDAOInterface {
     //This method deletes a row of a previously registered user in table "users" searching by it's id
     @Override
     public void delete(int id) {
-        String deleteSQL = "DELETE FROM rooms WHERE id = ?";
+        String deleteSQL = "DELETE FROM reservations WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -159,6 +161,4 @@ public class RoomDAO implements RoomDAOInterface {
             e.printStackTrace();
         }
     }
-
-    
 }
