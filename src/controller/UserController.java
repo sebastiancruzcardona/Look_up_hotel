@@ -43,12 +43,13 @@ public class UserController {
 
     //This method inserts a new row in table "users" with de provided data of a new user 
     public void Insert(String name, String email, String password, String contact) { //paste: 
-        String insertSQL = "INSERT INTO users (full_name,email,password,contact) VALUES (?,?,?,?)";
+        String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, password);
             pstmt.setString(4, contact);
+            pstmt.setInt(5, 2);//Registered users are client by defaul 
 
             int rowsAffected = pstmt.executeUpdate();
 
