@@ -66,7 +66,7 @@ public class UserDAO implements UserDAOInterface{
 
     @Override
     //This method modifies information of a previously registered user in table "users"
-    public void Update(String name, String email, String password, String contact) {
+    public void update(String name, String email, String password, String contact) {
         String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);

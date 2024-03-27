@@ -14,7 +14,7 @@ public interface UserDAOInterface {
     
     void insert(String name, String email, String password, String contact);
     
-    void Update(String name, String email, String password, String contact);
+    void update(String name, String email, String password, String contact);
     
     Map<String, Object> select();
     
