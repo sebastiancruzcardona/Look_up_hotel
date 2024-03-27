@@ -15,7 +15,7 @@ public class User {
     private String email;
     private String password;
     private String details;
-    private String rol;
+    private int rol;
 
 //Constructor to create the object
     public User(String userName, String email, String password, String details) {
@@ -26,7 +26,7 @@ public class User {
     }
 
 //Constructor that brings out the object from database
-    public User(int id, String userName, String email, String password, String details, String rol) {
+    public User(int id, String userName, String email, String password, String details, int rol) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -75,7 +75,7 @@ public class User {
         this.details = details;
     }
 
-    public String getRol() {
+    public int getRol() {
         return rol;
     }
 
