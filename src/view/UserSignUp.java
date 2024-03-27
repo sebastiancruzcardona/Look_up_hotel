@@ -4,7 +4,8 @@
  */
 package view;
 
-import controller.UserController;
+
+import daos.UserDAO;
 
 /**
  *
@@ -12,11 +13,12 @@ import controller.UserController;
  */
 public class UserSignUp extends javax.swing.JFrame {
 
-    controller.UserController userController;
+    UserDAO userDAO;
+    
     public UserSignUp() {
         initComponents();
         setLocationRelativeTo(this);
-        userController = new UserController();
+        userDAO = new UserDAO();
     }
 
     /**
@@ -208,7 +210,7 @@ public class UserSignUp extends javax.swing.JFrame {
         String password = txt_password.getText();
         String contact = txa_contact.getText();
         
-        userController.Insert(username, email, password, contact);
+        userDAO.insert(username, email, password, contact);
         UserLogin userLogin = new UserLogin();
         userLogin.setVisible(true);
         this.dispose();
