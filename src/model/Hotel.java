@@ -17,7 +17,7 @@ public class Hotel {
     private String address;
     private int classification;
     private String comforts;
-    private ArrayList<Image> images;
+    private ArrayList<String> images;
 
     //Constructor to create the object
     public Hotel(String name, String address, int classification, String comforts) {
@@ -29,7 +29,7 @@ public class Hotel {
     }
 
     //Constructor that brings out the object from database
-    public Hotel(int id, String name, String address, int classification, String comforts, ArrayList<Image> images) {
+    public Hotel(int id, String name, String address, int classification, String comforts, ArrayList<String> images) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -74,11 +74,11 @@ public class Hotel {
         this.comforts = comforts;
     }
 
-    public ArrayList<Image> getImages() {
+    public ArrayList<String> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<Image> images) {
+    public void setImages(ArrayList<String> images) {
         this.images = images;
     }
     
