@@ -51,6 +51,17 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+DROP TABLE IF EXISTS `rols`;
+CREATE TABLE `rols` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `rols` (`id`, `name`) VALUES
+(1,	'Admin'),
+(2,	'Client');
+
 DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE `rooms` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -71,12 +82,26 @@ CREATE TABLE `users` (
   `email` varchar(120) NOT NULL,
   `password` varchar(120) NOT NULL,
   `contact` varchar(120) NOT NULL,
+  `id_rol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  KEY `id_rol` (`id_rol`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rols` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`) VALUES
-(1,	'Sebastián',	'sbs@gmail.com',	'password',	'contact'),
-(2,	'Fabián',	'lugo@gmail.com',	'password',	'contact');
+INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`) VALUES
+(6,	'prueba',	'prueba',	'prueba',	'prueba',	NULL),
+(7,	'test',	'test',	'test',	'test',	NULL),
+(8,	'prueba1',	'prueba1',	'prueba1',	'prueba1',	NULL),
+(9,	'test1',	'test1',	'test1',	'test1',	NULL),
+(10,	'prueba3',	'prueba3',	'prueba3',	'prueba3',	NULL),
+(11,	'prueba5',	'prueba5',	'prueba5',	'prueba5',	NULL),
+(12,	'a',	's',	's',	's	',	NULL),
+(13,	'prueba7',	'prueba7',	'prueba7',	'prueba7',	NULL),
+(14,	'prueba9',	'prueba9',	'prueba9',	'prueba9',	NULL),
+(15,	'test7',	'test7',	'test7',	'test7',	NULL),
+(16,	'test8',	'test8',	'test8',	'test8',	NULL),
+(17,	'test10',	'test10',	'test10',	'test10',	NULL),
+(18,	'prueba11',	'prueba11',	'prueba11',	'prueba11',	NULL);
 
--- 2024-03-10 17:58:51
+-- 2024-03-27 01:37:39
