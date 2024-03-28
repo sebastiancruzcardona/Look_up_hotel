@@ -2,54 +2,54 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package daos;
 
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
+import interfaces.HotelDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.Hotel;
 
 /**
  *
- * @author Fabián Lugo - Sebastián Cruz
+ * @author ASUS - JOSE
  */
-public class UserController {
-
+public class HotelDAO implements HotelDAOInterface{
     
-    public MySQLConnection conexion = new MySQLConnection();
+    public MySQLConnection connection;
 
     //Stablish connection to database
-    public UserController() {
-        this.conexion = new MySQLConnection();
-
+    public HotelDAO() {
+        this.connection = new MySQLConnection();
     }
-
+    
     //This method establishes the connection to database, which is necessary to execute the other methods.
     //If connection is null, throws a NullConnectionException
     public Connection connect() { 
-        Connection conn = conexion.connectMySQL();
+        Connection conn = connection.connectMySQL();
         if (conn != null) {
             return conn;
         }
         throw new NullConnectionException();
     }
 
-    //This method inserts a new row in table "users" with de provided data of a new user 
-    public void Insert(String name, String email, String password, String contact) { //paste: 
-        String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
+    @Override
+    //This method inserts a new row in table "hotels" with de provided data of a new hotel
+    public void insert(String name, String address, int classification, String comforts) {
+        String insertSQL = "INSERT INTO hotels (name,address,classification,comforts) VALUES (?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
-            pstmt.setString(2, email);
-            pstmt.setString(3, password);
-            pstmt.setString(4, contact);
-            pstmt.setInt(5, 2);//Registered users are client by defaul 
+            pstmt.setString(2, address);
+            pstmt.setInt(3, classification);
+            pstmt.setString(4, comforts);
 
             int rowsAffected = pstmt.executeUpdate();
 
@@ -64,15 +64,16 @@ public class UserController {
         }
     }
 
-    //This method modifies information of a previously registered user in table "users"
-    public void Update(String name, String email, String password, String contact) {
-        String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
+    @Override
+    //This method modifies information of a previously registered hotel in table "hotels", searching by its id
+    public void update(String name, String address, int classification, String comforts, int id) {
+        String updateSQL = "UPDATE hotels SET name = ?,  address = ?, classification = ?, comforts = ?  WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
-            pstmt.setString(2, email);
-            pstmt.setString(3, password);
-            pstmt.setString(4, contact);
-            pstmt.setString(5, email);
+            pstmt.setString(2, address);
+            pstmt.setInt(3, classification);
+            pstmt.setString(4, comforts);
+            pstmt.setInt(5, id);
             pstmt.executeUpdate();
 
             int rowsAffected = pstmt.executeUpdate();
@@ -89,12 +90,13 @@ public class UserController {
         }
     }
 
-    //This method returns a HashMap that contains data and metadata from table "users"  
+    @Override
+    //This method returns a HashMap that contains data and metadata from table "hotels"
     public Map<String, Object> select() {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT u.id, u.full_name, u.email, u.password, u.contact, r.name FROM users u JOIN rols r on u.id_rol = r.id";
+        String selectSQL = "SELECT name, address, classification, comforts FROM hotels";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
@@ -143,9 +145,10 @@ public class UserController {
         return result ;
     }
 
-    //This method deletes a row of a previously registered user in table "users" searching by it's id
+    @Override
+    //This method deletes a row of a previously registered hotel in table "hotels" searching by its id
     public void delete(int id) {
-        String deleteSQL = "DELETE FROM users WHERE id = ?";
+        String deleteSQL = "DELETE FROM hotels WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
@@ -153,5 +156,5 @@ public class UserController {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
-    }
+    }    
 }

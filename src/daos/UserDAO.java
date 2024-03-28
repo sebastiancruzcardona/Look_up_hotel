@@ -2,47 +2,53 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package daos;
 
 import connection.MySQLConnection;
+import exceptions.EmailNotExistException;
 import exceptions.NullConnectionException;
+import interfaces.UserDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.accessibility.AccessibleRole;
+import javax.swing.JOptionPane;
+import model.User;
 
 /**
  *
- * @author Fabián Lugo - Sebastián Cruz
+ * @author ASUS - JOSE
  */
-public class UserController {
-
+public class UserDAO implements UserDAOInterface{
     
-    public MySQLConnection conexion = new MySQLConnection();
+    public MySQLConnection connection;
 
     //Stablish connection to database
-    public UserController() {
-        this.conexion = new MySQLConnection();
-
+    public UserDAO() {
+        this.connection = new MySQLConnection();
     }
-
+    
     //This method establishes the connection to database, which is necessary to execute the other methods.
     //If connection is null, throws a NullConnectionException
     public Connection connect() { 
-        Connection conn = conexion.connectMySQL();
+        Connection conn = connection.connectMySQL();
         if (conn != null) {
             return conn;
         }
         throw new NullConnectionException();
     }
 
-    //This method inserts a new row in table "users" with de provided data of a new user 
-    public void Insert(String name, String email, String password, String contact) { //paste: 
+    @Override
+    //This method inserts a new row in table "users" with de provided data of a new user
+    public void insert(String name, String email, String password, String contact) {
         String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
@@ -64,8 +70,9 @@ public class UserController {
         }
     }
 
+    @Override
     //This method modifies information of a previously registered user in table "users"
-    public void Update(String name, String email, String password, String contact) {
+    public void update(String name, String email, String password, String contact) {
         String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
@@ -89,6 +96,7 @@ public class UserController {
         }
     }
 
+    @Override
     //This method returns a HashMap that contains data and metadata from table "users"  
     public Map<String, Object> select() {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
@@ -143,6 +151,7 @@ public class UserController {
         return result ;
     }
 
+    @Override
     //This method deletes a row of a previously registered user in table "users" searching by it's id
     public void delete(int id) {
         String deleteSQL = "DELETE FROM users WHERE id = ?";
@@ -153,5 +162,70 @@ public class UserController {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+    }
+    
+    /**
+     *  This method validates the email found in the database
+     * @param email
+     * @return true or false
+     */
+    @Override
+     public boolean findEmail (String email) {
+        
+        String consultationSQL = "SELECT *  FROM users WHERE email = ? ";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(consultationSQL)){
+            pstmt.setString(1, email);
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            if(rs.next()){
+                return true;
+            }
+            else{
+                throw  new EmailNotExistException();//Exception if email dont exist in Data base
+                
+                
+            
+            }
+        } catch (SQLException  | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }
+        return false;
+        
+    }
+    
+    @Override
+    public User findUsuario(String email, String password){
+        
+        boolean aux = findEmail(email);
+        
+        if(aux){
+            String serchSQL = "SELECT * FROM users WHERE email = ? AND password = ? ";
+            try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(serchSQL)){
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            
+                if(rs.next()){
+                
+                    System.out.println("entra");
+                    User user = new User(rs.getInt("id"), rs.getString("full_name"), rs.getString("email"), rs.getNString("password"), rs.getString("contact"), rs.getInt("id_rol"));
+                    return user;
+                
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"La contrasenIa es incorrecta","ALERT",JOptionPane.WARNING_MESSAGE);
+                
+                
+                
+            
+                }
+             } catch (SQLException  | NullConnectionException e) {
+                System.out.println("An error occurred while connecting to database for deletion of data");
+                e.printStackTrace();
+        }
+        }
+        return null;
     }
 }

@@ -4,16 +4,21 @@
  */
 package view;
 
+import daos.UserDAO;
+import exceptions.EmailNotExistException;
+import interfaces.UserDAOInterface;
+import javax.swing.JOptionPane;
+import model.User;
+
 /**
  *
  * @author lugo
  */
 public class UserLogin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form UserLogin
-     */
+    
+    UserDAO controller;
     public UserLogin() {
+        controller= new UserDAO();
         initComponents();
         setLocationRelativeTo(this);
     }
@@ -140,7 +145,22 @@ public class UserLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        // TODO add your handling code here:
+        try {
+            String email= txt_user.getText();
+        String password = txt_password.getText();
+        System.out.println(password);
+        
+        User user = controller.findUsuario(email, password);
+        //boolean a = controller.findEmail(email);
+        //System.out.println(a);
+        SelectTestView prueba = new SelectTestView(user);
+        prueba.setVisible(true);
+        this.dispose();
+        } catch (EmailNotExistException e) {
+            
+            JOptionPane.showMessageDialog( null,e.getMessage());
+        }
+        
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void txt_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_userActionPerformed
