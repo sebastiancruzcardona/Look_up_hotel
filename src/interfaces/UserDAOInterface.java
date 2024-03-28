@@ -5,6 +5,7 @@
 package interfaces;
 
 import java.util.Map;
+import model.User;
 
 /**
  *
@@ -20,4 +21,7 @@ public interface UserDAOInterface {
     
     void delete(int id);    
     
+    boolean findEmail(String email);
+    
+    User findUsuario(String email, String password);
 }
