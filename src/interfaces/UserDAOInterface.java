@@ -23,5 +23,5 @@ public interface UserDAOInterface {
     
     boolean findEmail(String email);
     
-    User findUsuario(String email, String password);
+    User findUser(String email, String password);
 }

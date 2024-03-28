@@ -195,8 +195,14 @@ public class UserDAO implements UserDAOInterface{
         
     }
     
+     /**
+      * his method validates if a user is registered in table "users" and returns the user
+      * @param email
+      * @param password
+      * @return user
+      */
     @Override
-    public User findUsuario(String email, String password){
+    public User findUser(String email, String password){
         
         boolean aux = findEmail(email);
         
@@ -224,6 +230,8 @@ public class UserDAO implements UserDAOInterface{
              } catch (SQLException  | NullConnectionException e) {
                 System.out.println("An error occurred while connecting to database for deletion of data");
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                
         }
         }
         return null;
