@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.accessibility.AccessibleRole;
+import javax.swing.JOptionPane;
+import model.User;
 
 /**
  *
@@ -166,9 +169,10 @@ public class UserDAO implements UserDAOInterface{
      * @param email
      * @return true or false
      */
-    public boolean findEmail (String email){
+    @Override
+     public boolean findEmail (String email) {
         
-        String consultationSQL = "SELECTE email  FROM users WHERE email = ? ";
+        String consultationSQL = "SELECT *  FROM users WHERE email = ? ";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(consultationSQL)){
             pstmt.setString(1, email);
             
@@ -191,5 +195,37 @@ public class UserDAO implements UserDAOInterface{
         
     }
     
-    
+    @Override
+    public User findUsuario(String email, String password){
+        
+        boolean aux = findEmail(email);
+        
+        if(aux){
+            String serchSQL = "SELECT * FROM users WHERE email = ? AND password = ? ";
+            try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(serchSQL)){
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            
+                if(rs.next()){
+                
+                    System.out.println("entra");
+                    User user = new User(rs.getInt("id"), rs.getString("full_name"), rs.getString("email"), rs.getNString("password"), rs.getString("contact"), rs.getInt("id_rol"));
+                    return user;
+                
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"La contrasenIa es incorrecta","ALERT",JOptionPane.WARNING_MESSAGE);
+                
+                
+                
+            
+                }
+             } catch (SQLException  | NullConnectionException e) {
+                System.out.println("An error occurred while connecting to database for deletion of data");
+                e.printStackTrace();
+        }
+        }
+        return null;
+    }
 }
