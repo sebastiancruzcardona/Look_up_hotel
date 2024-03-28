@@ -5,6 +5,7 @@
 package daos;
 
 import connection.MySQLConnection;
+import exceptions.EmailNotExistException;
 import exceptions.NullConnectionException;
 import interfaces.UserDAOInterface;
 import java.sql.Connection;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -158,7 +161,35 @@ public class UserDAO implements UserDAOInterface{
         }
     }
     
-    
+    /**
+     *  This method validates the email found in the database
+     * @param email
+     * @return true or false
+     */
+    public boolean findEmail (String email){
+        
+        String consultationSQL = "SELECTE email  FROM users WHERE email = ? ";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(consultationSQL)){
+            pstmt.setString(1, email);
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            if(rs.next()){
+                return true;
+            }
+            else{
+                throw  new EmailNotExistException();//Exception if email dont exist in Data base
+                
+                
+            
+            }
+        } catch (SQLException  | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }
+        return false;
+        
+    }
     
     
 }
