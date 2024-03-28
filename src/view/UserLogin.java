@@ -150,7 +150,7 @@ public class UserLogin extends javax.swing.JFrame {
         String password = txt_password.getText();
         System.out.println(password);
         
-        User user = controller.findUsuario(email, password);
+        User user = controller.findUser(email, password);
         //boolean a = controller.findEmail(email);
         //System.out.println(a);
         SelectTestView prueba = new SelectTestView(user);
