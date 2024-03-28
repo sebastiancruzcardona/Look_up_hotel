@@ -5,17 +5,15 @@
         <group>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/daos/ReservationDAO.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/daos/UserDAO.java</file>
-            <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/daos/ImageDAO.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/model/Rol.java</file>
+            <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/daos/ImageDAO.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/interfaces/RoomDAOInterface.java</file>
-            <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/connection/MySQLConnection.java</file>
-            <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/controller/UserController.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/services/UserService.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/model/User.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/daos/RoomDAO.java</file>
-            <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/model/Hotel.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/view/UserSignUp.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/exceptions/NullConnectionException.java</file>
+            <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/model/Hotel.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/model/Room.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/model/Image.java</file>
             <file>file:/home/lugo/Documents/repoProyectoFinal/Look_up_hotel/src/interfaces/ImageDAOInterface.java</file>
