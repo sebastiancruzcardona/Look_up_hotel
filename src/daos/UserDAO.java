@@ -6,6 +6,7 @@ package daos;
 
 import connection.MySQLConnection;
 import exceptions.EmailNotExistException;
+import exceptions.IncorrectPasswordException;
 import exceptions.NullConnectionException;
 import interfaces.UserDAOInterface;
 import java.sql.Connection;
@@ -221,13 +222,13 @@ public class UserDAO implements UserDAOInterface{
                 
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"La contrasenIa es incorrecta","ALERT",JOptionPane.WARNING_MESSAGE);
+                    throw new IncorrectPasswordException();//exception if password is incorrect
                 
                 
                 
             
                 }
-             } catch (SQLException  | NullConnectionException e) {
+             } catch (SQLException  | NullConnectionException | IncorrectPasswordException e) {
                 System.out.println("An error occurred while connecting to database for deletion of data");
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, e.getMessage());
