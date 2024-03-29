@@ -6,6 +6,8 @@ package view;
 
 import daos.UserDAO;
 import exceptions.EmailNotExistException;
+import exceptions.EmptyFieldsException;
+import exceptions.NotAnEmailException;
 import interfaces.UserDAOInterface;
 import javax.swing.JOptionPane;
 import model.User;
@@ -17,10 +19,10 @@ import services.UserService;
  */
 public class UserLogin extends javax.swing.JFrame {
 
-    UserService controller;
+    UserService userService;
 
     public UserLogin() {
-        controller = new UserService();
+        userService = new UserService();
         initComponents();
         setLocationRelativeTo(this);
     }
@@ -148,21 +150,32 @@ public class UserLogin extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
-        String email = txt_user.getText();
-        String password = txt_password.getText();
+        try {
 
-        User user = controller.findUser(email, password);
+            String email = txt_user.getText();
+            String password = txt_password.getText();
+            userService.validateFilledFields(email, password);
+            userService.validateEmail(email);
+            User user = userService.findUser(email, password);
 
-        if (user != null) {
-            if (user.getRol() == 2) {
+            if (user != null) {
+                if (user.getRol() == 2) {
 
-                UserHome userHome = new UserHome(user);
-                userHome.setVisible(true);
-                this.dispose();
+                    UserHome userHome = new UserHome(user);
+                    userHome.setVisible(true);
+                    this.dispose();
+                }else{
+                    
+                }
             }
+        } catch (NotAnEmailException | EmptyFieldsException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        }
 
     }//GEN-LAST:event_btn_loginActionPerformed
-    }
+
+
     private void txt_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_userActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_userActionPerformed
