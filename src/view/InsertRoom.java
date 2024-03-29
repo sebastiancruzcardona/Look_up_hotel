@@ -195,7 +195,7 @@ public class InsertRoom extends javax.swing.JPanel {
        boolean availability = availabilit_check.getState();
        String amenitiesDetails = txt_details.getText();
        
-       roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails);
+       
        
     }//GEN-LAST:event_btn_insertActionPerformed
 

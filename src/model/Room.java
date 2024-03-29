@@ -16,24 +16,27 @@ public class Room {
     private double pricePerNight;
     private boolean availability;
     private String amenities;
-
+    private Hotel hotel;
     //Constructor to create the object
-    public Room(String number, String type, double pricePerNight, String amenities) {
+    public Room(String number, String type, double pricePerNight, String amenities, Hotel hotel) {
         this.number = number;
         this.type = type;
         this.pricePerNight = pricePerNight;
         this.amenities = amenities;
         availability = true;
+        this.hotel = hotel;
+        
     }
 
     //Constructor that brings out the object from database
-    public Room(int id, String number, String type, double pricePerNight, boolean availability, String amenities) {
+    public Room(int id, String number, String type, double pricePerNight, boolean availability, String amenities, Hotel hotel) {
         this.id = id;
         this.number = number;
         this.type = type;
         this.pricePerNight = pricePerNight;
         this.availability = availability;
         this.amenities = amenities;
+        this.hotel = hotel;
     }
     
 
