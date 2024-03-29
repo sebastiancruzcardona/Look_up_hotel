@@ -145,7 +145,7 @@ public class UserLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        try {
+       
             String email= txt_user.getText();
         String password = txt_password.getText();
         System.out.println(password);
@@ -156,10 +156,7 @@ public class UserLogin extends javax.swing.JFrame {
         SelectTestView prueba = new SelectTestView(user);
         prueba.setVisible(true);
         this.dispose();
-        } catch (EmailNotExistException e) {
-            
-            JOptionPane.showMessageDialog( null,e.getMessage());
-        }
+       
         
     }//GEN-LAST:event_btn_loginActionPerformed
 
