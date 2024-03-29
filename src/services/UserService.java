@@ -85,6 +85,12 @@ public class UserService {
             throw new EmptyFieldsException();
         }
     }
+    //this method override
+    public void validateFilledFields( String email, String password){
+        if(email.equals("") || password.equals("")){
+            throw new EmptyFieldsException();
+        }
+    }
 
     //This method calls find email method from userDAO
     public boolean findEmail(String email){

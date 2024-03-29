@@ -104,7 +104,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`) VALUES
-(6,	'prueba',	'prueba',	'prueba',	'prueba',	NULL),
 (7,	'test',	'test',	'test',	'test',	NULL),
 (8,	'prueba1',	'prueba1',	'prueba1',	'prueba1',	NULL),
 (9,	'test1',	'test1',	'test1',	'test1',	NULL),
@@ -122,6 +121,9 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`
 (21,	'prueba14',	'prueba14',	'prueba14',	'prueba14',	2),
 (23,	'prueba15',	'prueba15',	'prueba15',	'prueba15',	2),
 (24,	'prueba16',	'prueba16',	'prueba16',	'prueba16',	2),
-(25,	'prueba17',	'prueba17',	'prueba17',	'prueba17',	2);
+(25,	'prueba17',	'prueba17',	'prueba17',	'prueba17',	2),
+(26,	'fabian',	'feibian@gmail.com',	'admin',	'3004215235',	1),
+(27,	'sebastian',	'sebastian@gmail.com',	'admin',	'3187492128',	1),
+(28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2);
 
--- 2024-03-27 22:16:38
+-- 2024-03-29 06:15:35
