@@ -14,26 +14,26 @@ import java.util.Map;
 public class RoomService {
     RoomDAO roomDAO;
 
-    public RoomService(RoomDAO roomDAO) {
-        this.roomDAO = roomDAO;
+    public RoomService() {
+        roomDAO = new RoomDAO();
     }
     
-     //This method calls insert method from UserDAO
+     //This method calls insert method from RoomDAO
     public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails){
         roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails);
     }
     
-    //This method calls update method from UserDAO
+    //This method calls update method from RoomDAO
     public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails){
         roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails, 0);
     }
     
-    //This method returns a HashMap calling userDAO select method
+    //This method returns a HashMap calling RoomDAO select method
     public Map<String, Object> select(){
         return roomDAO.select();
     }
     
-    //This method calls delete method from UserDAO
+    //This method calls delete method from RoomDAO
     public void delete(int id){
         roomDAO.delete(id);
     }

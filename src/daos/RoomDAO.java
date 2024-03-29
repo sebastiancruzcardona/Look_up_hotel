@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 
 public class RoomDAO implements RoomDAOInterface {
@@ -53,7 +54,7 @@ public class RoomDAO implements RoomDAOInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Successful insertion");
+                JOptionPane.showMessageDialog(null,"Successful insertion");
             } else {
                 System.out.println("No insertion was made");
             }
@@ -97,7 +98,7 @@ public class RoomDAO implements RoomDAOInterface {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT id, room_number, type_room, price_per_nigth, availability, amenities_details  FROM rooms";
+        String selectSQL = "SELECT id, room_number, type_room, price_per_night, availability, amenities_details  FROM rooms";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
