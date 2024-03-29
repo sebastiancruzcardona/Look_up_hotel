@@ -4,7 +4,11 @@
  */
 package view;
 
-import controller.UserController;
+
+import exceptions.EmptyFieldsException;
+import exceptions.NotAnEmailException;
+import javax.swing.JOptionPane;
+import services.UserService;
 
 /**
  *
@@ -12,11 +16,12 @@ import controller.UserController;
  */
 public class UserSignUp extends javax.swing.JFrame {
 
-    controller.UserController userController;
+    UserService userService;
+    
     public UserSignUp() {
         initComponents();
         setLocationRelativeTo(this);
-        userController = new UserController();
+        userService = new UserService();
     }
 
     /**
@@ -203,15 +208,25 @@ public class UserSignUp extends javax.swing.JFrame {
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
         // TODO add your handling code here:
-        String username = txt_username.getText();
-        String email = txt_email.getText();
-        String password = txt_password.getText();
-        String contact = txa_contact.getText();
+        try {
+            
+            String username = txt_username.getText();
+            String email = txt_email.getText();
+            String password = txt_password.getText();
+            String contact = txa_contact.getText();
+            
+            userService.validateEmail(email);
+            userService.validateFilledFields(username, email, password, contact);
         
-        userController.Insert(username, email, password, contact);
-        UserLogin userLogin = new UserLogin();
-        userLogin.setVisible(true);
-        this.dispose();
+            userService.insert(username, email, password, contact);
+            UserLogin userLogin = new UserLogin();
+            userLogin.setVisible(true);
+            this.dispose();
+            
+        } catch (NotAnEmailException | EmptyFieldsException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
     }//GEN-LAST:event_btn_signupActionPerformed
 
     private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed

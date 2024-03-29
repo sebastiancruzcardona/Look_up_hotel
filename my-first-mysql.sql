@@ -31,6 +31,18 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+DROP TABLE IF EXISTS `reservation_statuses`;
+CREATE TABLE `reservation_statuses` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `reservation_statuses` (`id`, `name`) VALUES
+(1,	'Pending'),
+(2,	'Confirmed'),
+(3,	'Canceled');
+
 DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -39,17 +51,30 @@ CREATE TABLE `reservations` (
   `id_room` int NOT NULL,
   `entry_date` date NOT NULL,
   `departure_date` date NOT NULL,
-  `status` varchar(20) NOT NULL,
   `total_Price` double NOT NULL,
+  `id_reservation_statuses` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   KEY `id_hotel` (`id_hotel`),
   KEY `id_room` (`id_room`),
+  KEY `id_reservation_statuses` (`id_reservation_statuses`),
   CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`),
   CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`id_hotel`) REFERENCES `hotels` (`id`),
-  CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`id_room`) REFERENCES `rooms` (`id`)
+  CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`id_room`) REFERENCES `rooms` (`id`),
+  CONSTRAINT `reservations_ibfk_4` FOREIGN KEY (`id_reservation_statuses`) REFERENCES `reservation_statuses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+DROP TABLE IF EXISTS `rols`;
+CREATE TABLE `rols` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `rols` (`id`, `name`) VALUES
+(1,	'Admin'),
+(2,	'Client');
 
 DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE `rooms` (
@@ -71,12 +96,34 @@ CREATE TABLE `users` (
   `email` varchar(120) NOT NULL,
   `password` varchar(120) NOT NULL,
   `contact` varchar(120) NOT NULL,
+  `id_rol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  KEY `id_rol` (`id_rol`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rols` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`) VALUES
-(1,	'Sebastián',	'sbs@gmail.com',	'password',	'contact'),
-(2,	'Fabián',	'lugo@gmail.com',	'password',	'contact');
+INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`) VALUES
+(7,	'test',	'test',	'test',	'test',	NULL),
+(8,	'prueba1',	'prueba1',	'prueba1',	'prueba1',	NULL),
+(9,	'test1',	'test1',	'test1',	'test1',	NULL),
+(10,	'prueba3',	'prueba3',	'prueba3',	'prueba3',	NULL),
+(11,	'prueba5',	'prueba5',	'prueba5',	'prueba5',	NULL),
+(12,	'a',	's',	's',	's	',	NULL),
+(13,	'prueba7',	'prueba7',	'prueba7',	'prueba7',	NULL),
+(14,	'prueba9',	'prueba9',	'prueba9',	'prueba9',	NULL),
+(15,	'test7',	'test7',	'test7',	'test7',	NULL),
+(16,	'test8',	'test8',	'test8',	'test8',	NULL),
+(17,	'test10',	'test10',	'test10',	'test10',	NULL),
+(18,	'prueba11',	'prueba11',	'prueba11',	'prueba11',	NULL),
+(19,	'prueba12',	'prueba12',	'prueba12',	'prueba12',	NULL),
+(20,	'prueba13',	'prueba13',	'prueba13',	'prueba13',	2),
+(21,	'prueba14',	'prueba14',	'prueba14',	'prueba14',	2),
+(23,	'prueba15',	'prueba15',	'prueba15',	'prueba15',	2),
+(24,	'prueba16',	'prueba16',	'prueba16',	'prueba16',	2),
+(25,	'prueba17',	'prueba17',	'prueba17',	'prueba17',	2),
+(26,	'fabian',	'feibian@gmail.com',	'admin',	'3004215235',	1),
+(27,	'sebastian',	'sebastian@gmail.com',	'admin',	'3187492128',	1),
+(28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2);
 
--- 2024-03-10 17:58:51
+-- 2024-03-29 06:15:35

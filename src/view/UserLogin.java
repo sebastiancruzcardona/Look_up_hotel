@@ -4,16 +4,25 @@
  */
 package view;
 
+import daos.UserDAO;
+import exceptions.EmailNotExistException;
+import exceptions.EmptyFieldsException;
+import exceptions.NotAnEmailException;
+import interfaces.UserDAOInterface;
+import javax.swing.JOptionPane;
+import model.User;
+import services.UserService;
+
 /**
  *
  * @author lugo
  */
 public class UserLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UserLogin
-     */
+    UserService userService;
+
     public UserLogin() {
+        userService = new UserService();
         initComponents();
         setLocationRelativeTo(this);
     }
@@ -140,8 +149,35 @@ public class UserLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        // TODO add your handling code here:
+
+        try {
+
+            String email = txt_user.getText();
+            String password = txt_password.getText();
+            userService.validateFilledFields(email, password);
+            userService.validateEmail(email);
+            User user = userService.findUser(email, password);
+
+            if (user != null) {
+                if (user.getRol() == 2) {
+
+                    UserHome userHome = new UserHome(user);
+                    userHome.setVisible(true);
+                    this.dispose();
+                }else{
+                    AdminHome adminHome = new AdminHome(user);
+                    adminHome.setVisible(true);
+                    this.dispose();
+                    
+                }
+            }
+        } catch (NotAnEmailException | EmptyFieldsException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        }
+
     }//GEN-LAST:event_btn_loginActionPerformed
+
 
     private void txt_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_userActionPerformed
         // TODO add your handling code here:
