@@ -6,6 +6,7 @@ package services;
 
 import daos.UserDAO;
 import java.util.Map;
+import model.User;
 
 /**
  *
@@ -38,8 +39,16 @@ public class UserService {
     public void delete(int id){
         userDAO.delete(id);
     }
-    
-    
-    
-    
+    //This method calls findEmail method from UserDAO and return if found out considents
+    public boolean  findEmail(String email){
+        boolean result;
+        result =userDAO.findEmail(email);
+        return result;
+    }
+    //This method calls findUser method from UserDAO and return the user
+    public User findUser(String emial, String password){
+      User user;
+      user = userDAO.findUser(emial, password);
+      return user;
+    }
 }
