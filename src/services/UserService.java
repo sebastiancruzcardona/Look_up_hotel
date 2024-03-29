@@ -8,6 +8,7 @@ import daos.UserDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.NotAnEmailException;
 import java.util.Map;
+import model.User;
 
 /**
  *
@@ -85,6 +86,16 @@ public class UserService {
         }
     }
 
+    //This method calls find email method from userDAO
+    public boolean findEmail(String email){
+        boolean result = userDAO.findEmail(email);
+        return result;
+    }
     
+    //This method calls  findUser method from userDAO
+    public User findUser (String email, String password){
+       User user = userDAO.findUser(email, password);
+       return user;
+    }
     
 }
