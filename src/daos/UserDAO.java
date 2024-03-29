@@ -216,7 +216,7 @@ public class UserDAO implements UserDAOInterface{
             
                 if(rs.next()){
                 
-                    System.out.println("entra");
+                    
                     User user = new User(rs.getInt("id"), rs.getString("full_name"), rs.getString("email"), rs.getNString("password"), rs.getString("contact"), rs.getInt("id_rol"));
                     return user;
                 

@@ -12,14 +12,17 @@ import model.User;
  *
  * @author lugo
  */
-public class UserHome extends javax.swing.JFrame {
+public class AdminHome extends javax.swing.JFrame {
 
     User user;
-    public UserHome(User user) {
+    public AdminHome(User user) {
+        
         this.user = user;
+        
         initComponents();
         setLocationRelativeTo(this);
-        lb_username.setText(user.getUserName());
+        admin_name_label.setText(user.getUserName());
+        
     }
 
     /**
@@ -41,22 +44,23 @@ public class UserHome extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        info_panel = new javax.swing.JPanel();
+        admin_name_label = new javax.swing.JLabel();
         lb_username = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         sing_off = new javax.swing.JButton();
+        btn_hotel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        lbl = new javax.swing.JLabel();
+        btn_rooms = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        btn_hotel1 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
-        btn_search = new javax.swing.JButton();
-        txt_city = new javax.swing.JTextField();
-        innerDate = new com.toedter.calendar.JDateChooser();
-        calendar_out_date = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
-        banner = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1440, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nav.setBackground(new java.awt.Color(54, 37, 89));
@@ -115,14 +119,6 @@ public class UserHome extends javax.swing.JFrame {
         nav.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         btn_setting.setBackground(new java.awt.Color(54, 37, 89));
-        btn_setting.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_settingMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_settingMouseExited(evt);
-            }
-        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/cog-regular-24.png"))); // NOI18N
@@ -160,21 +156,21 @@ public class UserHome extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         nav.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 260, 20));
 
-        jPanel3.setBackground(new java.awt.Color(78, 52, 115));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        info_panel.setBackground(new java.awt.Color(78, 52, 115));
+        info_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel7.setText("Welcome");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, -1));
+        admin_name_label.setForeground(new java.awt.Color(204, 204, 204));
+        admin_name_label.setText("Welcome");
+        info_panel.add(admin_name_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         lb_username.setBackground(new java.awt.Color(54, 37, 89));
-        lb_username.setText("Client");
-        jPanel3.add(lb_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 131, -1));
+        lb_username.setText("Administrator");
+        info_panel.add(lb_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 131, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user-circle-solid-24.png"))); // NOI18N
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        info_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        nav.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, -1, 60));
+        nav.add(info_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, -1, 60));
 
         sing_off.setBackground(new java.awt.Color(54, 37, 89));
         sing_off.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/log-out-solid-24.png"))); // NOI18N
@@ -186,108 +182,164 @@ public class UserHome extends javax.swing.JFrame {
         });
         nav.add(sing_off, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 830, -1, -1));
 
-        getContentPane().add(nav, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 0, 310, 900));
+        btn_hotel.setBackground(new java.awt.Color(54, 37, 89));
+        btn_hotel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btn_hotelMouseMoved(evt);
+            }
+        });
+        btn_hotel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_hotelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_hotelMousePressed(evt);
+            }
+        });
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/building-house-regular-24.png"))); // NOI18N
+
+        lbl.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        lbl.setForeground(new java.awt.Color(204, 204, 204));
+        lbl.setText("Manage hotels");
+
+        javax.swing.GroupLayout btn_hotelLayout = new javax.swing.GroupLayout(btn_hotel);
+        btn_hotel.setLayout(btn_hotelLayout);
+        btn_hotelLayout.setHorizontalGroup(
+            btn_hotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_hotelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel6)
+                .addGap(45, 45, 45)
+                .addComponent(lbl)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+        btn_hotelLayout.setVerticalGroup(
+            btn_hotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_hotelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btn_hotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
+        );
+
+        nav.add(btn_hotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, 70));
+
+        btn_rooms.setBackground(new java.awt.Color(54, 37, 89));
+        btn_rooms.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btn_roomsMouseMoved(evt);
+            }
+        });
+        btn_rooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_roomsMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_roomsMousePressed(evt);
+            }
+        });
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hotel-regular-24.png"))); // NOI18N
+
+        btn_hotel1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_hotel1.setForeground(new java.awt.Color(204, 204, 204));
+        btn_hotel1.setText("Manage rooms");
+
+        javax.swing.GroupLayout btn_roomsLayout = new javax.swing.GroupLayout(btn_rooms);
+        btn_rooms.setLayout(btn_roomsLayout);
+        btn_roomsLayout.setHorizontalGroup(
+            btn_roomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_roomsLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel9)
+                .addGap(45, 45, 45)
+                .addComponent(btn_hotel1)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+        btn_roomsLayout.setVerticalGroup(
+            btn_roomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_roomsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btn_roomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_hotel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
+        );
+
+        nav.add(btn_rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, -1, 70));
+
+        getContentPane().add(nav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 900));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setPreferredSize(new java.awt.Dimension(2690, 1000));
 
-        search.setBackground(new java.awt.Color(54, 37, 89));
+        search.setBackground(new java.awt.Color(166, 118, 163));
         search.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_search.setBackground(new java.awt.Color(206, 236, 242));
-        btn_search.setFont(new java.awt.Font("AnjaliOldLipi", 1, 15)); // NOI18N
-        btn_search.setForeground(new java.awt.Color(54, 37, 89));
-        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/chevron-right-regular-24.png"))); // NOI18N
-        btn_search.setText("Search hotels");
-        btn_search.setToolTipText("");
-        btn_search.setBorderPainted(false);
-        btn_search.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btn_search.setIconTextGap(20);
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
-        search.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(781, 96, -1, 45));
-
-        txt_city.setBackground(new java.awt.Color(255, 255, 255));
-        txt_city.setToolTipText("enter");
-        txt_city.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_cityActionPerformed(evt);
-            }
-        });
-        search.add(txt_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 103, 290, -1));
-        search.add(innerDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 104, 160, -1));
-        search.add(calendar_out_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 104, 166, -1));
 
         jLabel10.setBackground(new java.awt.Color(54, 37, 89));
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("find the perfect hotel today");
-        search.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 32, -1, -1));
-
-        banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/20852675_6345959.jpg"))); // NOI18N
-        jLabel6.setText("jLabel6");
-        jLabel6.setPreferredSize(new java.awt.Dimension(1000, 1000));
-        banner.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, -40, 2850, 1950));
+        jLabel10.setText("What do you want to do today?");
+        search.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 1081, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentLayout.createSequentialGroup()
-                .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(657, Short.MAX_VALUE))
         );
 
-        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 0, 1120, 900));
+        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 1140, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_homeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseMoved
         setColor(btn_home);
-        
     }//GEN-LAST:event_btn_homeMouseMoved
 
     private void btn_homeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseExited
         resetColor(btn_home);
-     
     }//GEN-LAST:event_btn_homeMouseExited
 
     private void btn_homeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMousePressed
 
     }//GEN-LAST:event_btn_homeMousePressed
 
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        
+    private void btn_hotelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hotelMouseMoved
+     setColor(btn_hotel);
+    }//GEN-LAST:event_btn_hotelMouseMoved
 
-    }//GEN-LAST:event_btn_searchActionPerformed
+    private void btn_hotelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hotelMouseExited
+         resetColor(btn_hotel);
+    }//GEN-LAST:event_btn_hotelMouseExited
 
-    private void txt_cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cityActionPerformed
+    private void btn_hotelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hotelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_cityActionPerformed
+    }//GEN-LAST:event_btn_hotelMousePressed
 
-    private void btn_settingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseEntered
-        setColor(btn_setting);
-    }//GEN-LAST:event_btn_settingMouseEntered
+    private void btn_roomsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_roomsMouseMoved
+        setColor(btn_rooms);
+    }//GEN-LAST:event_btn_roomsMouseMoved
 
-    private void btn_settingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseExited
-        resetColor(btn_setting);
-    }//GEN-LAST:event_btn_settingMouseExited
+    private void btn_roomsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_roomsMouseExited
+        resetColor(btn_rooms);
+    }//GEN-LAST:event_btn_roomsMouseExited
+
+    private void btn_roomsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_roomsMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_roomsMousePressed
 
     private void sing_offActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sing_offActionPerformed
        UserLogin userLogin = new UserLogin();
@@ -298,13 +350,14 @@ public class UserHome extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel banner;
+    private javax.swing.JLabel admin_name_label;
     private javax.swing.JPanel btn_home;
-    private javax.swing.JButton btn_search;
+    private javax.swing.JPanel btn_hotel;
+    private javax.swing.JLabel btn_hotel1;
+    private javax.swing.JPanel btn_rooms;
     private javax.swing.JPanel btn_setting;
-    private com.toedter.calendar.JDateChooser calendar_out_date;
     private javax.swing.JPanel content;
-    private com.toedter.calendar.JDateChooser innerDate;
+    private javax.swing.JPanel info_panel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -312,19 +365,17 @@ public class UserHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lb_username;
+    private javax.swing.JLabel lbl;
     private javax.swing.JPanel nav;
     private javax.swing.JPanel search;
     private javax.swing.JButton sing_off;
-    private javax.swing.JTextField txt_city;
     // End of variables declaration//GEN-END:variables
-
-    //This methods change color in the nav buttons
+//This methods change color in the nav buttons
     private void setColor(JPanel panel) {
         panel.setBackground(new Color(67,45,115));    
     }

@@ -165,6 +165,9 @@ public class UserLogin extends javax.swing.JFrame {
                     userHome.setVisible(true);
                     this.dispose();
                 }else{
+                    AdminHome adminHome = new AdminHome(user);
+                    adminHome.setVisible(true);
+                    this.dispose();
                     
                 }
             }
