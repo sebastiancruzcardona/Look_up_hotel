@@ -4,9 +4,12 @@
  */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import model.User;
+
 
 /**
  *
@@ -60,8 +63,7 @@ public class AdminHome extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1440, 900));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(1440, 1024));
 
         nav.setBackground(new java.awt.Color(54, 37, 89));
         nav.setPreferredSize(new java.awt.Dimension(294, 1000));
@@ -148,10 +150,10 @@ public class AdminHome extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
-        nav.add(btn_setting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 310, 70));
+        nav.add(btn_setting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 310, 70));
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
-        nav.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 750, 260, 20));
+        nav.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 820, 260, 20));
 
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         nav.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 260, 20));
@@ -170,7 +172,7 @@ public class AdminHome extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user-circle-solid-24.png"))); // NOI18N
         info_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        nav.add(info_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, -1, 60));
+        nav.add(info_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 860, -1, 60));
 
         sing_off.setBackground(new java.awt.Color(54, 37, 89));
         sing_off.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/log-out-solid-24.png"))); // NOI18N
@@ -180,7 +182,7 @@ public class AdminHome extends javax.swing.JFrame {
                 sing_offActionPerformed(evt);
             }
         });
-        nav.add(sing_off, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 830, -1, -1));
+        nav.add(sing_off, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 950, -1, -1));
 
         btn_hotel.setBackground(new java.awt.Color(54, 37, 89));
         btn_hotel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -234,6 +236,9 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         btn_rooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_roomsMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_roomsMouseExited(evt);
             }
@@ -272,8 +277,6 @@ public class AdminHome extends javax.swing.JFrame {
 
         nav.add(btn_rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, -1, 70));
 
-        getContentPane().add(nav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 900));
-
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setPreferredSize(new java.awt.Dimension(2690, 1000));
 
@@ -297,10 +300,23 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(contentLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(657, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
 
-        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 1140, 900));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(nav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -347,6 +363,12 @@ public class AdminHome extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_sing_offActionPerformed
 
+    private void btn_roomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_roomsMouseClicked
+        
+        
+        ShowJPanel(new AdminGestionRoom());
+    }//GEN-LAST:event_btn_roomsMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -382,5 +404,16 @@ public class AdminHome extends javax.swing.JFrame {
 
     private void resetColor(JPanel panel) {
         panel.setBackground(new Color(54,37,89));
+    }
+    
+    
+    private void ShowJPanel(JPanel panel){
+        panel.setSize(1140, 1024);
+        panel.setLocation(0, 0);
+        
+        content.removeAll();
+        content.add(panel, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
     }
 }

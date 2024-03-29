@@ -57,10 +57,10 @@ public class UserHome extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(1435, 1024));
 
         nav.setBackground(new java.awt.Color(54, 37, 89));
-        nav.setPreferredSize(new java.awt.Dimension(294, 1000));
+        nav.setPreferredSize(new java.awt.Dimension(294, 1024));
         nav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_home.setBackground(new java.awt.Color(54, 37, 89));
@@ -94,7 +94,7 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(75, 75, 75)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btn_homeLayout.setVerticalGroup(
             btn_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +140,7 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(67, 67, 67)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btn_settingLayout.setVerticalGroup(
             btn_settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,10 +152,10 @@ public class UserHome extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
-        nav.add(btn_setting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 310, 70));
+        nav.add(btn_setting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 710, 310, 70));
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
-        nav.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 750, 260, 20));
+        nav.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 820, 260, 20));
 
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         nav.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 260, 20));
@@ -174,7 +174,7 @@ public class UserHome extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user-circle-solid-24.png"))); // NOI18N
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        nav.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, -1, 60));
+        nav.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 860, -1, 60));
 
         sing_off.setBackground(new java.awt.Color(54, 37, 89));
         sing_off.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/log-out-solid-24.png"))); // NOI18N
@@ -184,15 +184,12 @@ public class UserHome extends javax.swing.JFrame {
                 sing_offActionPerformed(evt);
             }
         });
-        nav.add(sing_off, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 830, -1, -1));
-
-        getContentPane().add(nav, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 0, 310, 900));
+        nav.add(sing_off, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 940, -1, -1));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
-        content.setPreferredSize(new java.awt.Dimension(2690, 1000));
+        content.setPreferredSize(new java.awt.Dimension(2690, 1024));
 
-        search.setBackground(new java.awt.Color(54, 37, 89));
-        search.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        search.setBackground(new java.awt.Color(166, 118, 163));
 
         btn_search.setBackground(new java.awt.Color(206, 236, 242));
         btn_search.setFont(new java.awt.Font("AnjaliOldLipi", 1, 15)); // NOI18N
@@ -208,7 +205,6 @@ public class UserHome extends javax.swing.JFrame {
                 btn_searchActionPerformed(evt);
             }
         });
-        search.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(781, 96, -1, 45));
 
         txt_city.setBackground(new java.awt.Color(255, 255, 255));
         txt_city.setToolTipText("enter");
@@ -217,16 +213,53 @@ public class UserHome extends javax.swing.JFrame {
                 txt_cityActionPerformed(evt);
             }
         });
-        search.add(txt_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 103, 290, -1));
-        search.add(innerDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 104, 160, -1));
-        search.add(calendar_out_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 104, 166, -1));
 
         jLabel10.setBackground(new java.awt.Color(54, 37, 89));
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("find the perfect hotel today");
-        search.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 32, -1, -1));
 
+        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
+        search.setLayout(searchLayout);
+        searchLayout.setHorizontalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel10))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(btn_search)))
+                .addContainerGap(220, Short.MAX_VALUE))
+        );
+        searchLayout.setVerticalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel10)
+                .addGap(22, 22, 22)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        banner.setPreferredSize(new java.awt.Dimension(2690, 1024));
         banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/20852675_6345959.jpg"))); // NOI18N
@@ -238,22 +271,35 @@ public class UserHome extends javax.swing.JFrame {
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 1081, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(contentLayout.createSequentialGroup()
+                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentLayout.createSequentialGroup()
                 .addComponent(banner, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 0, 1120, 900));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1171, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(nav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
