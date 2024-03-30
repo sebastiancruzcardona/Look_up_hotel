@@ -17,6 +17,9 @@ CREATE TABLE `hotels` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `hotels` (`id`, `name`, `address`, `classification`, `comforts`) VALUES
+(1,	'emperador',	'calle 12',	2,	'prueba'),
+(2,	'armenia',	'prueba',	2,	'prueba');
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE `images` (
@@ -92,8 +95,7 @@ CREATE TABLE `rooms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `rooms` (`id`, `room_number`, `type_room`, `price_per_night`, `availability`, `amenities_details`, `id_hotel`) VALUES
-(1,	'1B',	'duplex',	133400,	1,	'full',	NULL),
-(2,	'2b',	'unit',	200,	1,	'becarfull',	NULL);
+(4,	'233',	'pruebatt',	120000,	1,	'prueba hola prueba',	2);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -132,4 +134,4 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`
 (27,	'sebastian',	'sebastian@gmail.com',	'admin',	'3187492128',	1),
 (28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2);
 
--- 2024-03-29 21:43:53
+-- 2024-03-30 03:03:50

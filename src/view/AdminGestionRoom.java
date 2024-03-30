@@ -7,8 +7,10 @@ package view;
 import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.Room;
 import services.RoomService;
 
 /**
@@ -18,10 +20,10 @@ import services.RoomService;
 public class AdminGestionRoom extends javax.swing.JPanel {
     
     RoomService roomService;
-    
+    int idTable;
     public AdminGestionRoom() {
         roomService = new RoomService();
-        
+        String idTable=null;
         initComponents();
         initTable();
     }
@@ -89,6 +91,11 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         ));
         rooms_table.setIntercellSpacing(new java.awt.Dimension(1, 1));
         rooms_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        rooms_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                rooms_tableMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(rooms_table);
 
         txt_search.setBackground(new java.awt.Color(255, 255, 255));
@@ -107,6 +114,11 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         btn_update.setText("Edit");
         btn_update.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_update.setMaximumSize(new java.awt.Dimension(100, 30));
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
         btn_insert.setBackground(new java.awt.Color(54, 37, 89));
         btn_insert.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,6 +136,11 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/x-regular-24.png"))); // NOI18N
         btn_delete.setText("Delete");
         btn_delete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout back_groundLayout = new javax.swing.GroupLayout(back_ground);
         back_ground.setLayout(back_groundLayout);
@@ -181,6 +198,21 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         ShowJPanel(new InsertRoom());
     }//GEN-LAST:event_btn_insertActionPerformed
 
+    private void rooms_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rooms_tableMousePressed
+        DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
+
+        idTable = (int) tblMode1.getValueAt(rooms_table.getSelectedRow(), 0);
+        
+    }//GEN-LAST:event_rooms_tableMousePressed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        validateDeleteId(idTable);
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        validateUpdateId(idTable);
+    }//GEN-LAST:event_btn_updateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back_ground;
@@ -233,6 +265,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
      
      }
      
+     
      private void ShowJPanel(JPanel panel){
         panel.setSize(1140, 1024);
         panel.setLocation(0, 0);
@@ -242,4 +275,37 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         back_ground.revalidate();
         back_ground.repaint();
     }
+     
+     //This method validate if there is a select arrow from table
+     public void validateDeleteId(int id){
+         if(idTable == 0){
+             JOptionPane.showMessageDialog(null, "Please select the table row you want to delete");
+         }else{
+              int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this room?","Answer",JOptionPane.YES_NO_CANCEL_OPTION );
+              if (answer ==JOptionPane.YES_OPTION) {
+                 roomService.delete(id);
+                 reloadTable();
+             }
+             
+             
+         }
+     }
+     
+     
+     public void validateUpdateId(int id){
+         if(idTable == 0){
+             JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
+         }else{
+              
+             
+                  Room room =roomService.findRoom(id);
+                  System.out.println(room.getNumber()+ room.getId());
+                   ShowJPanel(new AdminUpdateRoom(room));
+                 
+                 
+             
+             
+             
+         }
+     }
 }

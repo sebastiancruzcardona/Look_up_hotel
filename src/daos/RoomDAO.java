@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import model.Room;
 
 
 public class RoomDAO implements RoomDAOInterface {
@@ -66,16 +67,15 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method modifies information of a previously registered user in table "rooms"
     @Override
-    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,int idHotel, int id) {
-        String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ?, id_hotel  WHERE id = ?";
+    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id) {
+        String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ? WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
             pstmt.setDouble(3, pricePerNigth);
             pstmt.setBoolean(4,availability );
             pstmt.setString(5, amenitiesDetails);
-            pstmt.setInt(6, idHotel);
-            pstmt.setInt(7, id);
+            pstmt.setInt(6, id);
             
             pstmt.executeUpdate();
 
@@ -159,6 +159,37 @@ public class RoomDAO implements RoomDAOInterface {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+    }
+
+    /**
+     *  This method find a room registered in table "rooms" and returns the room
+     * @param id
+     * @return
+     */
+    @Override
+    public Room findRoom(int id) {
+        String selectSQL = "SELECT * FROM rooms WHERE id = ?";
+        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+            pstm.setInt(1, id);
+            
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()) {
+                
+               Room room = new Room(rs.getInt("id"), rs.getString("room_number"), rs.getString("type_room"),rs.getDouble("price_per_night"), rs.getBoolean("availability"), rs.getString("amenities_details"), null);
+                
+               return room;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "es null");
+            }
+            
+            
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }
+        return null;
     }
 
     
