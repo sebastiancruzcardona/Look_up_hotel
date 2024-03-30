@@ -4,6 +4,13 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import services.HotelService;
 import services.RoomService;
 
 /**
@@ -13,9 +20,11 @@ import services.RoomService;
 public class InsertRoom extends javax.swing.JPanel {
 
     RoomService roomService;
+    HotelService hotelService;
     public InsertRoom() {
-        
+        hotelService = new HotelService();
         roomService = new RoomService();
+        
         initComponents();
     }
 
@@ -42,6 +51,8 @@ public class InsertRoom extends javax.swing.JPanel {
         txt_details = new javax.swing.JTextField();
         availabilit_check = new java.awt.Checkbox();
         btn_insert = new javax.swing.JButton();
+        hotel_combox = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,6 +128,24 @@ public class InsertRoom extends javax.swing.JPanel {
             }
         });
 
+        hotel_combox.setBackground(new java.awt.Color(255, 255, 255));
+        hotel_combox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hotel_comboxMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                hotel_comboxMousePressed(evt);
+            }
+        });
+        hotel_combox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hotel_comboxActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("Hotel");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -128,23 +157,27 @@ public class InsertRoom extends javax.swing.JPanel {
                         .addGap(104, 104, 104)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(339, 339, 339)
+                        .addGap(351, 351, 351)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_room_number, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_type_room, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_details, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
+                            .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(364, Short.MAX_VALUE))
+                                .addGap(37, 37, 37)
+                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hotel_combox, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txt_room_number, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addComponent(txt_type_room, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addComponent(txt_price, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addComponent(txt_details, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jLabel4))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +202,15 @@ public class InsertRoom extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_details, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hotel_combox, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -194,26 +231,62 @@ public class InsertRoom extends javax.swing.JPanel {
        double priceNight = Double.parseDouble(txt_price.getText());
        boolean availability = availabilit_check.getState();
        String amenitiesDetails = txt_details.getText();
+       String hotel = (String) hotel_combox.getSelectedItem();
        
-       roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails);
+       roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
+       
+       
+       
        
     }//GEN-LAST:event_btn_insertActionPerformed
+
+    private void hotel_comboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotel_comboxActionPerformed
+      
+          
+    }//GEN-LAST:event_hotel_comboxActionPerformed
+
+    private void hotel_comboxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMouseClicked
+        
+              
+            
+    }//GEN-LAST:event_hotel_comboxMouseClicked
+
+    private void hotel_comboxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMousePressed
+        fillComboBox();
+    }//GEN-LAST:event_hotel_comboxMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Checkbox availabilit_check;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btn_insert;
+    private javax.swing.JComboBox<String> hotel_combox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel search;
     private javax.swing.JTextField txt_details;
     private javax.swing.JTextField txt_price;
     private javax.swing.JTextField txt_room_number;
     private javax.swing.JTextField txt_type_room;
     // End of variables declaration//GEN-END:variables
+
+    
+
+//This methods fill dates in hotel_comboBox
+    public void fillComboBox(){
+       
+        ArrayList<String> hotelsName = hotelService.selectHotelsName();
+          hotel_combox.removeAllItems();
+          for (String  hotel: hotelsName) {
+              hotel_combox.addItem(hotel);
+              
+            
+        }
+    }
+
 }

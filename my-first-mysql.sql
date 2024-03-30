@@ -84,10 +84,16 @@ CREATE TABLE `rooms` (
   `price_per_night` double NOT NULL,
   `availability` tinyint(1) NOT NULL,
   `amenities_details` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `id_hotel` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `room_number` (`room_number`)
+  UNIQUE KEY `room_number` (`room_number`),
+  KEY `fk_hotel` (`id_hotel`),
+  CONSTRAINT `fk_hotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotels` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `rooms` (`id`, `room_number`, `type_room`, `price_per_night`, `availability`, `amenities_details`, `id_hotel`) VALUES
+(1,	'1B',	'duplex',	133400,	1,	'full',	NULL),
+(2,	'2b',	'unit',	200,	1,	'becarfull',	NULL);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -126,4 +132,4 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`
 (27,	'sebastian',	'sebastian@gmail.com',	'admin',	'3187492128',	1),
 (28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2);
 
--- 2024-03-29 06:15:35
+-- 2024-03-29 21:43:53
