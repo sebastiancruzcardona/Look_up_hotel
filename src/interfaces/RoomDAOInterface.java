@@ -5,6 +5,7 @@
 package interfaces;
 
 import java.util.Map;
+import model.Room;
 
 /**
  *
@@ -14,11 +15,11 @@ public interface RoomDAOInterface {
     
     public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel);
     
-    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int idHotel, int id);
+    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,  int id);
     
     public Map<String,Object> select();
     
     public void delete(int id);
     
-    
+    Room findRoom(int id);
 }

@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.Room;
 import services.RoomService;
 
 /**
@@ -113,6 +114,11 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         btn_update.setText("Edit");
         btn_update.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_update.setMaximumSize(new java.awt.Dimension(100, 30));
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
         btn_insert.setBackground(new java.awt.Color(54, 37, 89));
         btn_insert.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,8 +206,12 @@ public class AdminGestionRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_rooms_tableMousePressed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        validateDeleteDd(idTable);
+        validateDeleteId(idTable);
     }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        validateUpdateId(idTable);
+    }//GEN-LAST:event_btn_updateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -267,7 +277,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
     }
      
      //This method validate if there is a select arrow from table
-     public void validateDeleteDd(int id){
+     public void validateDeleteId(int id){
          if(idTable == 0){
              JOptionPane.showMessageDialog(null, "Please select the table row you want to delete");
          }else{
@@ -281,4 +291,21 @@ public class AdminGestionRoom extends javax.swing.JPanel {
          }
      }
      
+     
+     public void validateUpdateId(int id){
+         if(idTable == 0){
+             JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
+         }else{
+              
+             
+                  Room room =roomService.findRoom(id);
+                  System.out.println(room.getNumber()+ room.getId());
+                   ShowJPanel(new AdminUpdateRoom(room));
+                 
+                 
+             
+             
+             
+         }
+     }
 }

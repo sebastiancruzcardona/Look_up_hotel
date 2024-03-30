@@ -63,7 +63,6 @@ public class AdminHome extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1440, 1024));
 
         nav.setBackground(new java.awt.Color(54, 37, 89));
         nav.setPreferredSize(new java.awt.Dimension(294, 1000));
@@ -121,6 +120,14 @@ public class AdminHome extends javax.swing.JFrame {
         nav.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         btn_setting.setBackground(new java.awt.Color(54, 37, 89));
+        btn_setting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_settingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_settingMouseExited(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/cog-regular-24.png"))); // NOI18N
@@ -344,7 +351,9 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_homeMouseExited
 
     private void btn_homeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMousePressed
-
+        AdminHome adminHome = new AdminHome(user);
+        adminHome.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_homeMousePressed
 
     private void btn_hotelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hotelMouseMoved
@@ -382,6 +391,14 @@ public class AdminHome extends javax.swing.JFrame {
         
         ShowJPanel(new AdminGestionRoom()); 
     }//GEN-LAST:event_btn_roomsMouseClicked
+
+    private void btn_settingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseEntered
+        setColor(btn_setting);
+    }//GEN-LAST:event_btn_settingMouseEntered
+
+    private void btn_settingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseExited
+         resetColor(btn_setting);
+    }//GEN-LAST:event_btn_settingMouseExited
 
     
 

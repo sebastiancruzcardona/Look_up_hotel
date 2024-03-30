@@ -6,6 +6,7 @@ package services;
 
 import daos.RoomDAO;
 import java.util.Map;
+import model.Room;
 
 /**
  *
@@ -24,8 +25,8 @@ public class RoomService {
     }
     
     //This method calls update method from RoomDAO
-    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int idHotel,int id){
-        roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel,id);
+    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,int id){
+        roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
     }
     
     //This method returns a HashMap calling RoomDAO select method
@@ -36,5 +37,9 @@ public class RoomService {
     //This method calls delete method from RoomDAO
     public void delete(int id){
         roomDAO.delete(id);
+    }
+    //This method calls findRoom method from RoomDAO
+    public Room findRoom(int id){
+        return roomDAO.findRoom(id);
     }
 }
