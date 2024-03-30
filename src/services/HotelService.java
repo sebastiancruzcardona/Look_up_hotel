@@ -5,6 +5,7 @@
 package services;
 
 import daos.HotelDAO;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -39,7 +40,10 @@ public class HotelService {
         hotelDAO.delete(id);
     }
     
-    
+    //This method calls selectHotelsName from HotelDAO
+    public ArrayList<String> selectHotelsName(){
+        return hotelDAO.selectNameHotels();
+    }
     
    
 }

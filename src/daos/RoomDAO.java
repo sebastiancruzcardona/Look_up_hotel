@@ -42,15 +42,15 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method inserts a new row in table "rooms" with de provided data of a new room
     @Override
-    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int idHotel) { //paste: 
-        String insertSQL = "INSERT INTO rooms (room_number,type_room,price_per_night,availability,amenities_details, id_hotel) VALUES (?,?,?,?,?,?)";
+    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel) { //paste: 
+        String insertSQL = "INSERT INTO rooms (room_number,type_room,price_per_night,availability,amenities_details, id_hotel) VALUES (?,?,?,?,?,(SELECT id FROM hotels where name =?))";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
             pstmt.setDouble(3, pricePerNigth);
             pstmt.setBoolean(4,availability );
             pstmt.setString(5, amenitiesDetails);
-            pstmt.setInt(6, idHotel);
+            pstmt.setString(6, idHotel);
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {

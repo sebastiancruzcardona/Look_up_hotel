@@ -19,7 +19,7 @@ public class RoomService {
     }
     
      //This method calls insert method from RoomDAO
-    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int idHotel){
+    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel){
         roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel);
     }
     
