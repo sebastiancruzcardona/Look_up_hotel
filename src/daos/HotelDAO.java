@@ -157,4 +157,29 @@ public class HotelDAO implements HotelDAOInterface{
             e.printStackTrace();
         }
     }    
+    // This method create a ArrayList with hotel names from table "hotels"
+    @Override
+    public ArrayList<String> selectNameHotels() {
+        String selectSQL = "SELECT name FROM hotels";
+        ArrayList<String> hotelsName = new  ArrayList<>();
+        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+            
+            ResultSet rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                
+               hotelsName.add(rs.getString("name"));
+                
+               
+                
+            }
+            
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }return hotelsName;
+    }
+
+    
 }
+

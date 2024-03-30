@@ -19,6 +19,14 @@ public class Hotel {
     private String comforts;
     private ArrayList<String> images;
 
+    
+    //Construtor to emtpy
+    public Hotel() {
+    }
+
+    
+
+
     //Constructor to create the object
     public Hotel(String name, String address, int classification, String comforts) {
         this.name = name;

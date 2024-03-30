@@ -5,6 +5,7 @@
 package interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import model.Hotel;
 
@@ -21,5 +22,7 @@ public interface HotelDAOInterface {
     Map<String,Object> select();
     
     void delete(int id);
+    
+    ArrayList<String> selectNameHotels ();
 }
 
