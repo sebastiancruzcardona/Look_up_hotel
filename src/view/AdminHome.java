@@ -198,6 +198,9 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
         btn_hotel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_hotelMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_hotelMouseExited(evt);
             }
@@ -399,6 +402,10 @@ public class AdminHome extends javax.swing.JFrame {
     private void btn_settingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseExited
          resetColor(btn_setting);
     }//GEN-LAST:event_btn_settingMouseExited
+
+    private void btn_hotelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hotelMouseClicked
+        ShowJPanel(new AdminManageHotel());
+    }//GEN-LAST:event_btn_hotelMouseClicked
 
     
 
