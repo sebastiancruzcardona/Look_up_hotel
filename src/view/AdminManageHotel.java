@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.Room;
+import model.Hotel;
 import services.HotelService;
 
 /**
@@ -20,7 +20,7 @@ import services.HotelService;
 public class AdminManageHotel extends javax.swing.JPanel {
     
     HotelService hotelService;
-    int idTable;
+    int idTable = 0;
     public AdminManageHotel() {
         hotelService = new HotelService();
         initComponents();
@@ -40,7 +40,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
         search = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        rooms_table = new javax.swing.JTable();
+        hotels_table = new javax.swing.JTable();
         txt_search = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
@@ -56,7 +56,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
         jLabel10.setBackground(new java.awt.Color(54, 37, 89));
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Gestion room");
+        jLabel10.setText("Manage hotel");
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
@@ -75,9 +75,9 @@ public class AdminManageHotel extends javax.swing.JPanel {
                 .addGap(43, 43, 43))
         );
 
-        rooms_table.setBackground(new java.awt.Color(255, 255, 255));
-        rooms_table.setForeground(new java.awt.Color(0, 0, 0));
-        rooms_table.setModel(new javax.swing.table.DefaultTableModel(
+        hotels_table.setBackground(new java.awt.Color(255, 255, 255));
+        hotels_table.setForeground(new java.awt.Color(0, 0, 0));
+        hotels_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,13 +88,13 @@ public class AdminManageHotel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        rooms_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        rooms_table.addMouseListener(new java.awt.event.MouseAdapter() {
+        hotels_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        hotels_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                rooms_tableMousePressed(evt);
+                hotels_tableMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(rooms_table);
+        jScrollPane1.setViewportView(hotels_table);
 
         txt_search.setBackground(new java.awt.Color(255, 255, 255));
         txt_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -196,12 +196,11 @@ public class AdminManageHotel extends javax.swing.JPanel {
         ShowJPanel(new InsertHotel());
     }//GEN-LAST:event_btn_addActionPerformed
 
-    private void rooms_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rooms_tableMousePressed
-        DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
-
-        idTable = (int) tblMode1.getValueAt(rooms_table.getSelectedRow(), 0);
+    private void hotels_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotels_tableMousePressed
+        DefaultTableModel tblMode1 = (DefaultTableModel) hotels_table.getModel();
+        idTable = (int) tblMode1.getValueAt(hotels_table.getSelectedRow(), 0);
         
-    }//GEN-LAST:event_rooms_tableMousePressed
+    }//GEN-LAST:event_hotels_tableMousePressed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         validateDeleteId(idTable);
@@ -217,17 +216,17 @@ public class AdminManageHotel extends javax.swing.JPanel {
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_update;
+    private javax.swing.JTable hotels_table;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable rooms_table;
     private javax.swing.JPanel search;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 
      public void reloadTable() {
         //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
-        Map<String, Object> result = roomService.select();
+        Map<String, Object> result = hotelService.select();
 
         //Get the names of the columns from the results map. The column names are returned as a list of strings.
         List<String> columnNames = (List<String>) result.get("columnNames");
@@ -251,16 +250,13 @@ public class AdminManageHotel extends javax.swing.JPanel {
         }
 
         //Set tableModel. This updates the table to show data stored in tableModel
-        rooms_table.setModel(model);
-     
-        
-        
+        hotels_table.setModel(model);        
      }
+     
      //this methods reload all methods when start jpanel 
      public void initTable(){
          reloadTable();
-         txt_search.putClientProperty("placeholder", "enter the id of the room you want to search");
-     
+         txt_search.putClientProperty("placeholder", "enter the id of the room you want to search");     
      }
      
      
@@ -279,13 +275,11 @@ public class AdminManageHotel extends javax.swing.JPanel {
          if(idTable == 0){
              JOptionPane.showMessageDialog(null, "Please select the table row you want to delete");
          }else{
-              int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this room?","Answer",JOptionPane.YES_NO_CANCEL_OPTION );
+              int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this hotel?","Answer",JOptionPane.YES_NO_CANCEL_OPTION );
               if (answer ==JOptionPane.YES_OPTION) {
-                 roomService.delete(id);
+                 hotelService.delete(id);
                  reloadTable();
-             }
-             
-             
+             }            
          }
      }
      
@@ -293,17 +287,10 @@ public class AdminManageHotel extends javax.swing.JPanel {
      public void validateUpdateId(int id){
          if(idTable == 0){
              JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
-         }else{
-              
-             
-                  Room room =roomService.findRoom(id);
-                  System.out.println(room.getNumber()+ room.getId());
-                   ShowJPanel(new AdminUpdateRoom(room));
-                 
-                 
-             
-             
-             
+         }else{      
+             Hotel hotel = hotelService.findHotel(id);
+             System.out.println(hotel.getId() + hotel.getName());
+             ShowJPanel(new AdminUpdateHotel(hotel));             
          }
      }
 }

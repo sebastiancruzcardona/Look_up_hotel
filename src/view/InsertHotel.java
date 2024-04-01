@@ -62,7 +62,7 @@ public class InsertHotel extends javax.swing.JPanel {
         jLabel11.setBackground(new java.awt.Color(54, 37, 89));
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Gestion room");
+        jLabel11.setText("Manage hotel");
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
@@ -84,7 +84,7 @@ public class InsertHotel extends javax.swing.JPanel {
         jLabel10.setBackground(new java.awt.Color(54, 37, 89));
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Registrer new room");
+        jLabel10.setText("Create a new hotel");
 
         txt_room_number.setBackground(new java.awt.Color(255, 255, 255));
         txt_room_number.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));

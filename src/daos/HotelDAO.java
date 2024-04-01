@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import model.Hotel;
 
 /**
@@ -96,7 +97,7 @@ public class HotelDAO implements HotelDAOInterface{
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT name, address, classification, comforts FROM hotels";
+        String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
@@ -156,26 +157,76 @@ public class HotelDAO implements HotelDAOInterface{
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
-    }    
+    }
+        
+    @Override
+    /**
+     * This method brings out the uri addresses of the stored images of an hotel from table "images".
+     * This method is to be used inside the findHotel method, because this does not validate for it self
+     * if there is a hotel identified by the provided id. That is why this method is not called in HotelServices
+     * @param id
+     * @return A String ArrayList of images. If there are not images, the Arraylist is empty
+     */
+    public ArrayList<String> findHotelImages(int id) {
+        ArrayList<String> images = new ArrayList<>();
+        String selectSQL = "SELECT uri FROM images WHERE id_hotel = ?";
+        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+            pstm.setInt(1, id);            
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()) {                
+               images.add(rs.getString("uri"));
+            }
+            
+            
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for finding hotel images");
+            e.printStackTrace();
+        }
+        return images;        
+    }
+
+    @Override
+    /**
+     * This method finds a hotel registered in table "hotels" and returns it. If it finds a hotel, this method calls findHotelImages method to set the hotel's ArrayList of images
+     * @param id
+     * @return A Hotel if the hotel exists, or null, if there is not a hotel with that id
+     */
+    public Hotel findHotel(int id) {
+        String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels WHERE id = ?";
+        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+            pstm.setInt(1, id);            
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()) {
+                Hotel hotel = new Hotel(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getInt("classification"), rs.getString("comforts"), findHotelImages(id));
+                return hotel;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "es null");
+            }
+            
+            
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for finding hotel");
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     // This method create a ArrayList with hotel names from table "hotels"
     @Override
     public ArrayList<String> selectNameHotels() {
         String selectSQL = "SELECT name FROM hotels";
         ArrayList<String> hotelsName = new  ArrayList<>();
-        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
-            
-            ResultSet rs = pstm.executeQuery();
-            
-            while (rs.next()) {
-                
-               hotelsName.add(rs.getString("name"));
-                
-               
-                
+        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {            
+            ResultSet rs = pstm.executeQuery();            
+            while (rs.next()) {                
+               hotelsName.add(rs.getString("name"));  
             }
             
         } catch (SQLException | NullConnectionException e) {
-            System.out.println("An error occurred while connecting to database for deletion of data");
+            System.out.println("An error occurred while connecting to database for hotels names selection");
             e.printStackTrace();
         }return hotelsName;
     }

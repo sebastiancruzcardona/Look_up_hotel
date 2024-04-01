@@ -7,6 +7,7 @@ package services;
 import daos.HotelDAO;
 import java.util.ArrayList;
 import java.util.Map;
+import model.Hotel;
 
 /**
  *
@@ -15,8 +16,7 @@ import java.util.Map;
 public class HotelService {
    HotelDAO hotelDAO;
 
-    public HotelService() {
-        
+    public HotelService() {        
         hotelDAO = new HotelDAO();
     }
    
@@ -38,6 +38,11 @@ public class HotelService {
     //This method calls delete method from HotelDAO
     public void delete(int id){
         hotelDAO.delete(id);
+    }
+    
+    //This method calls findHotel method from HotelDAO
+    public Hotel findHotel(int id){
+        return hotelDAO.findHotel(id);
     }
     
     //This method calls selectHotelsName from HotelDAO
