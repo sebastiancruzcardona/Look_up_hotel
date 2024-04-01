@@ -26,8 +26,8 @@ public class HotelService {
     }
     
     //This method calls update method from HotelDAO
-    public void update(String name, String address, int classification, String comforts){
-        hotelDAO.update(name, address, classification, comforts, classification);
+    public void update(String name, String address, int classification, String comforts, int id){
+        hotelDAO.update(name, address, classification, comforts, id);
     }
     
     //This method returns a HashMap calling HotelDAO select method

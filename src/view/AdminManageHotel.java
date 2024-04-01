@@ -20,7 +20,7 @@ import services.HotelService;
 public class AdminManageHotel extends javax.swing.JPanel {
     
     HotelService hotelService;
-    int idTable = 0;
+    int idTable;
     public AdminManageHotel() {
         hotelService = new HotelService();
         initComponents();

@@ -212,8 +212,9 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         String address = txt_address.getText();
         int classification = Integer.parseInt(txt_classification.getText());
         String comforts = txt_comforts.getText();
+        System.out.println(hotel.getId());
        
-        hotelService.update(name, address, classification, comforts);
+        hotelService.update(name, address, classification, comforts, hotel.getId());
         clear();
     }//GEN-LAST:event_btn_editActionPerformed
 
