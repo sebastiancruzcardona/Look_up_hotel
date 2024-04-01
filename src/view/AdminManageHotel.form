@@ -51,7 +51,7 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="btn_insert" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btn_add" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btn_update" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -79,7 +79,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_update" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="btn_delete" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="btn_insert" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="btn_add" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
               </Group>
@@ -242,7 +242,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_updateActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_insert">
+        <Component class="javax.swing.JButton" name="btn_add">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="59" green="25" red="36" type="rgb"/>
@@ -257,7 +257,7 @@
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_insertActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_delete">

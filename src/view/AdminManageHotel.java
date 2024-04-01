@@ -11,19 +11,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Room;
-import services.RoomService;
+import services.HotelService;
 
 /**
  *
- * @author lugo
+ * @author Fabián Lugo - Sebastián Cruz
  */
 public class AdminManageHotel extends javax.swing.JPanel {
     
-    RoomService roomService;
+    HotelService hotelService;
     int idTable;
     public AdminManageHotel() {
-        roomService = new RoomService();
-        String idTable=null;
+        hotelService = new HotelService();
         initComponents();
         initTable();
     }
@@ -45,7 +44,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
         txt_search = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
-        btn_insert = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1150, 1024));
@@ -119,14 +118,14 @@ public class AdminManageHotel extends javax.swing.JPanel {
             }
         });
 
-        btn_insert.setBackground(new java.awt.Color(54, 37, 89));
-        btn_insert.setForeground(new java.awt.Color(255, 255, 255));
-        btn_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
-        btn_insert.setText("Add");
-        btn_insert.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_insert.addActionListener(new java.awt.event.ActionListener() {
+        btn_add.setBackground(new java.awt.Color(54, 37, 89));
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
+        btn_add.setText("Add");
+        btn_add.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_insertActionPerformed(evt);
+                btn_addActionPerformed(evt);
             }
         });
 
@@ -154,7 +153,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addComponent(jButton1))
                     .addGroup(back_groundLayout.createSequentialGroup()
-                        .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -177,7 +176,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111))
         );
 
@@ -193,9 +192,9 @@ public class AdminManageHotel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        ShowJPanel(new InsertRoom());
-    }//GEN-LAST:event_btn_insertActionPerformed
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        ShowJPanel(new InsertHotel());
+    }//GEN-LAST:event_btn_addActionPerformed
 
     private void rooms_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rooms_tableMousePressed
         DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
@@ -215,8 +214,8 @@ public class AdminManageHotel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back_ground;
+    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_insert;
     private javax.swing.JButton btn_update;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
