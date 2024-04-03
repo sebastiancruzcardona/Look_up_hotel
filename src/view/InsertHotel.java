@@ -4,14 +4,7 @@
  */
 package view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
 import services.HotelService;
-import services.RoomService;
 
 /**
  *
