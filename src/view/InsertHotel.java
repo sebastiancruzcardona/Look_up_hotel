@@ -15,16 +15,13 @@ import services.RoomService;
 
 /**
  *
- * @author lugo
+ * @author Fabián Lugo - Sebastián Cruz
  */
 public class InsertHotel extends javax.swing.JPanel {
 
-    RoomService roomService;
     HotelService hotelService;
     public InsertHotel() {
-        hotelService = new HotelService();
-        roomService = new RoomService();
-        
+        hotelService = new HotelService();        
         initComponents();
     }
 
@@ -41,19 +38,16 @@ public class InsertHotel extends javax.swing.JPanel {
         search = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txt_room_number = new javax.swing.JTextField();
+        txt_name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_type_room = new javax.swing.JTextField();
+        txt_address = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_price = new javax.swing.JTextField();
+        txt_classification = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        availabilit_check = new java.awt.Checkbox();
-        btn_insert = new javax.swing.JButton();
-        hotel_combox = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        btn_add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txt_details = new javax.swing.JTextArea();
+        txt_comforts = new javax.swing.JTextArea();
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -86,67 +80,45 @@ public class InsertHotel extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Create a new hotel");
 
-        txt_room_number.setBackground(new java.awt.Color(255, 255, 255));
-        txt_room_number.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txt_room_number.setName(""); // NOI18N
+        txt_name.setBackground(new java.awt.Color(255, 255, 255));
+        txt_name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txt_name.setName(""); // NOI18N
 
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Room number");
+        jLabel1.setText("Hotel name");
 
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("Type room");
+        jLabel2.setText("Address");
 
-        txt_type_room.setBackground(new java.awt.Color(255, 255, 255));
-        txt_type_room.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txt_type_room.setName(""); // NOI18N
+        txt_address.setBackground(new java.awt.Color(255, 255, 255));
+        txt_address.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txt_address.setName(""); // NOI18N
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("Price per night");
+        jLabel3.setText("Classification");
 
-        txt_price.setBackground(new java.awt.Color(255, 255, 255));
-        txt_price.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txt_price.setName(""); // NOI18N
+        txt_classification.setBackground(new java.awt.Color(255, 255, 255));
+        txt_classification.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txt_classification.setName(""); // NOI18N
 
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("Amentities_details");
+        jLabel4.setText("Comforts");
 
-        availabilit_check.setForeground(new java.awt.Color(153, 153, 153));
-        availabilit_check.setLabel("Availability");
-        availabilit_check.setState(true);
-
-        btn_insert.setBackground(new java.awt.Color(54, 37, 89));
-        btn_insert.setForeground(new java.awt.Color(255, 255, 255));
-        btn_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
-        btn_insert.setText("Add");
-        btn_insert.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_insert.addActionListener(new java.awt.event.ActionListener() {
+        btn_add.setBackground(new java.awt.Color(54, 37, 89));
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
+        btn_add.setText("Add");
+        btn_add.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_insertActionPerformed(evt);
+                btn_addActionPerformed(evt);
             }
         });
 
-        hotel_combox.setBackground(new java.awt.Color(255, 255, 255));
-        hotel_combox.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hotel_comboxMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                hotel_comboxMousePressed(evt);
-            }
-        });
-        hotel_combox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hotel_comboxActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Hotel");
-
-        txt_details.setBackground(new java.awt.Color(255, 255, 255));
-        txt_details.setColumns(20);
-        txt_details.setRows(5);
-        jScrollPane1.setViewportView(txt_details);
+        txt_comforts.setBackground(new java.awt.Color(255, 255, 255));
+        txt_comforts.setColumns(20);
+        txt_comforts.setRows(5);
+        jScrollPane1.setViewportView(txt_comforts);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -160,24 +132,18 @@ public class InsertHotel extends javax.swing.JPanel {
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGap(382, 382, 382)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(hotel_combox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_room_number, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_type_room, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_price, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_name)
+                            .addComponent(jLabel1)
+                            .addComponent(txt_address)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_classification)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(434, 434, 434)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(469, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
@@ -190,28 +156,22 @@ public class InsertHotel extends javax.swing.JPanel {
                 .addGap(79, 79, 79)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_room_number, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_type_room, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hotel_combox, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_classification, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -226,76 +186,40 @@ public class InsertHotel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-       String roomNumber = txt_room_number.getText();
-       String typeRoom = txt_type_room.getText();
-       double priceNight = Double.parseDouble(txt_price.getText());
-       boolean availability = availabilit_check.getState();
-       String amenitiesDetails = txt_details.getText();
-       String hotel = (String) hotel_combox.getSelectedItem();
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+       String name = txt_name.getText();
+       String address = txt_address.getText();
+       int clssification = Integer.parseInt(txt_classification.getText());
+       String comforts = txt_comforts.getText();
        
-       roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
-        clear();
-       
-       
-       
-    }//GEN-LAST:event_btn_insertActionPerformed
-
-    private void hotel_comboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotel_comboxActionPerformed
-      
-          
-    }//GEN-LAST:event_hotel_comboxActionPerformed
-
-    private void hotel_comboxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMouseClicked
-        
-              
-            
-    }//GEN-LAST:event_hotel_comboxMouseClicked
-
-    private void hotel_comboxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMousePressed
-        fillComboBox();
-    }//GEN-LAST:event_hotel_comboxMousePressed
+       hotelService.insert(name, address, clssification, comforts);  
+       clear();
+    }//GEN-LAST:event_btn_addActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Checkbox availabilit_check;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btn_insert;
-    private javax.swing.JComboBox<String> hotel_combox;
+    private javax.swing.JButton btn_add;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel search;
-    private javax.swing.JTextArea txt_details;
-    private javax.swing.JTextField txt_price;
-    private javax.swing.JTextField txt_room_number;
-    private javax.swing.JTextField txt_type_room;
+    private javax.swing.JTextField txt_address;
+    private javax.swing.JTextField txt_classification;
+    private javax.swing.JTextArea txt_comforts;
+    private javax.swing.JTextField txt_name;
     // End of variables declaration//GEN-END:variables
 
-    
 
-//This methods fill dates in hotel_comboBox
-    public void fillComboBox(){
-       
-        ArrayList<String> hotelsName = hotelService.selectHotelsName();
-          hotel_combox.removeAllItems();
-          for (String  hotel: hotelsName) {
-              hotel_combox.addItem(hotel);
-              
-            
-        }
-    }
-//This method clean txtfield then do update
+//This method cleans txtfields after the add
     public void clear(){
-        txt_room_number.setText("");
-        txt_type_room.setText("");
-        txt_price.setText("");
-        
-        txt_details.setText("");
+        txt_name.setText("");
+        txt_address.setText("");
+        txt_classification.setText("");        
+        txt_comforts.setText("");
     }
 }
