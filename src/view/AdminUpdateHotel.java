@@ -41,11 +41,11 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txt_address = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_classification = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btn_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_comforts = new javax.swing.JTextArea();
+        combobox_classification = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1140, 1024));
 
@@ -97,10 +97,6 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Classification");
 
-        txt_classification.setBackground(new java.awt.Color(255, 255, 255));
-        txt_classification.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txt_classification.setName(""); // NOI18N
-
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("Comforts");
 
@@ -120,6 +116,21 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         txt_comforts.setRows(5);
         jScrollPane1.setViewportView(txt_comforts);
 
+        combobox_classification.setBackground(new java.awt.Color(255, 255, 255));
+        combobox_classification.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                combobox_classificationMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                combobox_classificationMousePressed(evt);
+            }
+        });
+        combobox_classification.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combobox_classificationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -138,9 +149,9 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(txt_address, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(txt_classification, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                             .addComponent(jLabel3)
-                            .addComponent(jScrollPane1)))
+                            .addComponent(jScrollPane1)
+                            .addComponent(combobox_classification, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGap(377, 377, 377)
                         .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -163,9 +174,9 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
                 .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_classification, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
+                .addComponent(combobox_classification, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +221,7 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         String name = txt_name.getText();
         String address = txt_address.getText();
-        int classification = Integer.parseInt(txt_classification.getText());
+        int classification = combobox_classification.getSelectedIndex() + 1;
         String comforts = txt_comforts.getText();
         System.out.println(hotel.getId());
        
@@ -218,10 +229,23 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         clear();
     }//GEN-LAST:event_btn_editActionPerformed
 
+    private void combobox_classificationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_classificationMouseClicked
+
+    }//GEN-LAST:event_combobox_classificationMouseClicked
+
+    private void combobox_classificationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_classificationMousePressed
+        fillComboBox();
+    }//GEN-LAST:event_combobox_classificationMousePressed
+
+    private void combobox_classificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_classificationActionPerformed
+
+    }//GEN-LAST:event_combobox_classificationActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btn_edit;
+    private javax.swing.JComboBox<String> combobox_classification;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -232,23 +256,31 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel search;
     private javax.swing.JTextField txt_address;
-    private javax.swing.JTextField txt_classification;
     private javax.swing.JTextArea txt_comforts;
     private javax.swing.JTextField txt_name;
     // End of variables declaration//GEN-END:variables
     
-    //This method fills the test fields with the current hotel information
+//This methods fill dates in hotel_comboBox
+    public void fillComboBox() {
+        String[] classificationNumbers = new String[]{"1", "2", "3", "4", "5"};
+        combobox_classification.removeAllItems();
+        for (String number : classificationNumbers) {
+            combobox_classification.addItem(number);
+        }
+    }    
+
+//This method fills the test fields with the current hotel information
     public void initPanel(){
         txt_name.setText(hotel.getName());
         txt_address.setText(hotel.getAddress());
-        txt_classification.setText(String.valueOf(hotel.getClassification()));
+        fillComboBox();
+        combobox_classification.setSelectedIndex(hotel.getClassification() - 1);
         txt_comforts.setText(hotel.getComforts());
 }
     //This method cleans txtfields after update
     public void clear(){
         txt_name.setText("");
-        txt_address.setText("");
-        txt_classification.setText("");        
+        txt_address.setText("");      
         txt_comforts.setText("");
     }
 }

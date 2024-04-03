@@ -5,6 +5,7 @@
 package services;
 
 import daos.HotelDAO;
+import exceptions.EmptyFieldsException;
 import java.util.ArrayList;
 import java.util.Map;
 import model.Hotel;
@@ -49,6 +50,5 @@ public class HotelService {
     public ArrayList<String> selectHotelsName(){
         return hotelDAO.selectNameHotels();
     }
-    
    
 }
