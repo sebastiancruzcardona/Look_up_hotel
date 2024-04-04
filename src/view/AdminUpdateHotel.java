@@ -4,6 +4,12 @@
  */
 package view;
 
+import exceptions.EmptyFieldsException;
+import exceptions.HotelNameAlreadyInDataBase;
+import exceptions.NoChangeWasMadeException;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import model.Hotel;
 import services.HotelService;
 
@@ -50,6 +56,7 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1140, 1024));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setPreferredSize(new java.awt.Dimension(1140, 1024));
 
         search.setBackground(new java.awt.Color(166, 118, 163));
 
@@ -189,18 +196,18 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1351, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1351, Short.MAX_VALUE)
+            .addGap(0, 1140, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -219,14 +226,25 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        String name = txt_name.getText();
-        String address = txt_address.getText();
-        int classification = combobox_classification.getSelectedIndex() + 1;
-        String comforts = txt_comforts.getText();
-        System.out.println(hotel.getId());
-       
-        hotelService.update(name, address, classification, comforts, hotel.getId());
-        clear();
+        try{
+            String name = txt_name.getText();
+            String address = txt_address.getText();
+            int classification = combobox_classification.getSelectedIndex() + 1;
+            String comforts = txt_comforts.getText();
+            
+            hotelService.validateFilledFields(name, address, classification, comforts);
+            hotelService.validateHotelNameAvailability(name, hotel);            
+            
+            hotelService.update(name, address, classification, comforts, hotel.getId(), hotel);
+            JOptionPane.showMessageDialog(null, "Successfully updated hotel");
+            clear();
+            ShowJPanel(new AdminManageHotel());
+            
+        }catch (EmptyFieldsException | HotelNameAlreadyInDataBase | NoChangeWasMadeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void combobox_classificationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_classificationMouseClicked
@@ -282,5 +300,15 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         txt_name.setText("");
         txt_address.setText("");      
         txt_comforts.setText("");
+    }
+    
+    private void ShowJPanel(JPanel panel){
+        panel.setSize(1140, 1024);
+        panel.setLocation(0, 0);
+        
+        bg.removeAll();
+        bg.add(panel, BorderLayout.CENTER);
+        bg.revalidate();
+        bg.repaint();
     }
 }

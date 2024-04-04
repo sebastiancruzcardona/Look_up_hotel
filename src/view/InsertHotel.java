@@ -4,7 +4,10 @@
  */
 package view;
 
-import java.util.ArrayList;
+import exceptions.EmptyFieldsException;
+import exceptions.HotelNameAlreadyInDataBase;
+import exceptions.NoClassificationOptionChosen;
+import javax.swing.JOptionPane;
 import services.HotelService;
 
 /**
@@ -193,13 +196,23 @@ public class InsertHotel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        String name = txt_name.getText();
-        String address = txt_address.getText();
-        int clssification = combobox_classification.getSelectedIndex() + 1;
-        String comforts = txt_comforts.getText();
+        try{
+            String name = txt_name.getText();
+            String address = txt_address.getText();
+            int calssification = combobox_classification.getSelectedIndex() + 1;
+            String comforts = txt_comforts.getText();
+            
+            hotelService.validateFilledFields(name, address, calssification, comforts);
+            hotelService.validateHotelNameAvailability(name);
 
-        hotelService.insert(name, address, clssification, comforts);
-        clear();
+            hotelService.insert(name, address, calssification, comforts);
+            JOptionPane.showMessageDialog(null, "Successfully created hotel");
+            clear();
+            
+        }catch (NoClassificationOptionChosen | EmptyFieldsException | HotelNameAlreadyInDataBase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void combobox_classificationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_classificationMouseClicked
