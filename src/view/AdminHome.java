@@ -57,6 +57,9 @@ public class AdminHome extends javax.swing.JFrame {
         lbl = new javax.swing.JLabel();
         btn_rooms = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        btn_hotel2 = new javax.swing.JLabel();
+        btn_users = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         btn_hotel1 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
@@ -260,9 +263,9 @@ public class AdminHome extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hotel-regular-24.png"))); // NOI18N
 
-        btn_hotel1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btn_hotel1.setForeground(new java.awt.Color(204, 204, 204));
-        btn_hotel1.setText("Manage rooms");
+        btn_hotel2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_hotel2.setForeground(new java.awt.Color(204, 204, 204));
+        btn_hotel2.setText("Manage rooms");
 
         javax.swing.GroupLayout btn_roomsLayout = new javax.swing.GroupLayout(btn_rooms);
         btn_rooms.setLayout(btn_roomsLayout);
@@ -271,21 +274,69 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(btn_roomsLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel9)
-                .addGap(45, 45, 45)
-                .addComponent(btn_hotel1)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(btn_hotel2)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         btn_roomsLayout.setVerticalGroup(
             btn_roomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn_roomsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(btn_roomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_hotel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
+                .addContainerGap())
         );
 
         nav.add(btn_rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, -1, 70));
+
+        btn_users.setBackground(new java.awt.Color(54, 37, 89));
+        btn_users.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btn_usersMouseMoved(evt);
+            }
+        });
+        btn_users.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_usersMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_usersMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_usersMousePressed(evt);
+            }
+        });
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/user-circle-solid-24.png"))); // NOI18N
+
+        btn_hotel1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_hotel1.setForeground(new java.awt.Color(204, 204, 204));
+        btn_hotel1.setText("Manage users");
+
+        javax.swing.GroupLayout btn_usersLayout = new javax.swing.GroupLayout(btn_users);
+        btn_users.setLayout(btn_usersLayout);
+        btn_usersLayout.setHorizontalGroup(
+            btn_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_usersLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel11)
+                .addGap(46, 46, 46)
+                .addComponent(btn_hotel1)
+                .addContainerGap(116, Short.MAX_VALUE))
+        );
+        btn_usersLayout.setVerticalGroup(
+            btn_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_usersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btn_usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_hotel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        nav.add(btn_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, -1, 70));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setPreferredSize(new java.awt.Dimension(2690, 1000));
@@ -407,6 +458,22 @@ public class AdminHome extends javax.swing.JFrame {
         ShowJPanel(new AdminManageHotel());
     }//GEN-LAST:event_btn_hotelMouseClicked
 
+    private void btn_usersMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMouseMoved
+        setColor(btn_users);
+    }//GEN-LAST:event_btn_usersMouseMoved
+
+    private void btn_usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_usersMouseClicked
+
+    private void btn_usersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMouseExited
+       resetColor(btn_users);
+    }//GEN-LAST:event_btn_usersMouseExited
+
+    private void btn_usersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_usersMousePressed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -414,12 +481,15 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JPanel btn_home;
     private javax.swing.JPanel btn_hotel;
     private javax.swing.JLabel btn_hotel1;
+    private javax.swing.JLabel btn_hotel2;
     private javax.swing.JPanel btn_rooms;
     private javax.swing.JPanel btn_setting;
+    private javax.swing.JPanel btn_users;
     private javax.swing.JPanel content;
     private javax.swing.JPanel info_panel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
