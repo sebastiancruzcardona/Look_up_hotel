@@ -100,8 +100,14 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         jScrollPane1.setViewportView(rooms_table);
 
         txt_search.setBackground(new java.awt.Color(255, 255, 255));
+        txt_search.setForeground(new java.awt.Color(153, 153, 153));
         txt_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_search.setName(""); // NOI18N
+        txt_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_searchActionPerformed(evt);
+            }
+        });
 
         btn_allfilter.setBackground(new java.awt.Color(54, 37, 89));
         btn_allfilter.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,6 +241,10 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         reloadTable();
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
+    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back_ground;
@@ -284,7 +294,8 @@ public class AdminGestionRoom extends javax.swing.JPanel {
      //this methods reload all methods when start jpanel 
      public void initTable(){
          reloadTable();
-         txt_search.putClientProperty("placeholder", "enter the id of the room you want to search");
+         TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
+
      
      }
      
