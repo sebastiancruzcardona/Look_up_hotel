@@ -5,6 +5,7 @@
 package services;
 
 import daos.RoomDAO;
+import exceptions.EmptyFieldsException;
 import java.util.Map;
 import model.Room;
 
@@ -42,4 +43,12 @@ public class RoomService {
     public Room findRoom(int id){
         return roomDAO.findRoom(id);
     }
+    
+    //This methd validates if all fields were filled out
+    public void validateFilledFields(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel){
+        if(roomNumber.equals("") || typeRoom.equals("") || amenitiesDetails.equals("") || idHotel.equals("") || pricePerNigth == 0) {
+                
+                throw new EmptyFieldsException();
+        }
+     }
 }
