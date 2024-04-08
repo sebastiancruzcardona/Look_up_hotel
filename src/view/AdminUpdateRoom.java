@@ -4,6 +4,10 @@
  */
 package view;
 
+import exceptions.EmptyFieldsException;
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import model.Room;
 import services.RoomService;
 
@@ -15,6 +19,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
 
     Room room;
     RoomService roomService;
+
     public AdminUpdateRoom(Room room) {
         roomService = new RoomService();
         this.room = room;
@@ -216,17 +221,23 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        
-        
-        
-        String roomNumber = txt_room_number.getText();
-        String typeRoom = txt_type_room.getText();
-        double priceNight = Double.parseDouble(txt_price.getText());
-        boolean availability = availabilit_check.getState();
-        String amenitiesDetails = txt_details.getText();
-       
-        roomService.update(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, room.getId());
-        clear();
+
+        try {
+            String roomNumber = txt_room_number.getText();
+            String typeRoom = txt_type_room.getText();
+            double priceNight = Double.parseDouble(txt_price.getText());
+            boolean availability = availabilit_check.getState();
+            String amenitiesDetails = txt_details.getText();
+            roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, typeRoom);
+            roomService.update(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, room.getId());
+            clear();
+            
+            ShowJPanel(new AdminGestionRoom());
+            
+        } catch (EmptyFieldsException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
 
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -249,21 +260,32 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     private javax.swing.JTextField txt_room_number;
     private javax.swing.JTextField txt_type_room;
     // End of variables declaration//GEN-END:variables
-    
+
     //This method change txtField for date from room about edit
-    public void initPanel(){
+    public void initPanel() {
         txt_room_number.setText(room.getNumber());
         txt_type_room.setText(room.getType());
         txt_price.setText(String.valueOf(room.getPricePerNight()));
         availabilit_check.setState(room.isAvailability());
         txt_details.setText(room.getAmenities());
-}
-    //This method clean txtfield then do update
-    public void clear(){
+    }
+
+    //This method clean txtfields then do update
+    public void clear() {
         txt_room_number.setText("");
         txt_type_room.setText("");
         txt_price.setText("");
-        
+
         txt_details.setText("");
+    }
+    
+    private void ShowJPanel(JPanel panel){
+        panel.setSize(1140, 1024);
+        panel.setLocation(0, 0);
+        
+        bg.removeAll();
+        bg.add(panel, BorderLayout.CENTER);
+        bg.revalidate();
+        bg.repaint();
     }
 }

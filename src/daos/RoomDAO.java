@@ -82,9 +82,9 @@ public class RoomDAO implements RoomDAOInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Successfull update");
+                JOptionPane.showMessageDialog(null,"Successfull update");
             } else {
-                System.out.println("No update was made");
+                JOptionPane.showMessageDialog(null,"No update was made");
             }
 
         } catch (SQLException | NullConnectionException e) {

@@ -4,11 +4,13 @@
  */
 package view;
 
+import exceptions.EmptyFieldsException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import services.HotelService;
 import services.RoomService;
@@ -21,10 +23,11 @@ public class InsertRoom extends javax.swing.JPanel {
 
     RoomService roomService;
     HotelService hotelService;
+
     public InsertRoom() {
         hotelService = new HotelService();
         roomService = new RoomService();
-        
+
         initComponents();
     }
 
@@ -227,29 +230,31 @@ public class InsertRoom extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-       String roomNumber = txt_room_number.getText();
-       String typeRoom = txt_type_room.getText();
-       double priceNight = Double.parseDouble(txt_price.getText());
-       boolean availability = availabilit_check.getState();
-       String amenitiesDetails = txt_details.getText();
-       String hotel = (String) hotel_combox.getSelectedItem();
-       
-       roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
-        clear();
-       
-       
-       
+        try {
+            String roomNumber = txt_room_number.getText();
+            String typeRoom = txt_type_room.getText();
+            double priceNight = Double.parseDouble(txt_price.getText());
+            boolean availability = availabilit_check.getState();
+            String amenitiesDetails = txt_details.getText();
+            String hotel = (String) hotel_combox.getSelectedItem();
+
+            roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
+            clear();
+        } catch (EmptyFieldsException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void hotel_comboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hotel_comboxActionPerformed
-      
-          
+
+
     }//GEN-LAST:event_hotel_comboxActionPerformed
 
     private void hotel_comboxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMouseClicked
-        
-              
-            
+
+
     }//GEN-LAST:event_hotel_comboxMouseClicked
 
     private void hotel_comboxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMousePressed
@@ -277,25 +282,23 @@ public class InsertRoom extends javax.swing.JPanel {
     private javax.swing.JTextField txt_type_room;
     // End of variables declaration//GEN-END:variables
 
-    
-
 //This methods fill dates in hotel_comboBox
-    public void fillComboBox(){
-       
+    public void fillComboBox() {
+
         ArrayList<String> hotelsName = hotelService.selectHotelsName();
-          hotel_combox.removeAllItems();
-          for (String  hotel: hotelsName) {
-              hotel_combox.addItem(hotel);
-              
-            
+        hotel_combox.removeAllItems();
+        for (String hotel : hotelsName) {
+            hotel_combox.addItem(hotel);
+
         }
     }
 //This method clean txtfield then do update
-    public void clear(){
+
+    public void clear() {
         txt_room_number.setText("");
         txt_type_room.setText("");
         txt_price.setText("");
-        
+
         txt_details.setText("");
     }
 }
