@@ -463,7 +463,7 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_usersMouseMoved
 
     private void btn_usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMouseClicked
-        // TODO add your handling code here:
+        ShowJPanel(new AdminManageUser());
     }//GEN-LAST:event_btn_usersMouseClicked
 
     private void btn_usersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMouseExited
