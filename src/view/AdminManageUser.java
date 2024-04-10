@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Room;
+import model.User;
 import services.UserService;
 
 /**
@@ -18,7 +19,7 @@ import services.UserService;
  * @author lugo
  */
 public class AdminManageUser extends javax.swing.JPanel {
-
+    
     int idTable;
     UserService userService;
     public AdminManageUser() {
@@ -298,7 +299,7 @@ public class AdminManageUser extends javax.swing.JPanel {
         //this methods reload all methods when start jpanel 
         public void initTable(){
              reloadTable();
-            TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
+            TextPrompt tp7 = new TextPrompt("Enter user name's ", txt_search);
          
         }
         
@@ -327,16 +328,16 @@ public class AdminManageUser extends javax.swing.JPanel {
          }
      }
      
-     //This method validate if there is a selecto arrow from table and show panel AdminUpdateRoom
+     //This method validate if there is a selecto arrow from table and show panel AdminUpdateUser
      public void validateUpdateId(int id){
          if(idTable == 0){
              JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
          }else{
               
              
-                //  Room room =roomService.findRoom(id);
+                User user  =userService.findUser(id);
                  // System.out.println(room.getNumber()+ room.getId());
-                   //ShowJPanel(new AdminUpdateRoom(room));
+                   ShowJPanel(new AdminUpdateUser(user));
                  
                  
              
