@@ -237,7 +237,6 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
             hotelService.validateHotelNameAvailability(name, hotel);            
             
             hotelService.update(name, address, classification, comforts, hotel.getId(), hotel);
-            JOptionPane.showMessageDialog(null, "Successfully updated hotel");
             clear();
             ShowJPanel(new AdminManageHotel());
             

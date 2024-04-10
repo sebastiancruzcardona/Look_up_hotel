@@ -206,7 +206,6 @@ public class InsertHotel extends javax.swing.JPanel {
             hotelService.validateHotelNameAvailability(name);
 
             hotelService.insert(name, address, calssification, comforts);
-            JOptionPane.showMessageDialog(null, "Successfully created hotel");
             clear();
             
         }catch (NoClassificationOptionChosen | EmptyFieldsException | HotelNameAlreadyInDataBase e) {

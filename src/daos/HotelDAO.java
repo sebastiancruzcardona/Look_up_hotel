@@ -57,6 +57,7 @@ public class HotelDAO implements HotelDAOInterface {
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
+                JOptionPane.showMessageDialog(null, "Successfully created hotel");
             } else {
                 System.out.println("No insertion was made");
             }
@@ -82,6 +83,7 @@ public class HotelDAO implements HotelDAOInterface {
 
             if (rowsAffected > 0) {
                 System.out.println("Successfull update");
+                JOptionPane.showMessageDialog(null, "Successfully updated hotel");
             } else {
                 System.out.println("No update was made");
             }
@@ -154,6 +156,7 @@ public class HotelDAO implements HotelDAOInterface {
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Successfully deleted hotel");
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
@@ -210,7 +213,7 @@ public class HotelDAO implements HotelDAOInterface {
                 Hotel hotel = new Hotel(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getInt("classification"), rs.getString("comforts"), findHotelImages(id));
                 return hotel;
             } else {
-                JOptionPane.showMessageDialog(null, "es null");
+                JOptionPane.showMessageDialog(null, "This hotel does not exist in database");
             }
 
         } catch (SQLException | NullConnectionException e) {
