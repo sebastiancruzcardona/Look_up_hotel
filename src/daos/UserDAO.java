@@ -62,6 +62,7 @@ public class UserDAO implements UserDAOInterface{
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
+                JOptionPane.showMessageDialog(null,"User successfully created");
             } else {
                 System.out.println("No insertion was made");
             }
