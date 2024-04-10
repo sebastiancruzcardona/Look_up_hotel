@@ -18,5 +18,23 @@ public class RegularExpressions {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+    
+    public static boolean validateAlpha(String string){
+        Pattern pattern = Pattern.compile("^[A-Za-z\\s]$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    public static boolean validateAlphaNumeric(String string){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z\\s]$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    public static boolean validateNumeric(String string){
+        Pattern pattern = Pattern.compile("^[0-9]$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
 
 }
