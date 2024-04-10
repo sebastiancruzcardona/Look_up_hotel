@@ -159,6 +159,7 @@ public class UserDAO implements UserDAOInterface{
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Successfully deleted user");
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
