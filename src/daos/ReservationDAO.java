@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,8 +59,10 @@ public class ReservationDAO implements ReservationDAOInterface{
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
+                JOptionPane.showMessageDialog(null,"Reservation succesfully created");
             } else {
                 System.out.println("No insertion was made");
+                JOptionPane.showMessageDialog(null,"Reservation was not created");
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
@@ -80,8 +83,10 @@ public class ReservationDAO implements ReservationDAOInterface{
 
             if (rowsAffected > 0) {
                 System.out.println("Successfull update");
+                JOptionPane.showMessageDialog(null,"Reservation succesfully updated");
             } else {
                 System.out.println("No update was made");
+                JOptionPane.showMessageDialog(null,"No update was made");
             }
 
         } catch (SQLException | NullConnectionException e) {
@@ -209,6 +214,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Reservation succesfully deleted");
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
