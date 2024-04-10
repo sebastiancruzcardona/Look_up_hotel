@@ -155,6 +155,7 @@ public class RoomDAO implements RoomDAOInterface {
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Successfully deleted room");
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
