@@ -280,6 +280,8 @@ public class AdminManageHotel extends javax.swing.JPanel {
 
         //Set tableModel. This updates the table to show data stored in tableModel
         hotels_table.setModel(model); 
+        
+        //Make table cells uneditable
         hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
      }
      

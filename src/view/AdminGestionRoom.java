@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Room;
@@ -295,8 +296,9 @@ public class AdminGestionRoom extends javax.swing.JPanel {
 
         //Set tableModel. This updates the table to show data stored in tableModel
         rooms_table.setModel(model);
+        
+        //Make table cells uneditable
         rooms_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-     
         
         
      }

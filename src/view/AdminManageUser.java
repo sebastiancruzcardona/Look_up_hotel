@@ -298,6 +298,8 @@ public class AdminManageUser extends javax.swing.JPanel {
 
         //Set tableModel. This updates the table to show data stored in tableModel
         users_table.setModel(model);
+        
+        //Make table cells uneditable
         users_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
      
         
