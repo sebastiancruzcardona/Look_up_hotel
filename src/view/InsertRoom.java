@@ -92,6 +92,11 @@ public class InsertRoom extends javax.swing.JPanel {
         txt_room_number.setBackground(new java.awt.Color(255, 255, 255));
         txt_room_number.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_room_number.setName(""); // NOI18N
+        txt_room_number.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_room_numberKeyTyped(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Room number");
@@ -102,6 +107,11 @@ public class InsertRoom extends javax.swing.JPanel {
         txt_type_room.setBackground(new java.awt.Color(255, 255, 255));
         txt_type_room.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_type_room.setName(""); // NOI18N
+        txt_type_room.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_type_roomKeyTyped(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Price per night");
@@ -109,6 +119,11 @@ public class InsertRoom extends javax.swing.JPanel {
         txt_price.setBackground(new java.awt.Color(255, 255, 255));
         txt_price.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_price.setName(""); // NOI18N
+        txt_price.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_priceKeyTyped(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("Amentities_details");
@@ -149,6 +164,11 @@ public class InsertRoom extends javax.swing.JPanel {
         txt_details.setBackground(new java.awt.Color(255, 255, 255));
         txt_details.setColumns(20);
         txt_details.setRows(5);
+        txt_details.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_detailsKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txt_details);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
@@ -266,6 +286,47 @@ public class InsertRoom extends javax.swing.JPanel {
     private void hotel_comboxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotel_comboxMousePressed
         fillComboBox();
     }//GEN-LAST:event_hotel_comboxMousePressed
+
+    private void txt_priceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_priceKeyTyped
+        int key = evt.getKeyChar();
+        //Numbers in ASCII
+        //Validate if pressed key is a number
+        boolean numero = key >= 48 && key <= 57;
+        //If is another thing do not put the character in the text field
+        if(!numero){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_priceKeyTyped
+
+    private void txt_room_numberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_room_numberKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case or lower case
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_room_numberKeyTyped
+
+    private void txt_type_roomKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_type_roomKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case or lower case
+        boolean caracter = key >= 65 && key <= 90 || key >= 97 && key <= 122;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_type_roomKeyTyped
+
+    private void txt_detailsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_detailsKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }     
+    }//GEN-LAST:event_txt_detailsKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

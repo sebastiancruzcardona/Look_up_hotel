@@ -191,6 +191,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_room_numberKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -222,6 +225,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_type_roomKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -245,6 +251,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_priceKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -322,6 +331,9 @@
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_detailsKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
