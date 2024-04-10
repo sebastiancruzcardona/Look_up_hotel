@@ -42,7 +42,13 @@ public class UserService {
         userDAO.delete(id);
     }
     
-    //This method validates if the provided text is an email
+   //This method calls insert method from UserDAO
+    public void insertManage(String name, String email, String password, String contact, int rol){
+        userDAO.insertManage(name, email, password, contact, rol);
+    }
+    
+    
+//This method validates if the provided text is an email
     public void validateEmail(String email){
         //First look for an "@", if there is not such character, throw a NotAnEmailException
         if(!email.contains("@")){
