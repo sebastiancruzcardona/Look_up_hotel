@@ -18,7 +18,7 @@ public interface HotelDAOInterface {
     
     void update(String name, String address, int classification, String comforts, int id);
     
-    Map<String,Object> select();
+    Map<String,Object> select(String query);
     
     void delete(int id);
     
@@ -27,8 +27,6 @@ public interface HotelDAOInterface {
     ArrayList<String> findHotelImages(int id);
     
     Hotel findHotel(int id);
-    
-    Map<String,Object> selectHotelSearch(String name);
     
     boolean validateHotelNameAvailability(String name);
 }

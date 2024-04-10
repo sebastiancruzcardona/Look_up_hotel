@@ -236,7 +236,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_allfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_allfilterActionPerformed
-        reloadTable();
+        reloadTable(null);
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
@@ -263,48 +263,9 @@ public class AdminManageHotel extends javax.swing.JPanel {
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 
-     public void reloadTable() {
-        //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
-        Map<String, Object> result = hotelService.select();
-
-        //Get the names of the columns from the results map. The column names are returned as a list of strings.
-        List<String> columnNames = (List<String>) result.get("columnNames");
-
-        //Get data from the result map table. The table data is returned as a list of lists of objects. Each inner list represents a row in the table and contains the data for that row.
-        List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
-         
-        //Create a new tableModel. A tableModel is an object that manages the data in a table
-        DefaultTableModel model = new DefaultTableModel(){
-            @Override
-            //Override isCellEditable method making all cells uneditables
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
-        //Iterate through the list of column names
-        for (String columnName : columnNames) {
-            //Add each column name to the tableModel. This creates table's columns.
-            model.addColumn(columnName);
-        }
-
-        //Iterate through the list of table date
-        for (List<Object> rowData : tableData) {
-            //Add each row of data to the tableModel. This adds the data to the corresponding columns in the table
-            model.addRow(rowData.toArray());
-        }
-
-        //Set tableModel. This updates the table to show data stored in tableModel
-        hotels_table.setModel(model); 
-        
-        //Make table cells uneditable
-        hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-     }
-     
-     //Overload reloadTable method to use it when btn_search is pressed
      public void reloadTable(String name) {
         //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
-        Map<String, Object> result = hotelService.selectHotelSearch(name);
+        Map<String, Object> result = hotelService.select(name);
 
         //Get the names of the columns from the results map. The column names are returned as a list of strings.
         List<String> columnNames = (List<String>) result.get("columnNames");
@@ -339,11 +300,11 @@ public class AdminManageHotel extends javax.swing.JPanel {
         //Make table cells uneditable
         hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
      }
-     
+
      
      //this methods reload all methods when start jpanel 
      public void initTable(){
-         reloadTable();
+         reloadTable(null);
          TextPrompt tp7 = new TextPrompt("Enter hotel name's", txt_search);     
      }
      
@@ -366,7 +327,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
               int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this hotel?","Answer",JOptionPane.YES_NO_CANCEL_OPTION );
               if (answer ==JOptionPane.YES_OPTION) {
                  hotelService.delete(id);
-                 reloadTable();
+                 reloadTable(null);
              }            
          }
      }

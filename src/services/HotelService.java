@@ -42,15 +42,8 @@ public class HotelService {
     }
     
     //This method returns a HashMap calling HotelDAO select method
-    public Map<String, Object> select(){
-        return hotelDAO.select();
-    }
-    
-    public Map<String,Object> selectHotelSearch(String name){
-        if(name.equals("")){
-            throw new EmptySearchFieldException();
-        }
-        return hotelDAO.selectHotelSearch(name);
+    public Map<String, Object> select(String name){
+        return hotelDAO.select(createSelectQuery(name));
     }
     
     //This method calls delete method from HotelDAO
@@ -91,6 +84,23 @@ public class HotelService {
             hotelDAO.validateHotelNameAvailability(name);
         }
         return true;
+    }
+    
+    /**
+     * This method creates the appropriate query for the select method
+     * 
+     * @param String name
+     * @return The standar select query if name == null. The select query with a LIKE condition if !name == null.
+     * If name.equals(""), thows an EmptySearchFieldException
+     */
+    public String createSelectQuery(String name){
+        String query = "SELECT id, name, address, classification, comforts FROM hotels";
+        if(name == null){
+            return query;
+        }else if (name.equals("")){
+            throw new EmptySearchFieldException();
+        }
+        return query += " WHERE name LIKE '%" + name + "%'";        
     }
    
 }

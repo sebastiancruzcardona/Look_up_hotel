@@ -96,11 +96,11 @@ public class HotelDAO implements HotelDAOInterface {
 
     @Override
     //This method returns a HashMap that contains data and metadata from table "hotels"
-    public Map<String, Object> select() {
+    public Map<String, Object> select(String query) {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels";
+        String selectSQL = query;
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
@@ -222,72 +222,6 @@ public class HotelDAO implements HotelDAOInterface {
         }
         return null;
     }
-
-    @Override
-    /**
-     * This method finds a hotel registered in table "hotels" and returns it. If
-     * it finds a hotel, this method calls findHotelImages method to set the
-     * hotel's ArrayList of images
-     *
-     * @param String name
-     * @return A Hotel if the hotel exists, or null, if there is not a hotel
-     * with that id
-     */
-    public Map<String,Object> selectHotelSearch(String name) {
-         //Initialize result HashMap. This map wil contain column names, number of columns and table data
-        //Map<keyDataType, valueDataType>
-        Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels WHERE name LIKE '%" + name + "%'";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
-            //Execute query and get the results in a ResultSet 
-            ResultSet rs = pstmt.executeQuery();
-
-            //Get metadata from ResultSet. Metadata contains information about results such as number of columns an column names
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            //Get number of columns from metadata
-            int numColumns = rsmd.getColumnCount();
-
-            //Create a list to save column names
-            List<String> columnNames = new ArrayList<>();
-            for (int i = 1; i <= numColumns; i++) {
-                //Get each column name from metadata and add them to columnNames list
-                columnNames.add(rsmd.getColumnName(i));
-            }
-
-            //Create a list of lists to save table data
-            List<List<Object>> tableData = new ArrayList<>();
-            while (rs.next()) {
-                //Create a list to save data from the current row
-                List<Object> rowData = new ArrayList<>();
-                for (int i = 1; i <= numColumns; i++) {
-                    //Get every colum data and add it them to list
-                    rowData.add(rs.getObject(i));
-                }
-                //Add data list (that represents a row from table) to de tableData list
-                tableData.add(rowData);
-            }
-
-            //Add number of columns, column names and table data to de result HasMap
-            result.put("numColumns", numColumns);
-            result.put("columnNames", columnNames);
-            result.put("tableData", tableData);
-
-        } catch (SQLException | NullConnectionException e) {
-            //If an exception occurs
-            System.out.println("An error occurred while connecting to database for selection");
-            e.printStackTrace();
-        }
-
-        //Print the result map for debugging
-        System.out.println(result);
-
-        //Return the result Map
-        return result;
-    }
-    
-    
-
     
     @Override
     // This method creates an ArrayList with hotel names from table "hotels"
