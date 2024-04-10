@@ -32,6 +32,11 @@ public class UserService {
         userDAO.update(name, email, password, contact);
     }
     
+    //This method calls update method from UserDAO
+    public void update(String name, String email, String password, String contact, int rol){
+        userDAO.update(name, email, password, contact,  rol);
+    }
+   
     //This method returns a HashMap calling userDAO select method
     public Map<String, Object> select(){
         return userDAO.select();
@@ -110,4 +115,9 @@ public class UserService {
        return user;
     }
     
+    //This method calls  findUser method from userDAO
+    public User findUser (int id){
+       User user = userDAO.findUser(id);
+       return user;
+    }
 }

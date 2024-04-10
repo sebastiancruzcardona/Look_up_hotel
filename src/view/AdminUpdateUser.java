@@ -4,8 +4,13 @@
  */
 package view;
 
+import exceptions.EmptyFieldsException;
+import exceptions.NotAnEmailException;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.User;
+import services.UserService;
 import view.AdminManageUser;
 
 /**
@@ -14,11 +19,15 @@ import view.AdminManageUser;
  */
 public class AdminUpdateUser extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AdminUpdateUser
-     */
-    public AdminUpdateUser() {
+    User user;
+    UserService userService;
+    
+    public AdminUpdateUser(User user) {
+        userService = new UserService();
+        this.user=user;
+        
         initComponents();
+        initPanel();
     }
 
     /**
@@ -225,17 +234,22 @@ public class AdminUpdateUser extends javax.swing.JPanel {
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
 
-       // try {
+        try {
             String userName = txt_username.getText();
             String password = txt_password.getText();
             String contact = txa_contact.getText();
+            int index = combox_rol.getSelectedIndex()+1;
+           
+            userService.validateEmail(txt_email.getText());
+            userService.validateFilledFields(userName, user.getEmail(), password, contact);
+            userService.update(userName, user.getEmail(), password, contact,index);
             clear();
 
             ShowJPanel(new AdminManageUser());
 
-       // } catch (EmptyFieldsException e) {
-           // JOptionPane.showMessageDialog(null, e.getMessage());
-       // }
+       } catch (EmptyFieldsException | NotAnEmailException e) {
+           JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
@@ -284,6 +298,15 @@ public class AdminUpdateUser extends javax.swing.JPanel {
         bg.repaint();
     }
  
+     //This method change txtField for date from room about edit
+    public void initPanel() {
+        txt_username.setText(user.getUserName());
+        txt_password.setText(user.getPassword());
+        txa_contact.setText(user.getDetails());
+        combox_rol.setSelectedIndex(user.getRol()-1);
+        txt_email.setText(user.getEmail());
+    }
+    
  //This method clean txtfields then do update
     public void clear() {
         txt_username.setText("");

@@ -237,7 +237,7 @@ public class UserDAO implements UserDAOInterface{
         }
         return null;
     }
-
+    //This method inserts a new row in table "users" with de provided data of a new user
     @Override
     public void insertManage(String name, String email, String password, String contact, int rol) {
         String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
@@ -259,5 +259,70 @@ public class UserDAO implements UserDAOInterface{
             System.out.println("An error occurred while connecting to database for data insertion");
             e.printStackTrace();
         }
+    }
+    
+    /**
+      * his method validates if a user is registered in table "users" and returns the user
+      * @param id
+      
+      * @return user
+      */
+    @Override
+    public User findUser(int id) {
+       String serchSQL = "SELECT * FROM users WHERE id = ?  ";
+            try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(serchSQL)){
+            pstmt.setInt(1, id);
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+                if(rs.next()){
+                
+                    
+                    User user = new User(rs.getInt("id"), rs.getString("full_name"), rs.getString("email"), rs.getNString("password"), rs.getString("contact"), rs.getInt("id_rol"));
+                    return user;
+                
+                }
+                else{
+                    throw new IncorrectPasswordException();
+                
+                
+                
+            
+                }
+             } catch (SQLException  | NullConnectionException | IncorrectPasswordException e) {
+                System.out.println("An error occurred while connecting to database for deletion of data");
+                
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                
+        }
+        
+        return null; 
+    }
+
+    @Override
+    public void update(String name, String email, String password, String contact, int rol) {
+        String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?,  id_rol = ? WHERE email = ?";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
+            pstmt.setString(4, contact);
+            pstmt.setInt(5, rol);
+            pstmt.setString(6, email);
+            pstmt.executeUpdate();
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null,"Successfull update");
+            } else {
+                JOptionPane.showMessageDialog(null,"No update was made");
+            }
+
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for data update");
+            e.printStackTrace();
+        }
+       
     }
 }

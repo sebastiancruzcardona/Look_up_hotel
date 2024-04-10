@@ -17,6 +17,8 @@ public interface UserDAOInterface {
     
     void update(String name, String email, String password, String contact);
     
+    void update(String name, String email, String password, String contact, int rol);
+    
     Map<String, Object> select();
     
     void delete(int id);    
@@ -24,6 +26,8 @@ public interface UserDAOInterface {
     boolean findEmail(String email);
     
     User findUser(String email, String password);
+    
+    User findUser(int id);
     
     void insertManage(String name, String email, String password, String contact,int rol);
 }
