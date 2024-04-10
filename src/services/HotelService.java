@@ -6,6 +6,7 @@ package services;
 
 import daos.HotelDAO;
 import exceptions.EmptyFieldsException;
+import exceptions.EmptySearchFieldException;
 import exceptions.NoChangeWasMadeException;
 import exceptions.NoClassificationOptionChosen;
 import java.util.ArrayList;
@@ -43,6 +44,13 @@ public class HotelService {
     //This method returns a HashMap calling HotelDAO select method
     public Map<String, Object> select(){
         return hotelDAO.select();
+    }
+    
+    public Map<String,Object> selectHotelSearch(String name){
+        if(name.equals("")){
+            throw new EmptySearchFieldException();
+        }
+        return hotelDAO.selectHotelSearch(name);
     }
     
     //This method calls delete method from HotelDAO

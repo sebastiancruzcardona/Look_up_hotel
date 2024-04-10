@@ -4,6 +4,7 @@
  */
 package view;
 
+import exceptions.EmptySearchFieldException;
 import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         hotels_table = new javax.swing.JTable();
         txt_search = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_search = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
         btn_add = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
@@ -102,11 +103,16 @@ public class AdminManageHotel extends javax.swing.JPanel {
         txt_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_search.setName(""); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(54, 37, 89));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_search.setBackground(new java.awt.Color(54, 37, 89));
+        btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
+        btn_search.setText("Search");
+        btn_search.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         btn_update.setBackground(new java.awt.Color(54, 37, 89));
         btn_update.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,7 +179,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
                     .addGroup(back_groundLayout.createSequentialGroup()
                         .addComponent(txt_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btn_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_allfilter)
                         .addGap(45, 45, 45))))
@@ -186,7 +192,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
                 .addGap(81, 81, 81)
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_allfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
@@ -232,15 +238,24 @@ public class AdminManageHotel extends javax.swing.JPanel {
         reloadTable();
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        try {
+            reloadTable(txt_search.getText());
+        } catch (EmptySearchFieldException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }//GEN-LAST:event_btn_searchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back_ground;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_allfilter;
     private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
     private javax.swing.JTable hotels_table;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel search;
@@ -284,6 +299,46 @@ public class AdminManageHotel extends javax.swing.JPanel {
         //Make table cells uneditable
         hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
      }
+     
+     //Overload reloadTable method to use it when btn_search is pressed
+     public void reloadTable(String name) {
+        //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
+        Map<String, Object> result = hotelService.selectHotelSearch(name);
+
+        //Get the names of the columns from the results map. The column names are returned as a list of strings.
+        List<String> columnNames = (List<String>) result.get("columnNames");
+
+        //Get data from the result map table. The table data is returned as a list of lists of objects. Each inner list represents a row in the table and contains the data for that row.
+        List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
+         
+        //Create a new tableModel. A tableModel is an object that manages the data in a table
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            //Override isCellEditable method making all cells uneditables
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        //Iterate through the list of column names
+        for (String columnName : columnNames) {
+            //Add each column name to the tableModel. This creates table's columns.
+            model.addColumn(columnName);
+        }
+
+        //Iterate through the list of table date
+        for (List<Object> rowData : tableData) {
+            //Add each row of data to the tableModel. This adds the data to the corresponding columns in the table
+            model.addRow(rowData.toArray());
+        }
+
+        //Set tableModel. This updates the table to show data stored in tableModel
+        hotels_table.setModel(model); 
+        
+        //Make table cells uneditable
+        hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+     }
+     
      
      //this methods reload all methods when start jpanel 
      public void initTable(){
