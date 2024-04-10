@@ -238,7 +238,7 @@ public class AdminManageUser extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        ShowJPanel(new InsertRoom());
+        ShowJPanel(new AdminInsertUser());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -275,9 +275,12 @@ public class AdminManageUser extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel();
 
         //Iterate through the list of column names
+        
         for (String columnName : columnNames) {
             //Add each column name to the tableModel. This creates table's columns.
+            
             model.addColumn(columnName);
+           
         }
 
         //Iterate through the list of table date

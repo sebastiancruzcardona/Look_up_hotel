@@ -339,6 +339,7 @@ public class AdminHome extends javax.swing.JFrame {
         nav.add(btn_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, -1, 70));
 
         content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         content.setPreferredSize(new java.awt.Dimension(2690, 1000));
 
         search.setBackground(new java.awt.Color(166, 118, 163));
@@ -375,7 +376,7 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(contentLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(791, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

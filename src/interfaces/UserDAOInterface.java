@@ -24,4 +24,6 @@ public interface UserDAOInterface {
     boolean findEmail(String email);
     
     User findUser(String email, String password);
+    
+    void insertManage(String name, String email, String password, String contact,int rol);
 }

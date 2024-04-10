@@ -237,4 +237,27 @@ public class UserDAO implements UserDAOInterface{
         }
         return null;
     }
+
+    @Override
+    public void insertManage(String name, String email, String password, String contact, int rol) {
+        String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
+            pstmt.setString(4, contact);
+            pstmt.setInt(5,rol);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                 JOptionPane.showMessageDialog(null,"Successfull update");
+            } else {
+                JOptionPane.showMessageDialog(null,"No insertion was made");
+            }
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for data insertion");
+            e.printStackTrace();
+        }
+    }
 }

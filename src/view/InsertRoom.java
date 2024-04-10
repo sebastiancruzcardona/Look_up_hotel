@@ -65,7 +65,7 @@ public class InsertRoom extends javax.swing.JPanel {
         jLabel11.setBackground(new java.awt.Color(54, 37, 89));
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Gestion room");
+        jLabel11.setText("Mange room");
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
@@ -113,7 +113,7 @@ public class InsertRoom extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("Amentities_details");
 
-        availabilit_check.setForeground(new java.awt.Color(153, 153, 153));
+        availabilit_check.setForeground(new java.awt.Color(51, 51, 51));
         availabilit_check.setLabel("Availability");
         availabilit_check.setState(true);
 
@@ -162,7 +162,7 @@ public class InsertRoom extends javax.swing.JPanel {
                         .addGap(113, 113, 113)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(382, 382, 382)
+                        .addContainerGap(382, Short.MAX_VALUE)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(hotel_combox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_room_number)
@@ -172,18 +172,22 @@ public class InsertRoom extends javax.swing.JPanel {
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(bgLayout.createSequentialGroup()
-                                        .addGap(49, 49, 49)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                         .addComponent(btn_insert, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
                                     .addGroup(bgLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(67, 67, 67)))))
-                .addGap(469, 469, 469))
+                                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)))))
+                .addContainerGap(469, Short.MAX_VALUE))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(392, 392, 392)
+                .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +196,7 @@ public class InsertRoom extends javax.swing.JPanel {
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
-                .addGap(79, 79, 79)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_room_number, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,9 +216,9 @@ public class InsertRoom extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(94, Short.MAX_VALUE))
         );

@@ -52,6 +52,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1150, 1024));
 
         back_ground.setBackground(new java.awt.Color(255, 255, 255));
+        back_ground.setPreferredSize(new java.awt.Dimension(1140, 1024));
 
         search.setBackground(new java.awt.Color(166, 118, 163));
 
@@ -210,7 +211,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back_ground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(back_ground, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
