@@ -273,7 +273,13 @@ public class AdminManageUser extends javax.swing.JPanel {
         List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
          
         //Create a new tableModel. A tableModel is an object that manages the data in a table
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            //Override isCellEditable method making all cells uneditables
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         //Iterate through the list of column names
         

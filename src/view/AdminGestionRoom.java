@@ -4,6 +4,7 @@
  */
 package view;
 
+import com.mysql.cj.x.protobuf.MysqlxExpr;
 import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,6 @@ public class AdminGestionRoom extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        rooms_table.setIntercellSpacing(new java.awt.Dimension(1, 1));
         rooms_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
         rooms_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -273,7 +273,13 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
          
         //Create a new tableModel. A tableModel is an object that manages the data in a table
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            //Override isCellEditable method making all cells uneditables
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         //Iterate through the list of column names
         for (String columnName : columnNames) {
