@@ -5,6 +5,7 @@
 package view;
 
 import exceptions.EmptySearchFieldException;
+import helper.TextPrompt;
 import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Map;
