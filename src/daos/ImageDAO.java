@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,8 +53,10 @@ public class ImageDAO implements ImageDAOInterface {
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
+                JOptionPane.showMessageDialog(null,"Successful Insertion");
             } else {
                 System.out.println("No insertion was made");
+                JOptionPane.showMessageDialog(null,"No insertion was made");
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
@@ -76,8 +79,10 @@ public class ImageDAO implements ImageDAOInterface {
 
             if (rowsAffected > 0) {
                 System.out.println("Successfull update");
+                JOptionPane.showMessageDialog(null,"Successful update");
             } else {
                 System.out.println("No update was made");
+                JOptionPane.showMessageDialog(null,"No update was made");
             }
 
         } catch (SQLException | NullConnectionException e) {
@@ -148,6 +153,7 @@ public class ImageDAO implements ImageDAOInterface {
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Successful deletion");
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
