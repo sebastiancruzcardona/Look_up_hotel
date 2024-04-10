@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Room;
 import model.User;
@@ -41,7 +42,7 @@ public class AdminManageUser extends javax.swing.JPanel {
         search = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        rooms_table = new javax.swing.JTable();
+        users_table = new javax.swing.JTable();
         txt_search = new javax.swing.JTextField();
         btn_allfilter = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
@@ -78,9 +79,9 @@ public class AdminManageUser extends javax.swing.JPanel {
                 .addGap(43, 43, 43))
         );
 
-        rooms_table.setBackground(new java.awt.Color(255, 255, 255));
-        rooms_table.setForeground(new java.awt.Color(0, 0, 0));
-        rooms_table.setModel(new javax.swing.table.DefaultTableModel(
+        users_table.setBackground(new java.awt.Color(255, 255, 255));
+        users_table.setForeground(new java.awt.Color(0, 0, 0));
+        users_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,14 +92,13 @@ public class AdminManageUser extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        rooms_table.setIntercellSpacing(new java.awt.Dimension(1, 1));
-        rooms_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        rooms_table.addMouseListener(new java.awt.event.MouseAdapter() {
+        users_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        users_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                rooms_tableMousePressed(evt);
+                users_tableMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(rooms_table);
+        jScrollPane1.setViewportView(users_table);
 
         txt_search.setBackground(new java.awt.Color(255, 255, 255));
         txt_search.setForeground(new java.awt.Color(153, 153, 153));
@@ -219,12 +219,12 @@ public class AdminManageUser extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rooms_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rooms_tableMousePressed
-        DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
+    private void users_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_users_tableMousePressed
+        DefaultTableModel tblMode1 = (DefaultTableModel) users_table.getModel();
 
-        idTable = (int) tblMode1.getValueAt(rooms_table.getSelectedRow(), 0);
+        idTable = (int) tblMode1.getValueAt(users_table.getSelectedRow(), 0);
 
-    }//GEN-LAST:event_rooms_tableMousePressed
+    }//GEN-LAST:event_users_tableMousePressed
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
         // TODO add your handling code here:
@@ -256,9 +256,9 @@ public class AdminManageUser extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable rooms_table;
     private javax.swing.JPanel search;
     private javax.swing.JTextField txt_search;
+    private javax.swing.JTable users_table;
     // End of variables declaration//GEN-END:variables
 
 
@@ -291,7 +291,8 @@ public class AdminManageUser extends javax.swing.JPanel {
         }
 
         //Set tableModel. This updates the table to show data stored in tableModel
-        rooms_table.setModel(model);
+        users_table.setModel(model);
+        users_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
      
         
         

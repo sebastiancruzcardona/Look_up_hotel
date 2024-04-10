@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel;
 import services.HotelService;
@@ -272,7 +273,8 @@ public class AdminManageHotel extends javax.swing.JPanel {
         }
 
         //Set tableModel. This updates the table to show data stored in tableModel
-        hotels_table.setModel(model);        
+        hotels_table.setModel(model); 
+        hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
      }
      
      //this methods reload all methods when start jpanel 
