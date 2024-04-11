@@ -19,7 +19,7 @@ public interface UserDAOInterface {
     
     void update(String name, String email, String password, String contact, int rol);
     
-    Map<String, Object> select();
+    Map<String, Object> select(String query );
     
     void delete(int id);    
     

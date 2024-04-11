@@ -19,7 +19,8 @@ CREATE TABLE `hotels` (
 
 INSERT INTO `hotels` (`id`, `name`, `address`, `classification`, `comforts`) VALUES
 (1,	'emperador',	'calle 12',	2,	'prueba'),
-(2,	'armenia',	'prueba',	2,	'prueba');
+(2,	'armenia',	'prueba',	2,	'prueba'),
+(3,	'polar',	'calle 21',	2,	'uf');
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE `images` (
@@ -83,7 +84,7 @@ DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE `rooms` (
   `id` int NOT NULL AUTO_INCREMENT,
   `room_number` varchar(20) NOT NULL,
-  `type_room` varchar(10) NOT NULL,
+  `id_type_room` int NOT NULL,
   `price_per_night` double NOT NULL,
   `availability` tinyint(1) NOT NULL,
   `amenities_details` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -91,11 +92,30 @@ CREATE TABLE `rooms` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `room_number` (`room_number`),
   KEY `fk_hotel` (`id_hotel`),
-  CONSTRAINT `fk_hotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotels` (`id`)
+  KEY `id_type_room` (`id_type_room`),
+  CONSTRAINT `fk_hotel` FOREIGN KEY (`id_hotel`) REFERENCES `hotels` (`id`),
+  CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`id_type_room`) REFERENCES `type_rooms` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `rooms` (`id`, `room_number`, `type_room`, `price_per_night`, `availability`, `amenities_details`, `id_hotel`) VALUES
-(4,	'233',	'pruebatt',	120000,	1,	'prueba hola prueba',	2);
+INSERT INTO `rooms` (`id`, `room_number`, `id_type_room`, `price_per_night`, `availability`, `amenities_details`, `id_hotel`) VALUES
+(6,	'2b',	4,	12,	1,	'dsad',	1),
+(7,	'12',	5,	213,	1,	'sadas',	2),
+(9,	'12b',	2,	3233,	1,	'dsad',	2);
+
+DROP TABLE IF EXISTS `type_rooms`;
+CREATE TABLE `type_rooms` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type_room` varchar(30) NOT NULL,
+  `person_number` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `type_rooms` (`id`, `type_room`, `person_number`) VALUES
+(1,	'single room',	1),
+(2,	'double room',	2),
+(3,	'triple room',	3),
+(4,	'quadruple room',	4),
+(5,	'family room',	5);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -129,9 +149,9 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`
 (21,	'prueba14',	'prueba14',	'prueba14',	'prueba14',	2),
 (23,	'prueba15',	'prueba15',	'prueba15',	'prueba15',	2),
 (24,	'prueba16',	'prueba16',	'prueba16',	'prueba16',	2),
-(25,	'prueba17',	'prueba17',	'prueba17',	'prueba17',	2),
 (26,	'fabian',	'feibian@gmail.com',	'admin',	'3004215235',	1),
 (27,	'sebastian',	'sebastian@gmail.com',	'admin',	'3187492128',	1),
-(28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2);
+(28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2),
+(29,	'alberto',	'prueba1@gmail.com',	'1',	'hola prueba hola otravez',	2);
 
--- 2024-03-30 03:03:50
+-- 2024-04-11 15:14:43
