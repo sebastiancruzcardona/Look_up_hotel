@@ -6,6 +6,7 @@ package view;
 
 
 import exceptions.EmptyFieldsException;
+import exceptions.JustSpacesException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import javax.swing.JOptionPane;
@@ -234,7 +235,7 @@ public class UserSignUp extends javax.swing.JFrame {
             userLogin.setVisible(true);
             this.dispose();
             
-        } catch (NotAnEmailException | EmptyFieldsException | NotAlphaNumericException e) {
+        } catch (NotAnEmailException | EmptyFieldsException | NotAlphaNumericException | JustSpacesException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 

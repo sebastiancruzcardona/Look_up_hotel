@@ -7,6 +7,7 @@ package services;
 import daos.UserDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
+import exceptions.JustSpacesException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import helper.RegularExpressions;
@@ -30,6 +31,9 @@ public class UserService {
         validateEmail(email);
         validateAlphaNumeric(name);
         validateAlphaNumeric(contact);
+        validateNotJustSpaces(name);
+        validateNotJustSpaces(password);
+        validateNotJustSpaces(contact);
         userDAO.insert(name, email, password, contact);
     }
     
@@ -38,6 +42,9 @@ public class UserService {
         validateEmail(email);
         validateAlphaNumeric(name);
         validateAlphaNumeric(contact);
+        validateNotJustSpaces(name);
+        validateNotJustSpaces(password);
+        validateNotJustSpaces(contact);
         userDAO.update(name, email, password, contact);
     }
     
@@ -46,6 +53,9 @@ public class UserService {
         validateEmail(email);
         validateAlphaNumeric(name);
         validateAlphaNumeric(contact);
+        validateNotJustSpaces(name);
+        validateNotJustSpaces(password);
+        validateNotJustSpaces(contact);
         userDAO.update(name, email, password, contact,  rol);
     }
    
@@ -64,6 +74,9 @@ public class UserService {
         validateEmail(email);
         validateAlphaNumeric(name);
         validateAlphaNumeric(contact);
+        validateNotJustSpaces(name);
+        validateNotJustSpaces(password);
+        validateNotJustSpaces(contact);
         userDAO.insertManage(name, email, password, contact, rol);
     }
     
@@ -125,6 +138,12 @@ public class UserService {
     public void validateAlphaNumeric(String string){
         if(!RegularExpressions.validateAlphaNumeric(string)){
             throw new NotAlphaNumericException();
+        }
+    }
+    
+    public void validateNotJustSpaces(String string){
+        if(RegularExpressions.validateJustSpaces(string)){
+            throw new JustSpacesException();
         }
     }
 
