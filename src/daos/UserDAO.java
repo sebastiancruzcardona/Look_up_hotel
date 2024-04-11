@@ -100,11 +100,11 @@ public class UserDAO implements UserDAOInterface{
 
     @Override
     //This method returns a HashMap that contains data and metadata from table "users"  
-    public Map<String, Object> select() {
+    public Map<String, Object> select(String query) {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT u.id, u.full_name, u.email, u.password, u.contact, r.name FROM users u JOIN rols r on u.id_rol = r.id";
+        String selectSQL =query;
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();

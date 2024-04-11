@@ -105,7 +105,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         jScrollPane1.setViewportView(rooms_table);
 
         txt_search.setBackground(new java.awt.Color(255, 255, 255));
-        txt_search.setForeground(new java.awt.Color(153, 153, 153));
+        txt_search.setForeground(new java.awt.Color(51, 51, 51));
         txt_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_search.setName(""); // NOI18N
         txt_search.addActionListener(new java.awt.event.ActionListener() {

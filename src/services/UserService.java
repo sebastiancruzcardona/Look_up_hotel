@@ -6,6 +6,7 @@ package services;
 
 import daos.UserDAO;
 import exceptions.EmptyFieldsException;
+import exceptions.EmptySearchFieldException;
 import exceptions.NotAnEmailException;
 import helper.RegularExpressions;
 import java.util.Map;
@@ -42,8 +43,8 @@ public class UserService {
     }
    
     //This method returns a HashMap calling userDAO select method
-    public Map<String, Object> select(){
-        return userDAO.select();
+    public Map<String, Object> select(String name){
+        return userDAO.select(createSelectQuery(name));
     }
     
     //This method calls delete method from UserDAO
@@ -131,4 +132,26 @@ public class UserService {
        User user = userDAO.findUser(id);
        return user;
     }
+    
+     /**
+     * This method creates the appropriate query for the select method
+     * 
+     * @param String name
+     * @return The standar select query if name == null. The select query with a LIKE condition if !name == null.
+     * If name.equals(""), thows an EmptySearchFieldException
+     */
+    public String createSelectQuery(String email){
+        String query =  "SELECT u.id, u.full_name, u.email, u.password, u.contact, r.name"
+                + " FROM users u "
+                + "JOIN rols r on u.id_rol = r.id";
+        if(email == null){
+            return query;
+        }else {
+                validateEmail(email);
+        }
+        return query += " AND u.email ="  +"'"+ email + "'"; 
+                
+                //query += " WHERE name LIKE '%" + name + "%'";        
+    }
+   
 }
