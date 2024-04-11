@@ -93,6 +93,11 @@ public class AdminInsertUser extends javax.swing.JPanel {
         txt_contact.setForeground(new java.awt.Color(0, 0, 0));
         txt_contact.setRows(5);
         txt_contact.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txt_contact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_contactKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txt_contact);
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 15)); // NOI18N
@@ -110,6 +115,11 @@ public class AdminInsertUser extends javax.swing.JPanel {
                 txt_usernameActionPerformed(evt);
             }
         });
+        txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_usernameKeyTyped(evt);
+            }
+        });
 
         txt_email.setBackground(new java.awt.Color(255, 255, 255));
         txt_email.setForeground(new java.awt.Color(0, 0, 0));
@@ -119,6 +129,11 @@ public class AdminInsertUser extends javax.swing.JPanel {
                 txt_emailActionPerformed(evt);
             }
         });
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
+            }
+        });
 
         txt_password.setBackground(new java.awt.Color(255, 255, 255));
         txt_password.setForeground(new java.awt.Color(0, 0, 0));
@@ -126,6 +141,11 @@ public class AdminInsertUser extends javax.swing.JPanel {
         txt_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_passwordActionPerformed(evt);
+            }
+        });
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyTyped(evt);
             }
         });
 
@@ -275,6 +295,34 @@ public class AdminInsertUser extends javax.swing.JPanel {
     private void combox_rolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combox_rolActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combox_rolActionPerformed
+
+    private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_usernameKeyTyped
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_passwordKeyTyped
+
+    private void txt_contactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_contactKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_contactKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

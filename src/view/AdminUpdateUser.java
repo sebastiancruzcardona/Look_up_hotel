@@ -106,6 +106,11 @@ public class AdminUpdateUser extends javax.swing.JPanel {
         txa_contact.setBackground(new java.awt.Color(255, 255, 255));
         txa_contact.setColumns(20);
         txa_contact.setRows(5);
+        txa_contact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txa_contactKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txa_contact);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -118,6 +123,11 @@ public class AdminUpdateUser extends javax.swing.JPanel {
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_usernameActionPerformed(evt);
+            }
+        });
+        txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_usernameKeyTyped(evt);
             }
         });
 
@@ -133,6 +143,11 @@ public class AdminUpdateUser extends javax.swing.JPanel {
         txt_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_passwordActionPerformed(evt);
+            }
+        });
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyTyped(evt);
             }
         });
 
@@ -267,6 +282,30 @@ public class AdminUpdateUser extends javax.swing.JPanel {
     private void combox_rolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combox_rolActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combox_rolActionPerformed
+
+    private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_usernameKeyTyped
+
+    private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_passwordKeyTyped
+
+    private void txa_contactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txa_contactKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txa_contactKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
