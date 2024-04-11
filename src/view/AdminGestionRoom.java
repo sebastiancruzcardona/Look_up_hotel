@@ -5,6 +5,7 @@
 package view;
 
 import com.mysql.cj.x.protobuf.MysqlxExpr;
+import exceptions.EmptySearchFieldException;
 import helper.TextPrompt;
 import java.awt.BorderLayout;
 import java.util.List;
@@ -51,7 +52,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
         btn_update = new javax.swing.JButton();
         btn_insert = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_search = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1150, 1024));
 
@@ -157,11 +158,16 @@ public class AdminGestionRoom extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(54, 37, 89));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
-        jButton2.setText("Search");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_search.setBackground(new java.awt.Color(54, 37, 89));
+        btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
+        btn_search.setText("Search");
+        btn_search.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout back_groundLayout = new javax.swing.GroupLayout(back_ground);
         back_ground.setLayout(back_groundLayout);
@@ -184,7 +190,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
                     .addGroup(back_groundLayout.createSequentialGroup()
                         .addComponent(txt_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btn_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_allfilter)
                         .addGap(39, 39, 39))))
@@ -198,7 +204,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_allfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
@@ -242,12 +248,21 @@ public class AdminGestionRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_allfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_allfilterActionPerformed
-        reloadTable();
+        reloadTable(null);
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txt_searchActionPerformed
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+          try {
+            reloadTable(txt_search.getText());
+            txt_search.setText("");
+        } catch (EmptySearchFieldException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_btn_searchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -255,8 +270,8 @@ public class AdminGestionRoom extends javax.swing.JPanel {
     private javax.swing.JButton btn_allfilter;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_insert;
+    private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable rooms_table;
@@ -264,9 +279,9 @@ public class AdminGestionRoom extends javax.swing.JPanel {
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 
-     public void reloadTable() {
+     public void reloadTable(String name) {
         //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
-        Map<String, Object> result = roomService.select();
+        Map<String, Object> result = roomService.select(name);
 
         //Get the names of the columns from the results map. The column names are returned as a list of strings.
         List<String> columnNames = (List<String>) result.get("columnNames");
@@ -305,7 +320,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
      }
      //this methods reload all methods when start jpanel 
      public void initTable(){
-         reloadTable();
+         reloadTable(null);
          TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
 
      
@@ -330,7 +345,7 @@ public class AdminGestionRoom extends javax.swing.JPanel {
               int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this room?","Answer",JOptionPane.YES_NO_CANCEL_OPTION );
               if (answer ==JOptionPane.YES_OPTION) {
                  roomService.delete(id);
-                 reloadTable();
+                 reloadTable(null);
              }
              
              

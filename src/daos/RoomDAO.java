@@ -44,7 +44,7 @@ public class RoomDAO implements RoomDAOInterface {
     //This method inserts a new row in table "rooms" with de provided data of a new room
     @Override
     public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel) { //paste: 
-        String insertSQL = "INSERT INTO rooms (room_number,type_room,price_per_night,availability,amenities_details, id_hotel) VALUES (?,?,?,?,?,(SELECT id FROM hotels where name =?))";
+        String insertSQL = "INSERT INTO rooms (room_number,id_type_room,price_per_night,availability,amenities_details, id_hotel) VALUES (?,(SELECT id FROM type_rooms WHERE type_room = ?),?,?,?,(SELECT id FROM hotels WHERE name =?))";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
@@ -68,7 +68,7 @@ public class RoomDAO implements RoomDAOInterface {
     //This method modifies information of a previously registered user in table "rooms"
     @Override
     public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id) {
-        String updateSQL = "UPDATE rooms SET room_number = ?,  type_room = ?, price_per_night = ?, availability = ?, amenities_details = ? WHERE id = ?";
+        String updateSQL = "UPDATE rooms SET room_number = ?,  id_type_room = (SELECT id FROM type_rooms WHERE type_room = ?), price_per_night = ?, availability = ?, amenities_details = ? WHERE id = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
@@ -95,11 +95,11 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method returns a HashMap that contains data and metadata from table "rooms"  
     @Override
-    public Map<String, Object> select() {
+    public Map<String, Object> select(String query) {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT id, room_number, type_room, price_per_night, availability, amenities_details, id_hotel  FROM rooms";
+        String selectSQL = query;
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
@@ -177,7 +177,7 @@ public class RoomDAO implements RoomDAOInterface {
             
             if(rs.next()) {
                 
-               Room room = new Room(rs.getInt("id"), rs.getString("room_number"), rs.getString("type_room"),rs.getDouble("price_per_night"), rs.getBoolean("availability"), rs.getString("amenities_details"), null);
+               Room room = new Room(rs.getInt("id"), rs.getString("room_number"), rs.getString("id_type_room"),rs.getDouble("price_per_night"), rs.getBoolean("availability"), rs.getString("amenities_details"), null);
                 
                return room;
             }

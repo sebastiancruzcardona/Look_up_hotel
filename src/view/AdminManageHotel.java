@@ -242,6 +242,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try {
             reloadTable(txt_search.getText());
+            txt_search.setText("");
         } catch (EmptySearchFieldException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

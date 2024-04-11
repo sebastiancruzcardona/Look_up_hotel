@@ -100,7 +100,9 @@ public class HotelService {
         }else if (name.equals("")){
             throw new EmptySearchFieldException();
         }
-        return query += " WHERE name LIKE '%" + name + "%'";        
+        return query += " WHERE name ="  +"'"+ name + "'"; 
+                
+                //query += " WHERE name LIKE '%" + name + "%'";        
     }
    
 }
