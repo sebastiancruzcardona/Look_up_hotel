@@ -135,12 +135,14 @@ public class UserService {
         }
     }
     
+    //This method calls validateAlphaNumeric from helper.RegularExpressions
     public void validateAlphaNumeric(String string){
         if(!RegularExpressions.validateAlphaNumeric(string)){
             throw new NotAlphaNumericException();
         }
     }
     
+    //This method calls validateNotJustSpaces from helper.RegularExpressions
     public void validateNotJustSpaces(String string){
         if(RegularExpressions.validateJustSpaces(string)){
             throw new JustSpacesException();
