@@ -95,11 +95,11 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method returns a HashMap that contains data and metadata from table "rooms"  
     @Override
-    public Map<String, Object> select() {
+    public Map<String, Object> select(String query) {
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = " SELECT r.id, r.room_number, t.type_room, r.price_per_night, r.availability, r.amenities_details, h.name  FROM rooms  r JOIN type_rooms t ON r.id_type_room = t.id  JOIN hotels h ON r.id_hotel = h.id ";
+        String selectSQL = query;
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();

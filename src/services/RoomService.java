@@ -6,6 +6,7 @@ package services;
 
 import daos.RoomDAO;
 import exceptions.EmptyFieldsException;
+import exceptions.EmptySearchFieldException;
 import java.util.Map;
 import model.Room;
 
@@ -31,8 +32,8 @@ public class RoomService {
     }
     
     //This method returns a HashMap calling RoomDAO select method
-    public Map<String, Object> select(){
-        return roomDAO.select();
+    public Map<String, Object> select(String name){
+        return roomDAO.select(createSelectQuery(name));
     }
     
     //This method calls delete method from RoomDAO
@@ -51,4 +52,28 @@ public class RoomService {
                 throw new EmptyFieldsException();
         }
      }
+    /**
+      * This method creates the appropriate query for the select method
+     * 
+     * @param String name
+     * @return The standar select query if name == null. The select query with a LIKE condition if !name == null.
+     * If name.equals(""), thows an EmptySearchFieldException
+     */
+    public String createSelectQuery(String name){
+        String query = " SELECT r.id, r.room_number, t.type_room, r.price_per_night, r.availability, r.amenities_details, h.name  "
+                + "FROM rooms  "
+                + "r JOIN type_rooms t ON r.id_type_room = t.id  "
+                + "JOIN hotels h ON r.id_hotel = h.id ";
+        if(name == null){
+            return query;
+        }else if (name.equals("")){
+            throw new EmptySearchFieldException();
+        }
+      
+        query += " AND h.name ="+ "'"+name + "'";
+         
+          System.out.println(query);
+          return query;
+    }
+   
 }

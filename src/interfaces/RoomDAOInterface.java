@@ -17,7 +17,7 @@ public interface RoomDAOInterface {
     
     public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,  int id);
     
-    public Map<String,Object> select();
+    public Map<String,Object> select(String query);
     
     public void delete(int id);
     

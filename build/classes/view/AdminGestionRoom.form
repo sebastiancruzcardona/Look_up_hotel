@@ -64,7 +64,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="txt_search" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_search" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btn_allfilter" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txt_search" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="btn_search" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btn_allfilter" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
@@ -299,7 +299,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btn_search">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="59" green="25" red="36" type="rgb"/>
@@ -313,6 +313,9 @@
             <Property name="text" type="java.lang.String" value="Search"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_searchActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
