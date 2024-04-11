@@ -44,7 +44,6 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         txt_room_number = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_type_room = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_price = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -52,6 +51,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         btn_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_details = new javax.swing.JTextArea();
+        typeroom_combox = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1140, 1024));
 
@@ -102,15 +102,6 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Type room");
 
-        txt_type_room.setBackground(new java.awt.Color(255, 255, 255));
-        txt_type_room.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txt_type_room.setName(""); // NOI18N
-        txt_type_room.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_type_roomKeyTyped(evt);
-            }
-        });
-
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Price per night");
 
@@ -151,6 +142,10 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(txt_details);
 
+        typeroom_combox.setBackground(new java.awt.Color(255, 255, 255));
+        typeroom_combox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "single room", "double room", "triple room", "quadruple room", "family room" }));
+        typeroom_combox.setSelectedIndex(-1);
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -166,7 +161,6 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
                         .addGap(339, 339, 339)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_edit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_type_room)
                             .addComponent(txt_price)
                             .addComponent(jScrollPane1)
                             .addComponent(txt_room_number)
@@ -174,8 +168,9 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
                             .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))))
-                .addGap(311, 311, 311))
+                            .addComponent(jLabel3)
+                            .addComponent(typeroom_combox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(301, 301, 301))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,9 +185,9 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
                 .addComponent(txt_room_number, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_type_room, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(typeroom_combox, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +199,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
                 .addComponent(availabilit_check, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -244,7 +239,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
 
         try {
             String roomNumber = txt_room_number.getText();
-            String typeRoom = txt_type_room.getText();
+            String typeRoom =(String) typeroom_combox.getSelectedItem();
             double priceNight = Double.parseDouble(txt_price.getText());
             boolean availability = availabilit_check.getState();
             String amenitiesDetails = txt_details.getText();
@@ -270,16 +265,6 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
             evt.consume();
         }
     }//GEN-LAST:event_txt_room_numberKeyTyped
-
-    private void txt_type_roomKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_type_roomKeyTyped
-        int key = evt.getKeyChar();
-        //Validate if pressed key is a number, upper case or lower case
-        boolean caracter = key >= 65 && key <= 90 || key >= 97 && key <= 122;
-        //If is another thing do not put the character in the text field
-        if(!caracter){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_type_roomKeyTyped
 
     private void txt_priceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_priceKeyTyped
         int key = evt.getKeyChar();
@@ -319,13 +304,13 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     private javax.swing.JTextArea txt_details;
     private javax.swing.JTextField txt_price;
     private javax.swing.JTextField txt_room_number;
-    private javax.swing.JTextField txt_type_room;
+    private javax.swing.JComboBox<String> typeroom_combox;
     // End of variables declaration//GEN-END:variables
 
     //This method change txtField for date from room about edit
     public void initPanel() {
         txt_room_number.setText(room.getNumber());
-        txt_type_room.setText(room.getType());
+        typeroom_combox.setSelectedIndex(Integer.parseInt(room.getType())-1);
         txt_price.setText(String.valueOf(room.getPricePerNight()));
         availabilit_check.setState(room.isAvailability());
         txt_details.setText(room.getAmenities());
@@ -334,7 +319,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     //This method clean txtfields then do update
     public void clear() {
         txt_room_number.setText("");
-        txt_type_room.setText("");
+        
         txt_price.setText("");
 
         txt_details.setText("");
