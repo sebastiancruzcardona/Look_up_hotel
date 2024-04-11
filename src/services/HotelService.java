@@ -100,9 +100,11 @@ public class HotelService {
         }else if (name.equals("")){
             throw new EmptySearchFieldException();
         }
-        return query += " WHERE name ="  +"'"+ name + "'"; 
+        //This query allows finding non-exact matches
+        return query += " WHERE name LIKE '%" + name + "%'";
                 
-                //query += " WHERE name LIKE '%" + name + "%'";        
+                //This query is only for exact matches
+                //query += " WHERE name ="  +"'"+ name + "'";        
     }
    
 }
