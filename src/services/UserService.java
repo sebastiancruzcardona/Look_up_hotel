@@ -7,6 +7,7 @@ package services;
 import daos.UserDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
+import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import helper.RegularExpressions;
 import java.util.Map;
@@ -27,18 +28,24 @@ public class UserService {
     //This method calls insert method from UserDAO
     public void insert(String name, String email, String password, String contact){
         validateEmail(email);
+        validateAlphaNumeric(name);
+        validateAlphaNumeric(contact);
         userDAO.insert(name, email, password, contact);
     }
     
     //This method calls update method from UserDAO
     public void update(String name, String email, String password, String contact){
         validateEmail(email);
+        validateAlphaNumeric(name);
+        validateAlphaNumeric(contact);
         userDAO.update(name, email, password, contact);
     }
     
     //This method calls update method from UserDAO
     public void update(String name, String email, String password, String contact, int rol){
         validateEmail(email);
+        validateAlphaNumeric(name);
+        validateAlphaNumeric(contact);
         userDAO.update(name, email, password, contact,  rol);
     }
    
@@ -55,6 +62,8 @@ public class UserService {
    //This method calls insert method from UserDAO
     public void insertManage(String name, String email, String password, String contact, int rol){
         validateEmail(email);
+        validateAlphaNumeric(name);
+        validateAlphaNumeric(contact);
         userDAO.insertManage(name, email, password, contact, rol);
     }
     
@@ -110,6 +119,12 @@ public class UserService {
     public void validateFilledFields( String email, String password){
         if(email.equals("") || password.equals("")){
             throw new EmptyFieldsException();
+        }
+    }
+    
+    public void validateAlphaNumeric(String string){
+        if(!RegularExpressions.validateAlphaNumeric(string)){
+            throw new NotAlphaNumericException();
         }
     }
 
