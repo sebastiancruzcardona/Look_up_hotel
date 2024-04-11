@@ -85,6 +85,11 @@ public class UserSignUp extends javax.swing.JFrame {
                 txt_usernameActionPerformed(evt);
             }
         });
+        txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_usernameKeyTyped(evt);
+            }
+        });
 
         btn_signup.setBackground(new java.awt.Color(67, 45, 115));
         btn_signup.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
@@ -119,6 +124,11 @@ public class UserSignUp extends javax.swing.JFrame {
         txa_contact.setBackground(new java.awt.Color(242, 232, 223));
         txa_contact.setColumns(20);
         txa_contact.setRows(5);
+        txa_contact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txa_contactKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txa_contact);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -243,6 +253,26 @@ public class UserSignUp extends javax.swing.JFrame {
         userLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_usernameKeyTyped
+
+    private void txa_contactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txa_contactKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txa_contactKeyTyped
 
     /**
      * @param args the command line arguments
