@@ -90,6 +90,11 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         txt_name.setBackground(new java.awt.Color(255, 255, 255));
         txt_name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_name.setName(""); // NOI18N
+        txt_name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nameKeyTyped(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Hotel name");
@@ -100,6 +105,11 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         txt_address.setBackground(new java.awt.Color(255, 255, 255));
         txt_address.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txt_address.setName(""); // NOI18N
+        txt_address.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_addressKeyTyped(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Classification");
@@ -121,6 +131,11 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
         txt_comforts.setBackground(new java.awt.Color(255, 255, 255));
         txt_comforts.setColumns(20);
         txt_comforts.setRows(5);
+        txt_comforts.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_comfortsKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txt_comforts);
 
         combobox_classification.setBackground(new java.awt.Color(255, 255, 255));
@@ -190,7 +205,7 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96)
                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -258,6 +273,36 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
     private void combobox_classificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_classificationActionPerformed
 
     }//GEN-LAST:event_combobox_classificationActionPerformed
+
+    private void txt_nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        } 
+    }//GEN-LAST:event_txt_nameKeyTyped
+
+    private void txt_addressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_addressKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case, space, #, - or /
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key == 35 || key == 45 || key == 47;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }   
+    }//GEN-LAST:event_txt_addressKeyTyped
+
+    private void txt_comfortsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_comfortsKeyTyped
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        //If is another thing do not put the character in the text field
+        if(!caracter){
+            evt.consume();
+        }   
+    }//GEN-LAST:event_txt_comfortsKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
