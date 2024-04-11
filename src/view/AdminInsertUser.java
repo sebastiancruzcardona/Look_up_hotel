@@ -6,7 +6,9 @@ package view;
 
 import exceptions.EmptyFieldsException;
 import exceptions.HotelNameAlreadyInDataBase;
+import exceptions.JustSpacesException;
 import exceptions.NoClassificationOptionChosen;
+import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
@@ -286,7 +288,7 @@ public class AdminInsertUser extends javax.swing.JPanel {
             
             clear();
 
-        }catch (NotAnEmailException | EmptyFieldsException | HotelNameAlreadyInDataBase e) {
+        }catch (NotAnEmailException | EmptyFieldsException | NotAlphaNumericException | JustSpacesException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 

@@ -5,6 +5,8 @@
 package view;
 
 import exceptions.EmptyFieldsException;
+import exceptions.JustSpacesException;
+import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
@@ -262,7 +264,7 @@ public class AdminUpdateUser extends javax.swing.JPanel {
 
             ShowJPanel(new AdminManageUser());
 
-       } catch (EmptyFieldsException | NotAnEmailException e) {
+       } catch (EmptyFieldsException | NotAnEmailException | NotAlphaNumericException | JustSpacesException e) {
            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btn_editActionPerformed
