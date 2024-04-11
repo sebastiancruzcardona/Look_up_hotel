@@ -36,5 +36,12 @@ public class RegularExpressions {
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
+    
+    //This method returns true if the evualuated string just contains spaces
+    public static boolean validateJustSpaces(String string){
+        Pattern pattern = Pattern.compile("^\\s+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
 
 }
