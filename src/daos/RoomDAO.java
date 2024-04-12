@@ -162,6 +162,22 @@ public class RoomDAO implements RoomDAOInterface {
         }
     }
 
+    //This method deletes all rooms of a hotel that is being deleted
+    @Override
+    public void deleteByHotel(int id_hotel) {
+        String deleteSQL = "DELETE FROM rooms WHERE id_hotel = ?";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+            pstmt.setInt(1, id_hotel);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Successfully deleted rooms");
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }
+    }
+    
+    
+
     /**
      *  This method find a room registered in table "rooms" and returns the room
      * @param id

@@ -56,6 +56,11 @@ public class RoomService {
     public void delete(int id){
         roomDAO.delete(id);
     }
+    
+    //This method calls deleteByHotel method from RoomDAO
+    public void deleteByHotel(int id_hotel){
+        roomDAO.deleteByHotel(id_hotel);
+    }
     //This method calls findRoom method from RoomDAO
     public Room findRoom(int id){
         return roomDAO.findRoom(id);

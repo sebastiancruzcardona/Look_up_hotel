@@ -15,17 +15,21 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel;
 import services.HotelService;
+import services.RoomService;
 
 /**
  *
  * @author Fabián Lugo - Sebastián Cruz
  */
 public class AdminManageHotel extends javax.swing.JPanel {
-    
+
     HotelService hotelService;
+    RoomService roomService;
     int idTable;
+
     public AdminManageHotel() {
         hotelService = new HotelService();
+        roomService = new RoomService();
         initComponents();
         initTable();
     }
@@ -224,7 +228,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
     private void hotels_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hotels_tableMousePressed
         DefaultTableModel tblMode1 = (DefaultTableModel) hotels_table.getModel();
         idTable = (int) tblMode1.getValueAt(hotels_table.getSelectedRow(), 0);
-        
+
     }//GEN-LAST:event_hotels_tableMousePressed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -264,7 +268,7 @@ public class AdminManageHotel extends javax.swing.JPanel {
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 
-     public void reloadTable(String name) {
+    public void reloadTable(String name) {
         //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
         Map<String, Object> result = hotelService.select(name);
 
@@ -273,9 +277,9 @@ public class AdminManageHotel extends javax.swing.JPanel {
 
         //Get data from the result map table. The table data is returned as a list of lists of objects. Each inner list represents a row in the table and contains the data for that row.
         List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
-         
+
         //Create a new tableModel. A tableModel is an object that manages the data in a table
-        DefaultTableModel model = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
             //Override isCellEditable method making all cells uneditables
             public boolean isCellEditable(int row, int column) {
@@ -296,51 +300,50 @@ public class AdminManageHotel extends javax.swing.JPanel {
         }
 
         //Set tableModel. This updates the table to show data stored in tableModel
-        hotels_table.setModel(model); 
-        
+        hotels_table.setModel(model);
+
         //Make table cells uneditable
         hotels_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-     }
+    }
 
-     
-     //this methods reload all methods when start jpanel 
-     public void initTable(){
-         reloadTable(null);
-         TextPrompt tp7 = new TextPrompt("Enter hotel name's", txt_search);     
-     }
-     
-     
-     private void ShowJPanel(JPanel panel){
+    //this methods reload all methods when start jpanel 
+    public void initTable() {
+        reloadTable(null);
+        TextPrompt tp7 = new TextPrompt("Enter hotel name's", txt_search);
+    }
+
+    private void ShowJPanel(JPanel panel) {
         panel.setSize(1140, 1024);
         panel.setLocation(0, 0);
-        
+
         back_ground.removeAll();
         back_ground.add(panel, BorderLayout.CENTER);
         back_ground.revalidate();
         back_ground.repaint();
     }
-     
-     //This method validate if there is a select arrow from table
-     public void validateDeleteId(int id){
-         if(idTable == 0){
-             JOptionPane.showMessageDialog(null, "Please select the table row you want to delete");
-         }else{
-              int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this hotel?","Answer",JOptionPane.YES_NO_CANCEL_OPTION );
-              if (answer ==JOptionPane.YES_OPTION) {
-                 hotelService.delete(id);
-                 reloadTable(null);
-             }            
-         }
-     }
-     
-     //This method validate if there is a selecto arrow from table and show panel AdminUpdateRoom
-     public void validateUpdateId(int id){
-         if(idTable == 0){
-             JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
-         }else{      
-             Hotel hotel = hotelService.findHotel(id);
-             System.out.println(hotel.getId() + hotel.getName());
-             ShowJPanel(new AdminUpdateHotel(hotel));             
-         }
-     }
+
+    //This method validate if there is a select arrow from table
+    public void validateDeleteId(int id) {
+        if (idTable == 0) {
+            JOptionPane.showMessageDialog(null, "Please select the table row you want to delete");
+        } else {
+            int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this hotel? (this will delete all this hotel's rooms)", "Answer", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (answer == JOptionPane.YES_OPTION) {
+                roomService.deleteByHotel(id);
+                hotelService.delete(id);
+                reloadTable(null);
+            }
+        }
+    }
+
+    //This method validate if there is a selecto arrow from table and show panel AdminUpdateRoom
+    public void validateUpdateId(int id) {
+        if (idTable == 0) {
+            JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
+        } else {
+            Hotel hotel = hotelService.findHotel(id);
+            System.out.println(hotel.getId() + hotel.getName());
+            ShowJPanel(new AdminUpdateHotel(hotel));
+        }
+    }
 }

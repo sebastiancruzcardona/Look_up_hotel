@@ -21,5 +21,7 @@ public interface RoomDAOInterface {
     
     public void delete(int id);
     
+    void deleteByHotel(int id_hotel);
+    
     Room findRoom(int id);
 }
