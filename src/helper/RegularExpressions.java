@@ -27,6 +27,13 @@ public class RegularExpressions {
         return matcher.matches();
     }
     
+    //This method returns true if the evaluated string contains just letters (upper and lower case) and/or spaces and if the number of characters matches
+    public static boolean validateAlpha(String string, int number){
+        Pattern pattern = Pattern.compile("^[A-Za-z\\s]{" + number + "}$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
     //This method returns true if the evaluated string contains just numbers, letters (upper and lower case) and/or spaces
     public static boolean validateAlphaNumeric(String string){
         Pattern pattern = Pattern.compile("^[0-9A-Za-z\\s]+$");
@@ -34,9 +41,51 @@ public class RegularExpressions {
         return matcher.matches();
     }
     
+    //This method returns true if the evaluated string contains just numbers, letters (upper and lower case) and/or spaces and if the number of characters matches
+    public static boolean validateAlphaNumeric(String string, int number){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z\\s]{" + number + "}$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    //This method returns true if the evaluated string contains just numbers and/or letters (upper and lower case)
+    public static boolean validateStrictAlphaNumeric(String string){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    //This method returns true if the evaluated string contains just numbers and/or letters (upper and lower case) and if the number of characters matches
+    public static boolean validateStrictAlphaNumeric(String string, int number){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z]{" + number + "}$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    //This method returns true if the evaluated string contains just numbers, letters (upper and lower case) and/or dashes
+    public static boolean validateDashAlphaNumeric(String string){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z-]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    //This method returns true if the evaluated string contains just numbers, letters (upper and lower case) and/or dashes and if the number of characters matches
+    public static boolean validateDashAlphaNumeric(String string, int number){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z-]{" + number + "}$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
     //This method returns true if the evaluated string contains just numbers
     public static boolean validateNumeric(String string){
         Pattern pattern = Pattern.compile("^[0-9]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    //This method returns true if the evaluated string contains just numbers and if the number of characters matches
+    public static boolean validateNumeric(String string, int number){
+        Pattern pattern = Pattern.compile("^[0-9]{" + number + "}$");
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
