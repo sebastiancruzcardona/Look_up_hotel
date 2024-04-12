@@ -32,7 +32,7 @@ public class HotelService {
    //This method calls insert method from HotelDAO
     public void insert(String name, String address, int classification, String comforts){
         validateAlphaNumeric(name);
-        validateAlphaNumeric(comforts);
+        validateAlphaNumericPointComma(comforts);
         validateAddress(address);
         validateClassification(classification);
         hotelDAO.insert(name, address, classification, comforts);
@@ -44,7 +44,7 @@ public class HotelService {
     public void update(String name, String address, int classification, String comforts, int id, Hotel hotel){
         if(!hotel.getName().equals(name) || !hotel.getAddress().equals(address) || hotel.getClassification() != classification || !hotel.getComforts().equals(comforts)){
             validateAlphaNumeric(name);
-            validateAlphaNumeric(comforts);
+            validateAlphaNumericPointComma(comforts);
             validateAddress(address);
             validateClassification(classification);
             hotelDAO.update(name, address, classification, comforts, id);
@@ -81,6 +81,13 @@ public class HotelService {
         }
     }
     
+    //This method calls validateAlphaNumericPontComma from helper.RegularExpressions
+    public void validateAlphaNumericPointComma(String string){
+        if(!RegularExpressions.validateAlphaNumericPointComma(string)){
+            throw new NotAlphaNumericException();
+        }
+    }
+    
     //This method calls validateAddress from helper.RegularExpressions
     public void validateAddress(String string){
         if(!RegularExpressions.validateAddress(string)){
@@ -88,7 +95,7 @@ public class HotelService {
         }
     }
     
-    //This method calls validateAddress from helper.RegularExpressions
+    //This method calls validateClassiHotelRoomfication from helper.RegularExpressions
     public void validateClassification(int number){
         if(!RegularExpressions.validateHotelRoomClassification(number)){
             throw new NotValidClassificationExcpetion();

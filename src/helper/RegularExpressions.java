@@ -76,6 +76,13 @@ public class RegularExpressions {
         return matcher.matches();
     }
     
+    //This method returns true if the evaluated string contains just numbers, letters (upper and lower case), spaces, ".", "," and/or "-"
+    public static boolean validateAlphaNumericPointComma(String string){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z\\s.,-]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
     //This method returns true if the evaluated string contains just numbers
     public static boolean validateNumeric(String string){
         Pattern pattern = Pattern.compile("^[0-9]+$");
