@@ -30,6 +30,7 @@ public class RoomService {
         validateAlphaNumeric(roomNumber);
         validateTypeRoom(typeRoom);
         validateNumericDouble(String.valueOf(pricePerNigth));
+        validateAlphaNumericPointComma(amenitiesDetails);
         roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel);
     }
     
@@ -38,6 +39,7 @@ public class RoomService {
         validateAlphaNumeric(roomNumber);
         validateTypeRoom(typeRoom);
         validateNumericDouble(String.valueOf(pricePerNigth));
+        validateAlphaNumericPointComma(amenitiesDetails);
         roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
     }
     
@@ -77,10 +79,17 @@ public class RoomService {
         }
     }
     
-    //This method calls validateTypeRoom from helper.RegularExpressions
+    //This method calls validateNumericDouble from helper.RegularExpressions
     public void validateNumericDouble(String string){
         if(!RegularExpressions.validateNumericDouble(string)){
             throw new NotDoubleNumberException();
+        }
+    }
+    
+    //This method calls validateAlphaNumericPontComma from helper.RegularExpressions
+    public void validateAlphaNumericPointComma(String string){
+        if(!RegularExpressions.validateAlphaNumericPointComma(string)){
+            throw new NotAlphaNumericException();
         }
     }
     /**

@@ -315,7 +315,7 @@ public class InsertRoom extends javax.swing.JPanel {
     private void txt_detailsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_detailsKeyTyped
         int key = evt.getKeyChar();
         //Validate if pressed key is a number, upper case, lower case or space, ",", "-" or "."
-        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key >= 44 && key <= 46;
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32 || key >= 44 && key <= 46;
         //If is another thing do not put the character in the text field
         if (!caracter) {
             evt.consume();
