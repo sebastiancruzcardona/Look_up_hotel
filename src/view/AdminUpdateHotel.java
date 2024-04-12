@@ -289,8 +289,8 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
 
     private void txt_addressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_addressKeyTyped
         int key = evt.getKeyChar();
-        //Validate if pressed key is a number, upper case, lower case, space, #, - or /
-        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key == 35 || key == 45 || key == 47;
+        //Validate if pressed key is a number, upper case, lower case, space, "#", ",", "-", "." or "/"
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key == 35 || key >= 44 && key <= 47;
         //If is another thing do not put the character in the text field
         if(!caracter){
             evt.consume();
