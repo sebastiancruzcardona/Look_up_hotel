@@ -5,6 +5,7 @@
 package view;
 
 import exceptions.EmptyFieldsException;
+import exceptions.NotAlphaNumericException;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -249,7 +250,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
 
             ShowJPanel(new AdminGestionRoom());
 
-        } catch (EmptyFieldsException e) {
+        } catch (EmptyFieldsException | NotAlphaNumericException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 

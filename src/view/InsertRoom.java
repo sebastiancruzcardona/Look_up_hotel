@@ -5,6 +5,7 @@
 package view;
 
 import exceptions.EmptyFieldsException;
+import exceptions.NotAlphaNumericException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -262,7 +263,7 @@ public class InsertRoom extends javax.swing.JPanel {
             roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
             roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
             clear();
-        } catch (EmptyFieldsException e) {
+        } catch (EmptyFieldsException | NotAlphaNumericException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 

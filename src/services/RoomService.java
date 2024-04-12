@@ -7,6 +7,8 @@ package services;
 import daos.RoomDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
+import exceptions.NotAlphaNumericException;
+import helper.RegularExpressions;
 import java.util.Map;
 import model.Room;
 
@@ -23,11 +25,13 @@ public class RoomService {
     
      //This method calls insert method from RoomDAO
     public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel){
+        validateAlphaNumeric(roomNumber);
         roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel);
     }
     
     //This method calls update method from RoomDAO
     public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,int id){
+        validateAlphaNumeric(roomNumber);
         roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
     }
     
@@ -52,6 +56,13 @@ public class RoomService {
                 throw new EmptyFieldsException();
         }
      }
+    
+    //This method calls validateAlphaNumeric from helper.RegularExpressions
+    public void validateAlphaNumeric(String string){
+        if(!RegularExpressions.validateAlphaNumeric(string)){
+            throw new NotAlphaNumericException();
+        }
+    }
     /**
       * This method creates the appropriate query for the select method
      * 
