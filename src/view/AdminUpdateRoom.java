@@ -239,16 +239,16 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
 
         try {
             String roomNumber = txt_room_number.getText();
-            String typeRoom =(String) typeroom_combox.getSelectedItem();
+            String typeRoom = (String) typeroom_combox.getSelectedItem();
             double priceNight = Double.parseDouble(txt_price.getText());
             boolean availability = availabilit_check.getState();
             String amenitiesDetails = txt_details.getText();
             roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, typeRoom);
             roomService.update(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, room.getId());
             clear();
-            
+
             ShowJPanel(new AdminGestionRoom());
-            
+
         } catch (EmptyFieldsException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -261,7 +261,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         //Validate if pressed key is a number, upper case or lower case
         boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122;
         //If is another thing do not put the character in the text field
-        if(!caracter){
+        if (!caracter) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_room_numberKeyTyped
@@ -272,19 +272,19 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         //Validate if pressed key is a number
         boolean numero = key >= 48 && key <= 57;
         //If is another thing do not put the character in the text field
-        if(!numero){
+        if (!numero) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_priceKeyTyped
 
     private void txt_detailsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_detailsKeyTyped
-       int key = evt.getKeyChar();
-        //Validate if pressed key is a number, upper case, lower case or space
-        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        int key = evt.getKeyChar();
+        //Validate if pressed key is a number, upper case, lower case or space, ",", "-" or "."
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key >= 44 && key <= 46;
         //If is another thing do not put the character in the text field
-        if(!caracter){
+        if (!caracter) {
             evt.consume();
-        }     
+        }
     }//GEN-LAST:event_txt_detailsKeyTyped
 
 
@@ -310,7 +310,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     //This method change txtField for date from room about edit
     public void initPanel() {
         txt_room_number.setText(room.getNumber());
-        typeroom_combox.setSelectedIndex(Integer.parseInt(room.getType())-1);
+        typeroom_combox.setSelectedIndex(Integer.parseInt(room.getType()) - 1);
         txt_price.setText(String.valueOf(room.getPricePerNight()));
         availabilit_check.setState(room.isAvailability());
         txt_details.setText(room.getAmenities());
@@ -319,16 +319,16 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     //This method clean txtfields then do update
     public void clear() {
         txt_room_number.setText("");
-        
+
         txt_price.setText("");
 
         txt_details.setText("");
     }
-    
-    private void ShowJPanel(JPanel panel){
+
+    private void ShowJPanel(JPanel panel) {
         panel.setSize(1140, 1024);
         panel.setLocation(0, 0);
-        
+
         bg.removeAll();
         bg.add(panel, BorderLayout.CENTER);
         bg.revalidate();
