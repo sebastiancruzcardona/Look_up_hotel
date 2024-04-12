@@ -79,7 +79,7 @@ public class RoomService {
     
     //This method calls validateTypeRoom from helper.RegularExpressions
     public void validateNumericDouble(String string){
-        if(!RegularExpressions.validateNumeric(string)){
+        if(!RegularExpressions.validateNumericDouble(string)){
             throw new NotDoubleNumberException();
         }
     }

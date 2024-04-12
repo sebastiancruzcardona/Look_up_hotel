@@ -99,7 +99,7 @@ public class RegularExpressions {
     
     //This method returns true if the evaluated string contains just numbers
     public static boolean validateNumericDouble(String string){
-        Pattern pattern = Pattern.compile("^-?\\d+(\\.\\d+)?$");
+        Pattern pattern = Pattern.compile("^?\\d+(\\.\\d+)?$");
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }

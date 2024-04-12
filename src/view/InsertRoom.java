@@ -270,7 +270,7 @@ public class InsertRoom extends javax.swing.JPanel {
             roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
             roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
             clear();
-        } catch (EmptyFieldsException | NotAlphaNumericException | NotATypeOfRoomException |NotDoubleNumberException e) {
+        } catch (EmptyFieldsException | NotAlphaNumericException | NotATypeOfRoomException | NotDoubleNumberException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
@@ -295,7 +295,7 @@ public class InsertRoom extends javax.swing.JPanel {
         int key = evt.getKeyChar();
         //Numbers in ASCII
         //Validate if pressed key is a number or "."
-        boolean numero = key >= 48 && key <= 57 | key == 46;
+        boolean numero = key >= 48 && key <= 57 || key == 46;
         //If is another thing do not put the character in the text field
         if (!numero) {
             evt.consume();

@@ -277,8 +277,8 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
     private void txt_priceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_priceKeyTyped
         int key = evt.getKeyChar();
         //Numbers in ASCII
-        //Validate if pressed key is a number
-        boolean numero = key >= 48 && key <= 57;
+        //Validate if pressed key is a number or "."
+        boolean numero = key >= 48 && key <= 57 || key == 46;
         //If is another thing do not put the character in the text field
         if (!numero) {
             evt.consume();
