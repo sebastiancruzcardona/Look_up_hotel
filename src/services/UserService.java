@@ -8,6 +8,7 @@ import daos.UserDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
 import exceptions.JustSpacesException;
+import exceptions.NotAlphaException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import helper.RegularExpressions;
@@ -29,7 +30,7 @@ public class UserService {
     //This method calls insert method from UserDAO
     public void insert(String name, String email, String password, String contact){
         validateEmail(email);
-        validateAlphaNumeric(name);
+        validateAlpha(name);
         validateAlphaNumericPointComma(contact);
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
@@ -40,7 +41,7 @@ public class UserService {
     //This method calls update method from UserDAO
     public void update(String name, String email, String password, String contact){
         validateEmail(email);
-        validateAlphaNumeric(name);
+        validateAlpha(name);
         validateAlphaNumericPointComma(contact);
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
@@ -132,6 +133,13 @@ public class UserService {
     public void validateFilledFields( String email, String password){
         if(email.equals("") || password.equals("")){
             throw new EmptyFieldsException();
+        }
+    }
+    
+    //This method calls validateAlpha from helper.RegularExpressions
+    public void validateAlpha(String string){
+        if(!RegularExpressions.validateAlpha(string)){
+            throw new NotAlphaException();
         }
     }
     
