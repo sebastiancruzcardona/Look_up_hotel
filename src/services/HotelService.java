@@ -9,6 +9,11 @@ import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
 import exceptions.NoChangeWasMadeException;
 import exceptions.NoClassificationOptionChosen;
+import exceptions.NotAlphaException;
+import exceptions.NotAlphaNumericException;
+import exceptions.NotAnAddressException;
+import exceptions.NotValidClassificationExcpetion;
+import helper.RegularExpressions;
 import java.util.ArrayList;
 import java.util.Map;
 import model.Hotel;
@@ -26,6 +31,10 @@ public class HotelService {
    
    //This method calls insert method from HotelDAO
     public void insert(String name, String address, int classification, String comforts){
+        validateAlphaNumeric(name);
+        validateAlphaNumeric(comforts);
+        validateAddress(address);
+        validateClassification(classification);
         hotelDAO.insert(name, address, classification, comforts);
     }
     
@@ -34,6 +43,10 @@ public class HotelService {
     //If not, throws a NoChangeWasMadeException()
     public void update(String name, String address, int classification, String comforts, int id, Hotel hotel){
         if(!hotel.getName().equals(name) || !hotel.getAddress().equals(address) || hotel.getClassification() != classification || !hotel.getComforts().equals(comforts)){
+            validateAlphaNumeric(name);
+            validateAlphaNumeric(comforts);
+            validateAddress(address);
+            validateClassification(classification);
             hotelDAO.update(name, address, classification, comforts, id);
         }else{
             throw new NoChangeWasMadeException();
@@ -59,6 +72,27 @@ public class HotelService {
     //This method calls selectHotelsName from HotelDAO
     public ArrayList<String> selectHotelsName(){
         return hotelDAO.selectNameHotels();
+    }
+    
+    //This method calls validateAlphaNumeric from helper.RegularExpressions
+    public void validateAlphaNumeric(String string){
+        if(!RegularExpressions.validateAlphaNumeric(string)){
+            throw new NotAlphaNumericException();
+        }
+    }
+    
+    //This method calls validateAddress from helper.RegularExpressions
+    public void validateAddress(String string){
+        if(!RegularExpressions.validateAddress(string)){
+            throw new NotAnAddressException();
+        }
+    }
+    
+    //This method calls validateAddress from helper.RegularExpressions
+    public void validateClassification(int number){
+        if(!RegularExpressions.validateHotelClassification(number)){
+            throw new NotValidClassificationExcpetion();
+        }
     }
     
     //This methd validates if all fields were filled out

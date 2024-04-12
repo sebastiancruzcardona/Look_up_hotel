@@ -117,5 +117,12 @@ public class RegularExpressions {
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
+    
+    //This method returns true if the evaluated int is 1 <= number <= 5 
+    public static boolean validateHotelClassification(int number){
+        Pattern pattern = Pattern.compile("^[1-5]$");
+        Matcher matcher = pattern.matcher(String.valueOf(number));
+        return matcher.matches();
+    }
 
 }

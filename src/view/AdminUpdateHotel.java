@@ -7,6 +7,9 @@ package view;
 import exceptions.EmptyFieldsException;
 import exceptions.HotelNameAlreadyInDataBase;
 import exceptions.NoChangeWasMadeException;
+import exceptions.NotAlphaNumericException;
+import exceptions.NotAnAddressException;
+import exceptions.NotValidClassificationExcpetion;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -255,7 +258,7 @@ public class AdminUpdateHotel extends javax.swing.JPanel {
             clear();
             ShowJPanel(new AdminManageHotel());
             
-        }catch (EmptyFieldsException | HotelNameAlreadyInDataBase | NoChangeWasMadeException e) {
+        }catch (EmptyFieldsException | HotelNameAlreadyInDataBase | NoChangeWasMadeException | NotAlphaNumericException | NotAnAddressException | NotValidClassificationExcpetion e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
