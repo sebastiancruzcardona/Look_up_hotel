@@ -7,7 +7,9 @@ package services;
 import daos.RoomDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
+import exceptions.NotATypeOfRoomException;
 import exceptions.NotAlphaNumericException;
+import exceptions.NotDoubleNumberException;
 import helper.RegularExpressions;
 import java.util.Map;
 import model.Room;
@@ -26,12 +28,16 @@ public class RoomService {
      //This method calls insert method from RoomDAO
     public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel){
         validateAlphaNumeric(roomNumber);
+        validateTypeRoom(typeRoom);
+        validateNumericDouble(String.valueOf(pricePerNigth));
         roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel);
     }
     
     //This method calls update method from RoomDAO
     public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,int id){
         validateAlphaNumeric(roomNumber);
+        validateTypeRoom(typeRoom);
+        validateNumericDouble(String.valueOf(pricePerNigth));
         roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
     }
     
@@ -61,6 +67,20 @@ public class RoomService {
     public void validateAlphaNumeric(String string){
         if(!RegularExpressions.validateAlphaNumeric(string)){
             throw new NotAlphaNumericException();
+        }
+    }
+    
+    //This method calls validateTypeRoom from helper.RegularExpressions
+    public void validateTypeRoom(String string){
+        if(!RegularExpressions.validateTypeRoom(string)){
+            throw new NotATypeOfRoomException();
+        }
+    }
+    
+    //This method calls validateTypeRoom from helper.RegularExpressions
+    public void validateNumericDouble(String string){
+        if(!RegularExpressions.validateNumeric(string)){
+            throw new NotDoubleNumberException();
         }
     }
     /**

@@ -5,7 +5,9 @@
 package view;
 
 import exceptions.EmptyFieldsException;
+import exceptions.NotATypeOfRoomException;
 import exceptions.NotAlphaNumericException;
+import exceptions.NotDoubleNumberException;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -241,7 +243,12 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
         try {
             String roomNumber = txt_room_number.getText();
             String typeRoom = (String) typeroom_combox.getSelectedItem();
-            double priceNight = Double.parseDouble(txt_price.getText());
+            double priceNight;
+            try {
+               priceNight = Double.parseDouble(txt_price.getText());
+            } catch (Exception e) {
+                throw new NotDoubleNumberException();
+            }
             boolean availability = availabilit_check.getState();
             String amenitiesDetails = txt_details.getText();
             roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, typeRoom);
@@ -250,7 +257,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
 
             ShowJPanel(new AdminGestionRoom());
 
-        } catch (EmptyFieldsException | NotAlphaNumericException e) {
+        } catch (EmptyFieldsException | NotAlphaNumericException | NotATypeOfRoomException |NotDoubleNumberException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 

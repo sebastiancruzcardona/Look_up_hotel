@@ -97,6 +97,13 @@ public class RegularExpressions {
         return matcher.matches();
     }
     
+    //This method returns true if the evaluated string contains just numbers
+    public static boolean validateNumericDouble(String string){
+        Pattern pattern = Pattern.compile("^-?\\d+(\\.\\d+)?$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
     //This method returns true if the evualuated string just contains spaces
     public static boolean validateJustSpaces(String string){
         Pattern pattern = Pattern.compile("^\\s+$");
@@ -129,6 +136,13 @@ public class RegularExpressions {
     public static boolean validateHotelRoomClassification(int number){
         Pattern pattern = Pattern.compile("^[1-5]$");
         Matcher matcher = pattern.matcher(String.valueOf(number));
+        return matcher.matches();
+    }
+    
+    //This method returns true if the evaluated string is equal to "single room", "double room", "triple room", "quadruple room" or "family room"
+    public static boolean validateTypeRoom(String string){
+        Pattern pattern = Pattern.compile("^(single room|double room|triple room|quadruple room|family room)$");
+        Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
 

@@ -5,7 +5,9 @@
 package view;
 
 import exceptions.EmptyFieldsException;
+import exceptions.NotATypeOfRoomException;
 import exceptions.NotAlphaNumericException;
+import exceptions.NotDoubleNumberException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -255,15 +257,20 @@ public class InsertRoom extends javax.swing.JPanel {
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
         try {
             String roomNumber = txt_room_number.getText();
-            String typeRoom =  (String) typeroom_combox.getSelectedItem();
-            double priceNight = Double.parseDouble(txt_price.getText());
+            String typeRoom = (String) typeroom_combox.getSelectedItem();
+            double priceNight;
+            try {
+               priceNight = Double.parseDouble(txt_price.getText());
+            } catch (Exception e) {
+                throw new NotDoubleNumberException();
+            }
             boolean availability = availabilit_check.getState();
             String amenitiesDetails = txt_details.getText();
             String hotel = (String) hotel_combox.getSelectedItem();
             roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
             roomService.insert(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, hotel);
             clear();
-        } catch (EmptyFieldsException | NotAlphaNumericException e) {
+        } catch (EmptyFieldsException | NotAlphaNumericException | NotATypeOfRoomException |NotDoubleNumberException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
@@ -287,10 +294,10 @@ public class InsertRoom extends javax.swing.JPanel {
     private void txt_priceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_priceKeyTyped
         int key = evt.getKeyChar();
         //Numbers in ASCII
-        //Validate if pressed key is a number
-        boolean numero = key >= 48 && key <= 57;
+        //Validate if pressed key is a number or "."
+        boolean numero = key >= 48 && key <= 57 | key == 46;
         //If is another thing do not put the character in the text field
-        if(!numero){
+        if (!numero) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_priceKeyTyped
@@ -300,7 +307,7 @@ public class InsertRoom extends javax.swing.JPanel {
         //Validate if pressed key is a number, upper case or lower case
         boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122;
         //If is another thing do not put the character in the text field
-        if(!caracter){
+        if (!caracter) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_room_numberKeyTyped
@@ -308,11 +315,11 @@ public class InsertRoom extends javax.swing.JPanel {
     private void txt_detailsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_detailsKeyTyped
         int key = evt.getKeyChar();
         //Validate if pressed key is a number, upper case, lower case or space, ",", "-" or "."
-        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32 || key >= 44 && key <= 46;
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key >= 44 && key <= 46;
         //If is another thing do not put the character in the text field
-        if(!caracter){
+        if (!caracter) {
             evt.consume();
-        }     
+        }
     }//GEN-LAST:event_txt_detailsKeyTyped
 
 

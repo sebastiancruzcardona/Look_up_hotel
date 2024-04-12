@@ -8,10 +8,10 @@ package exceptions;
  *
  * @author ASUS - JOSE
  */
-public class NotAlphaException extends RuntimeException{
+public class NotDoubleNumberException extends RuntimeException{
     
-    public NotAlphaException(){
-        super("You must enter letter characters and spaces");
+    public NotDoubleNumberException(){
+        super("You must enter a decimal number");
     }
     
 }

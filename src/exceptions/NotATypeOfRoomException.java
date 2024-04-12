@@ -8,10 +8,10 @@ package exceptions;
  *
  * @author ASUS - JOSE
  */
-public class NotAnAddressException extends RuntimeException{
+public class NotATypeOfRoomException extends RuntimeException{
     
-    public NotAnAddressException(){
-        super("You must enter an address");
+    public NotATypeOfRoomException(){
+        super("A correct type of room must be entered");
     }
     
 }
