@@ -11,6 +11,7 @@ import exceptions.NotATypeOfRoomException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotDoubleNumberException;
 import helper.RegularExpressions;
+import java.util.ArrayList;
 import java.util.Map;
 import model.Room;
 
@@ -20,9 +21,11 @@ import model.Room;
  */
 public class RoomService {
     RoomDAO roomDAO;
+    HotelService hotelService;
 
     public RoomService() {
         roomDAO = new RoomDAO();
+        hotelService = new HotelService();
     }
     
      //This method calls insert method from RoomDAO
@@ -31,6 +34,7 @@ public class RoomService {
         validateTypeRoom(typeRoom);
         validateNumericDouble(String.valueOf(pricePerNigth));
         validateAlphaNumericPointComma(amenitiesDetails);
+        validateHotel(idHotel);
         roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel);
     }
     
@@ -92,6 +96,13 @@ public class RoomService {
             throw new NotAlphaNumericException();
         }
     }
+    
+    //This method calls validateAlphaNumericPontComma from helper.RegularExpressions
+    public void validateHotel(String string){
+        if(!RegularExpressions.validateHotel(string, createRegularExpression())){
+            throw new NotAlphaNumericException();
+        }
+    }
     /**
       * This method creates the appropriate query for the select method
      * 
@@ -114,6 +125,20 @@ public class RoomService {
          
           System.out.println(query);
           return query;
+    }
+    
+    //This method crates the appropriate regular expression for 
+    public String createRegularExpression(){
+        ArrayList<String> hotelsName = hotelService.selectHotelsName();
+        String regularExpression = "^(";
+        for(String hotel: hotelsName){
+            if(!hotel.equals(hotelsName.getLast())){
+                regularExpression += hotel + "|";
+            }else{
+                regularExpression += hotel + ")$";
+            }            
+        }
+        return regularExpression;
     }
    
 }
