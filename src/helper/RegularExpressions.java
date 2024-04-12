@@ -47,5 +47,26 @@ public class RegularExpressions {
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
+    
+    //This method returns true if the evualuated string is an address
+    //Alows values for colombian and american type addresses
+    //Values suported are like:
+    //"123 EverGreen Avenue, Springfield"
+    //"12 Main St, Chicago, Il"
+    //"12 Main St, Chi"
+    //"carrera 14 no. 123"
+    //"Calle 1 # 12-23"
+    //"cr 13 no. 20-32, Armenia, Colombia"
+    //"cr 13 no. 1-32, Armenia"
+    //Notice that in american type addresses, City (or a 3 letter prefix) is needed to succede the validation
+    //By the way, in colombian type addresses, address does not need to mention the city, but is better to include it, and country can be also included for clarity 
+    //Bear in mind that nonsense values like "fg gg p1 , ." can succede the validation, because caracters and spaces are suitable for the Regular expression
+    //However, as that kind of values are nonsense for bussiness logic, presumably admins will not enter them. Just if one of that kynd of value gets registered
+    //it can alwas be updated and anyway will not affect database  
+    public static boolean validateAddressCharacters(String string){
+        Pattern pattern = Pattern.compile("^[0-9A-Za-z]{1,7}\\s{1}[0-9A-Za-z#-/.,]{1,}\\s{1}[0-9A-Za-z#-/,]{1,}\\s{1}[0-9A-Za-z\\s#-/,]{3,}$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
 
 }
