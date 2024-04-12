@@ -97,7 +97,7 @@ public class RoomService {
         }
     }
     
-    //This method calls validateAlphaNumericPontComma from helper.RegularExpressions
+    //This method calls validateHotelMethod from helper.RegularExpressions
     public void validateHotel(String string){
         if(!RegularExpressions.validateHotel(string, createRegularExpression())){
             throw new NotAlphaNumericException();

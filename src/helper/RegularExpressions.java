@@ -146,7 +146,7 @@ public class RegularExpressions {
         return matcher.matches();
     }
     
-    //This method returns true if the evaluated string is equal to "single room", "double room", "triple room", "quadruple room" or "family room"
+    //This method returns true if the evaluated string matches with available hotel names
     public static boolean validateHotel(String string, String RegularExpression){
         Pattern pattern = Pattern.compile(RegularExpression);
         Matcher matcher = pattern.matcher(string);
