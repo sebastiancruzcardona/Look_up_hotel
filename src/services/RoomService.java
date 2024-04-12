@@ -127,7 +127,7 @@ public class RoomService {
           return query;
     }
     
-    //This method crates the appropriate regular expression for 
+    //This method crates the appropriate regular expression for validateHotelMethod
     public String createRegularExpression(){
         ArrayList<String> hotelsName = hotelService.selectHotelsName();
         String regularExpression = "^(";
