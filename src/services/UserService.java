@@ -30,7 +30,7 @@ public class UserService {
     public void insert(String name, String email, String password, String contact){
         validateEmail(email);
         validateAlphaNumeric(name);
-        validateAlphaNumeric(contact);
+        validateAlphaNumericPointComma(contact);
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
         validateNotJustSpaces(contact);
@@ -41,7 +41,7 @@ public class UserService {
     public void update(String name, String email, String password, String contact){
         validateEmail(email);
         validateAlphaNumeric(name);
-        validateAlphaNumeric(contact);
+        validateAlphaNumericPointComma(contact);
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
         validateNotJustSpaces(contact);
@@ -138,6 +138,13 @@ public class UserService {
     //This method calls validateAlphaNumeric from helper.RegularExpressions
     public void validateAlphaNumeric(String string){
         if(!RegularExpressions.validateAlphaNumeric(string)){
+            throw new NotAlphaNumericException();
+        }
+    }
+    
+    //This method calls validateAlphaNumericPointComma from helper.RegularExpressions
+    public void validateAlphaNumericPointComma(String string){
+        if(!RegularExpressions.validateAlphaNumericPointComma(string)){
             throw new NotAlphaNumericException();
         }
     }
