@@ -90,7 +90,7 @@ public class HotelService {
     
     //This method calls validateAddress from helper.RegularExpressions
     public void validateClassification(int number){
-        if(!RegularExpressions.validateHotelClassification(number)){
+        if(!RegularExpressions.validateHotelRoomClassification(number)){
             throw new NotValidClassificationExcpetion();
         }
     }
