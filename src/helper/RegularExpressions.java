@@ -63,7 +63,7 @@ public class RegularExpressions {
     //Bear in mind that nonsense values like "fg gg p1 , ." can succede the validation, because caracters and spaces are suitable for the Regular expression
     //However, as that kind of values are nonsense for bussiness logic, presumably admins will not enter them. Just if one of that kynd of value gets registered
     //it can alwas be updated and anyway will not affect database  
-    public static boolean validateAddressCharacters(String string){
+    public static boolean validateAddress(String string){
         Pattern pattern = Pattern.compile("^[0-9A-Za-z]{1,7}\\s{1}[0-9A-Za-z#-/.,]{1,}\\s{1}[0-9A-Za-z#-/,]{1,}\\s{1}[0-9A-Za-z\\s#-/,]{3,}$");
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
