@@ -4,6 +4,7 @@
  */
 package daos;
 
+import connection.DataBaseSingleton;
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
 import interfaces.ImageDAOInterface;
@@ -23,28 +24,20 @@ import javax.swing.JOptionPane;
  * @author lugo
  */
 public class ImageDAO implements ImageDAOInterface {
-     public MySQLConnection connection;
+     public Connection connection;
 
     //Stablish connection to database
     public ImageDAO() {
-        this.connection = new MySQLConnection();
+        connection = DataBaseSingleton.getInstance().getConnection();
     }
     
-    //This method establishes the connection to database, which is necessary to execute the other methods.
-    //If connection is null, throws a NullConnectionException
-    public Connection connect() { 
-        Connection conn = connection.connectMySQL();
-        if (conn != null) {
-            return conn;
-        }
-        throw new NullConnectionException();
-    }
+   
 
     @Override
     //This method inserts a new row in table "images" with de provided data of a new image
     public void insert(String name, String uri, int idHotel) {
         String insertSQL = "INSERT INTO images (name,uri,id_hotel) VALUES (?,?,?)";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, uri);
             pstmt.setInt(3, idHotel);  
@@ -68,7 +61,7 @@ public class ImageDAO implements ImageDAOInterface {
     //This method modifies information of a previously registered user in table "images"
     public void update(String name, String url, int idHotel) {
         String updateSQL = "UPDATE images SET name = ?,  url = ?, id_hotel = ?  WHERE id_hotel = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, url);
             pstmt.setInt(3, idHotel);
@@ -98,7 +91,7 @@ public class ImageDAO implements ImageDAOInterface {
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
         String selectSQL = "SELECT  id, name, uri, id_hotel FROM images";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -150,7 +143,7 @@ public class ImageDAO implements ImageDAOInterface {
     //This method deletes a row of a previously registered user in table "images" searching by it's id
     public void delete(int id) {
         String deleteSQL = "DELETE FROM images WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successful deletion");
