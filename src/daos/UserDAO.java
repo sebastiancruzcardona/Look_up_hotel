@@ -163,16 +163,18 @@ public class UserDAO implements UserDAOInterface{
 
     @Override
     //This method deletes a row of a previously registered user in table "users" searching by it's id
-    public void delete(int id) {
+    public  boolean delete(int id) {
         String deleteSQL = "DELETE FROM users WHERE id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Successfully deleted user");
+            System.out.println("Successfully deleted user");
+            return  true;
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+        return false;
     }
     
     /**
