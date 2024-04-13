@@ -15,13 +15,13 @@ public interface UserDAOInterface {
     
     boolean insert(String name, String email, String password, String contact);
     
-    void update(String name, String email, String password, String contact);
+    boolean update(String name, String email, String password, String contact);
     
-    void update(String name, String email, String password, String contact, int rol);
+    boolean update(String name, String email, String password, String contact, int rol);
     
     Map<String, Object> select(String query );
     
-    void delete(int id);    
+    boolean delete(int id);    
     
     boolean findEmail(String email);
     
