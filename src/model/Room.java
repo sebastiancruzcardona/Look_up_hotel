@@ -83,6 +83,14 @@ public class Room {
     public void setAmenities(String amenities) {
         this.amenities = amenities;
     }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
     
     
     
