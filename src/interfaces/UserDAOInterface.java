@@ -29,5 +29,5 @@ public interface UserDAOInterface {
     
     User findUser(int id);
     
-    void insertManage(String name, String email, String password, String contact,int rol);
+    boolean insertManage(String name, String email, String password, String contact,int rol);
 }
