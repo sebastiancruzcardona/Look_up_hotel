@@ -128,7 +128,7 @@
                       <Component id="availabilit_check" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="btn_edit" min="-2" pref="43" max="-2" attributes="0"/>
-                      <EmptySpace pref="180" max="32767" attributes="0"/>
+                      <EmptySpace pref="181" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

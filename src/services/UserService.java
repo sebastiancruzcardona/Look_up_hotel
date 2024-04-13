@@ -8,11 +8,13 @@ import daos.UserDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
 import exceptions.JustSpacesException;
+import exceptions.NoChangeWasMadeException;
 import exceptions.NotAlphaException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import helper.RegularExpressions;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import model.User;
 
 /**
@@ -35,7 +37,7 @@ public class UserService {
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
         validateNotJustSpaces(contact);
-        userDAO.insert(name, email, password, contact);
+        validateInsertion(userDAO.insert(name, email, password, contact));
     }
     
     //This method calls update method from UserDAO
@@ -46,18 +48,23 @@ public class UserService {
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
         validateNotJustSpaces(contact);
-        userDAO.update(name, email, password, contact);
+        validateUpdate( userDAO.update(name, email, password, contact));
     }
     
-    //This method calls update method from UserDAO
-    public void update(String name, String email, String password, String contact, int rol){
-        validateEmail(email);
-        validateAlphaNumeric(name);
-        validateAlphaNumeric(contact);
-        validateNotJustSpaces(name);
-        validateNotJustSpaces(password);
-        validateNotJustSpaces(contact);
-        userDAO.update(name, email, password, contact,  rol);
+    //This method calls update method from UserDAO from view manage , he can edit rol
+    public void update(String name, String email, String password, String contact, int rol, User user){
+         if(!user.getUserName().equals(name) || !user.getEmail().equals(email) || !user.getPassword().equals(password) || !user.getDetails().equals(contact)|| user.getRol()!=rol){   
+            validateEmail(email);
+            validateAlphaNumeric(name);
+            validateAlphaNumeric(contact);
+            validateNotJustSpaces(name);
+            validateNotJustSpaces(password);
+            validateNotJustSpaces(contact);
+             validateUpdate(userDAO.update(name, email, password, contact,  rol));
+         }else{
+                 throw new NoChangeWasMadeException();
+         }    
+            
     }
    
     //This method returns a HashMap calling userDAO select method
@@ -67,7 +74,7 @@ public class UserService {
     
     //This method calls delete method from UserDAO
     public void delete(int id){
-        userDAO.delete(id);
+        validateDelete(userDAO.delete(id));
     }
     
    //This method calls insert method from UserDAO
@@ -78,7 +85,7 @@ public class UserService {
         validateNotJustSpaces(name);
         validateNotJustSpaces(password);
         validateNotJustSpaces(contact);
-        userDAO.insertManage(name, email, password, contact, rol);
+        validateInsertion(userDAO.insertManage(name, email, password, contact, rol));
     }
     
     
@@ -169,6 +176,32 @@ public class UserService {
         validateEmail(email);
         boolean result = userDAO.findEmail(email);
         return result;
+    }
+    //this method validate if answer is true or false from getion data base
+    public void validateInsertion ( boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"User successfully created");
+        }else{
+            JOptionPane.showMessageDialog(null,"No insertion was made");
+        }
+    }
+    
+    //this method validate if answer is true or false from getion data base
+    public void validateUpdate ( boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"User successfully Update");
+        }else{
+            JOptionPane.showMessageDialog(null,"No update was made");
+        }
+    }
+    
+    //this method validate if answer is true or false from getion data base
+    public void validateDelete ( boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"User successfully delete user");
+        }else{
+            JOptionPane.showMessageDialog(null,"No delete was made");
+        }
     }
     
     //This method calls  findUser method from userDAO

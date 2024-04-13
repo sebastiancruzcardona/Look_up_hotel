@@ -6,6 +6,7 @@ package view;
 
 import exceptions.EmptyFieldsException;
 import exceptions.JustSpacesException;
+import exceptions.NoChangeWasMadeException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotAnEmailException;
 import java.awt.BorderLayout;
@@ -259,12 +260,12 @@ public class AdminUpdateUser extends javax.swing.JPanel {
            
             userService.validateEmail(txt_email.getText());
             userService.validateFilledFields(userName, user.getEmail(), password, contact);
-            userService.update(userName, user.getEmail(), password, contact,index);
+            userService.update(userName, user.getEmail(), password, contact,index,user);
             clear();
 
             ShowJPanel(new AdminManageUser());
 
-       } catch (EmptyFieldsException | NotAnEmailException | NotAlphaNumericException | JustSpacesException e) {
+       } catch (EmptyFieldsException | NotAnEmailException | NotAlphaNumericException | JustSpacesException |NoChangeWasMadeException e) {
            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btn_editActionPerformed

@@ -12,7 +12,7 @@ public class NoChangeWasMadeException extends RuntimeException {
 
     public NoChangeWasMadeException() {
     
-        super("No change was made to the hotel");
+        super("No change was made");
     }
     
     

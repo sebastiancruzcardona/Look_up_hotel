@@ -4,6 +4,7 @@
  */
 package daos;
 
+import connection.DataBaseSingleton;
 import connection.MySQLConnection;
 import exceptions.EmailNotExistException;
 import exceptions.IncorrectPasswordException;
@@ -30,15 +31,16 @@ import model.User;
  */
 public class UserDAO implements UserDAOInterface{
     
-    public MySQLConnection connection;
+    private Connection connection;
 
     //Stablish connection to database
     public UserDAO() {
-        this.connection = new MySQLConnection();
+        connection = DataBaseSingleton.getInstance().getConnection();
     }
     
     //This method establishes the connection to database, which is necessary to execute the other methods.
     //If connection is null, throws a NullConnectionException
+   /*
     public Connection connect() { 
         Connection conn = connection.connectMySQL();
         if (conn != null) {
@@ -46,12 +48,12 @@ public class UserDAO implements UserDAOInterface{
         }
         throw new NullConnectionException();
     }
-
+*/
     @Override
     //This method inserts a new row in table "users" with de provided data of a new user
-    public void insert(String name, String email, String password, String contact) {
+    public boolean insert(String name, String email, String password, String contact) {
         String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, password);
@@ -62,21 +64,24 @@ public class UserDAO implements UserDAOInterface{
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
-                JOptionPane.showMessageDialog(null,"User successfully created");
+                return true;
+                
             } else {
                 System.out.println("No insertion was made");
+                return false;
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
     //This method modifies information of a previously registered user in table "users"
-    public void update(String name, String email, String password, String contact) {
+    public boolean update(String name, String email, String password, String contact) {
         String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?  WHERE email = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, password);
@@ -87,15 +92,18 @@ public class UserDAO implements UserDAOInterface{
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null,"Successfull update");
+                System.out.println("Successfull update");
+                return  true;
             } else {
-                JOptionPane.showMessageDialog(null,"No update was made");
+                System.out.println("No update was made");
+                return  false;
             }
 
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data update");
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -104,8 +112,8 @@ public class UserDAO implements UserDAOInterface{
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL =query;
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+        String selectSQL =query; 
+        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -157,7 +165,7 @@ public class UserDAO implements UserDAOInterface{
     //This method deletes a row of a previously registered user in table "users" searching by it's id
     public void delete(int id) {
         String deleteSQL = "DELETE FROM users WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successfully deleted user");
@@ -176,7 +184,7 @@ public class UserDAO implements UserDAOInterface{
      public boolean findEmail (String email) {
         
         String consultationSQL = "SELECT *  FROM users WHERE email = ? ";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(consultationSQL)){
+        try ( PreparedStatement pstmt = connection.prepareStatement(consultationSQL)){
             pstmt.setString(1, email);
             
             ResultSet rs = pstmt.executeQuery();
@@ -211,7 +219,7 @@ public class UserDAO implements UserDAOInterface{
         
         if(aux){
             String serchSQL = "SELECT * FROM users WHERE email = ? AND password = ? ";
-            try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(serchSQL)){
+            try (PreparedStatement pstmt = connection.prepareStatement(serchSQL)){
             pstmt.setString(1, email);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
@@ -241,9 +249,9 @@ public class UserDAO implements UserDAOInterface{
     }
     //This method inserts a new row in table "users" with de provided data of a new user
     @Override
-    public void insertManage(String name, String email, String password, String contact, int rol) {
+    public boolean insertManage(String name, String email, String password, String contact, int rol) {
         String insertSQL = "INSERT INTO users (full_name,email,password,contact,id_rol) VALUES (?,?,?,?,?)";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, password);
@@ -253,14 +261,17 @@ public class UserDAO implements UserDAOInterface{
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                 JOptionPane.showMessageDialog(null,"Successfull update");
+                 System.out.println("Successful insertion");
+                 return true;
             } else {
-                JOptionPane.showMessageDialog(null,"No insertion was made");
+               System.out.println("No insertion was made");
+               return false;
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
             e.printStackTrace();
         }
+        return false;
     }
     
     /**
@@ -272,7 +283,7 @@ public class UserDAO implements UserDAOInterface{
     @Override
     public User findUser(int id) {
        String serchSQL = "SELECT * FROM users WHERE id = ?  ";
-            try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(serchSQL)){
+            try ( PreparedStatement pstmt = connection.prepareStatement(serchSQL)){
             pstmt.setInt(1, id);
             
             ResultSet rs = pstmt.executeQuery();
@@ -302,9 +313,9 @@ public class UserDAO implements UserDAOInterface{
     }
 
     @Override
-    public void update(String name, String email, String password, String contact, int rol) {
+    public boolean update(String name, String email, String password, String contact, int rol) {
         String updateSQL = "UPDATE users SET full_name = ?,  email = ?, password = ?, contact = ?,  id_rol = ? WHERE email = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, password);
@@ -316,15 +327,18 @@ public class UserDAO implements UserDAOInterface{
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null,"Successfull update");
+               System.out.println("Successfull update");
+                return  true;
             } else {
-                JOptionPane.showMessageDialog(null,"No update was made");
+                System.out.println("No update was made");
+                return false;
             }
 
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data update");
             e.printStackTrace();
         }
+        return false;
        
     }
 }

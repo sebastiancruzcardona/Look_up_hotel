@@ -5,6 +5,7 @@
 package view;
 
 import exceptions.EmptyFieldsException;
+import exceptions.NoChangeWasMadeException;
 import exceptions.NotATypeOfRoomException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotDoubleNumberException;
@@ -252,12 +253,12 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
             boolean availability = availabilit_check.getState();
             String amenitiesDetails = txt_details.getText();
             roomService.validateFilledFields(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, typeRoom);
-            roomService.update(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, room.getId());
+            roomService.update(roomNumber, typeRoom, priceNight, availability, amenitiesDetails, room.getId(), room);
             clear();
 
             ShowJPanel(new AdminGestionRoom());
 
-        } catch (EmptyFieldsException | NotAlphaNumericException | NotATypeOfRoomException |NotDoubleNumberException e) {
+        } catch (EmptyFieldsException | NotAlphaNumericException | NotATypeOfRoomException |NotDoubleNumberException | NoChangeWasMadeException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
@@ -332,7 +333,7 @@ public class AdminUpdateRoom extends javax.swing.JPanel {
 
         txt_details.setText("");
     }
-
+    //This method show new panel in content panel
     private void ShowJPanel(JPanel panel) {
         panel.setSize(1140, 1024);
         panel.setLocation(0, 0);

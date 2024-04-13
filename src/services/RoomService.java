@@ -7,6 +7,7 @@ package services;
 import daos.RoomDAO;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
+import exceptions.NoChangeWasMadeException;
 import exceptions.NotATypeOfRoomException;
 import exceptions.NotAlphaNumericException;
 import exceptions.NotDoubleNumberException;
@@ -39,12 +40,18 @@ public class RoomService {
     }
     
     //This method calls update method from RoomDAO
-    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,int id){
-        validateAlphaNumeric(roomNumber);
-        validateTypeRoom(typeRoom);
-        validateNumericDouble(String.valueOf(pricePerNigth));
-        validateAlphaNumericPointComma(amenitiesDetails);
-        roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
+    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,int id, Room room){
+       if(!room.getNumber().equals(roomNumber) || !room.getType().equals(typeRoom)|| room.getPricePerNight()!=pricePerNigth || room.isAvailability()!=availability || !room.getAmenities().equals(amenitiesDetails) ){
+            validateAlphaNumeric(roomNumber);
+            validateTypeRoom(typeRoom);
+            validateNumericDouble(String.valueOf(pricePerNigth));
+            validateAlphaNumericPointComma(amenitiesDetails);
+            roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
+        }else{
+           throw new NoChangeWasMadeException();
+           
+       }
+       
     }
     
     //This method returns a HashMap calling RoomDAO select method

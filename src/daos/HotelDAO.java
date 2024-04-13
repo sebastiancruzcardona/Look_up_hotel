@@ -4,6 +4,7 @@
  */
 package daos;
 
+import connection.DataBaseSingleton;
 import connection.MySQLConnection;
 import exceptions.HotelNameAlreadyInDataBase;
 import exceptions.NullConnectionException;
@@ -26,28 +27,20 @@ import model.Hotel;
  */
 public class HotelDAO implements HotelDAOInterface {
 
-    public MySQLConnection connection;
+    public Connection connection;
 
     //Stablish connection to database
     public HotelDAO() {
-        this.connection = new MySQLConnection();
+        connection = DataBaseSingleton.getInstance().getConnection();
     }
 
-    //This method establishes the connection to database, which is necessary to execute the other methods.
-    //If connection is null, throws a NullConnectionException
-    public Connection connect() {
-        Connection conn = connection.connectMySQL();
-        if (conn != null) {
-            return conn;
-        }
-        throw new NullConnectionException();
-    }
+   
 
     @Override
     //This method inserts a new row in table "hotels" with de provided data of a new hotel
     public void insert(String name, String address, int classification, String comforts) {
         String insertSQL = "INSERT INTO hotels (name,address,classification,comforts) VALUES (?,?,?,?)";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, address);
             pstmt.setInt(3, classification);
@@ -71,7 +64,7 @@ public class HotelDAO implements HotelDAOInterface {
     //This method modifies information of a previously registered hotel in table "hotels", searching by its id
     public void update(String name, String address, int classification, String comforts, int id) {
         String updateSQL = "UPDATE hotels SET name = ?,  address = ?, classification = ?, comforts = ?  WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, address);
             pstmt.setInt(3, classification);
@@ -101,7 +94,7 @@ public class HotelDAO implements HotelDAOInterface {
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
         String selectSQL = query;
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -153,7 +146,7 @@ public class HotelDAO implements HotelDAOInterface {
     //This method deletes a row of a previously registered hotel in table "hotels" searching by its id
     public void delete(int id) {
         String deleteSQL = "DELETE FROM hotels WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Successfully deleted hotel");
@@ -178,7 +171,7 @@ public class HotelDAO implements HotelDAOInterface {
     public ArrayList<String> findHotelImages(int id) {
         ArrayList<String> images = new ArrayList<>();
         String selectSQL = "SELECT uri FROM images WHERE id_hotel = ?";
-        try (Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
 
@@ -205,7 +198,7 @@ public class HotelDAO implements HotelDAOInterface {
      */
     public Hotel findHotel(int id) {
         String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
 
@@ -228,7 +221,7 @@ public class HotelDAO implements HotelDAOInterface {
     public ArrayList<String> selectNameHotels() {
         String selectSQL = "SELECT name FROM hotels";
         ArrayList<String> hotelsName = new ArrayList<>();
-        try (Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 hotelsName.add(rs.getString("name"));
@@ -245,7 +238,7 @@ public class HotelDAO implements HotelDAOInterface {
     //This method validates if the name provided for a hotel is available. If the name is not available throws a HotelNameAlreadyInDataBase exception
     public boolean validateHotelNameAvailability(String name) {
         String consultationSQL = "SELECT *  FROM hotels WHERE name = ? ";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(consultationSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(consultationSQL)) {
             pstmt.setString(1, name);
 
             ResultSet rs = pstmt.executeQuery();

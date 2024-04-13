@@ -13,7 +13,7 @@ import model.User;
  */
 public interface UserDAOInterface {
     
-    void insert(String name, String email, String password, String contact);
+    boolean insert(String name, String email, String password, String contact);
     
     void update(String name, String email, String password, String contact);
     

@@ -4,6 +4,7 @@
  */
 package daos;
 
+import connection.DataBaseSingleton;
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
 import interfaces.ReservationDAOInterface;
@@ -24,29 +25,21 @@ import javax.swing.JOptionPane;
  * @author lugo
  */
 public class ReservationDAO implements ReservationDAOInterface{
-    public MySQLConnection conexion = new MySQLConnection();
+    public Connection connection;
     
     //Stablish connection to database
     public ReservationDAO() {
-        this.conexion = new MySQLConnection();
+        connection = DataBaseSingleton.getInstance().getConnection();
 
     }
 
-    //This method establishes the connection to database, which is necessary to execute the other methods.
-    //If connection is null, throws a NullConnectionException
-    public Connection connect() { 
-        Connection conn = conexion.connectMySQL();
-        if (conn != null) {
-            return conn;
-        }
-        throw new NullConnectionException();
-    }
+   
 
     //This method inserts a new row in table "reservations" with de provided data of a new reservation 
     @Override
     public void insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice) { //paste: 
         String insertSQL = "INSERT INTO reservations (id_user,id_hotel,id_room,entry_date,departure_date,status,total_price) VALUES (?,?,?,?,?,?,?)";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setInt(1, idUser);
             pstmt.setInt(2, idHotel);
             pstmt.setInt(3, idRoom);
@@ -74,7 +67,7 @@ public class ReservationDAO implements ReservationDAOInterface{
     @Override
     public void update(int status, int id) {
         String updateSQL = "UPDATE reservations SET status = ? WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setInt(1, status);
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
@@ -102,7 +95,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
         String selectSQL = "SELECT id_user, id_hotel, id_room, entry_date, departure_date, total_price id_reservation_statuses FROM reservations WHERE id_user =" + id;
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -157,7 +150,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
         String selectSQL = "SELECT id_user, id_hotel, id_room, entry_date, departure_date, total_price id_reservation_statuses FROM reservations WHERE id_reservation_statuses =" + status;
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -211,7 +204,7 @@ public class ReservationDAO implements ReservationDAOInterface{
     @Override
     public void delete(int id) {
         String deleteSQL = "DELETE FROM reservations WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Reservation succesfully deleted");

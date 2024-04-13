@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package daos;
+import connection.DataBaseSingleton;
 import connection.MySQLConnection;
 import exceptions.NullConnectionException;
 import interfaces.RoomDAOInterface;
@@ -23,29 +24,21 @@ import model.Room;
 public class RoomDAO implements RoomDAOInterface {
     
     
-    public MySQLConnection conexion = new MySQLConnection();
+    private Connection connection;
     
     //Stablish connection to database
     public RoomDAO() {
-        this.conexion = new MySQLConnection();
+        connection = DataBaseSingleton.getInstance().getConnection();
 
     }
 
-    //This method establishes the connection to database, which is necessary to execute the other methods.
-    //If connection is null, throws a NullConnectionException
-    public Connection connect() { 
-        Connection conn = conexion.connectMySQL();
-        if (conn != null) {
-            return conn;
-        }
-        throw new NullConnectionException();
-    }
+   
 
     //This method inserts a new row in table "rooms" with de provided data of a new room
     @Override
     public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel) { //paste: 
         String insertSQL = "INSERT INTO rooms (room_number,id_type_room,price_per_night,availability,amenities_details, id_hotel) VALUES (?,(SELECT id FROM type_rooms WHERE type_room = ?),?,?,?,(SELECT id FROM hotels WHERE name =?))";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
             pstmt.setDouble(3, pricePerNigth);
@@ -69,7 +62,7 @@ public class RoomDAO implements RoomDAOInterface {
     @Override
     public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id) {
         String updateSQL = "UPDATE rooms SET room_number = ?,  id_type_room = (SELECT id FROM type_rooms WHERE type_room = ?), price_per_night = ?, availability = ?, amenities_details = ? WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, roomNumber);
             pstmt.setString(2, typeRoom);
             pstmt.setDouble(3, pricePerNigth);
@@ -100,7 +93,7 @@ public class RoomDAO implements RoomDAOInterface {
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
         String selectSQL = query;
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -152,7 +145,7 @@ public class RoomDAO implements RoomDAOInterface {
     @Override
     public void delete(int id) {
         String deleteSQL = "DELETE FROM rooms WHERE id = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+        try ( PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successfully deleted room");
@@ -166,7 +159,7 @@ public class RoomDAO implements RoomDAOInterface {
     @Override
     public void deleteByHotel(int id_hotel) {
         String deleteSQL = "DELETE FROM rooms WHERE id_hotel = ?";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id_hotel);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successfully deleted rooms");
@@ -186,7 +179,7 @@ public class RoomDAO implements RoomDAOInterface {
     @Override
     public Room findRoom(int id) {
         String selectSQL = "SELECT * FROM rooms WHERE id = ?";
-        try(Connection conn = connect(); PreparedStatement pstm = conn.prepareStatement(selectSQL)) {
+        try(PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             pstm.setInt(1, id);
             
             ResultSet rs = pstm.executeQuery();
