@@ -66,7 +66,7 @@ public class RoomService {
     
     //This method calls deleteByHotel method from RoomDAO
     public void deleteByHotel(int id_hotel){
-        validateDelete(roomDAO.deleteByHotel(id_hotel));
+        validateDeleteByHotel(roomDAO.deleteByHotel(id_hotel));
     }
     //This method calls findRoom method from RoomDAO
     public Room findRoom(int id){
@@ -140,6 +140,13 @@ public class RoomService {
             JOptionPane.showMessageDialog(null,"Hotel successfully deleted");
         }else{
             JOptionPane.showMessageDialog(null,"No deletion was made");
+        }
+    }
+    
+    //this method validates if answer is true or false for deletion
+    public void validateDeleteByHotel(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Rooms successfully deleted");
         }
     }
     /**
