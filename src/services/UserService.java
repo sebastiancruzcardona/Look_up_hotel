@@ -5,8 +5,10 @@
 package services;
 
 import daos.UserDAO;
+import exceptions.EmailNotExistException;
 import exceptions.EmptyFieldsException;
 import exceptions.EmptySearchFieldException;
+import exceptions.IncorrectPasswordException;
 import exceptions.JustSpacesException;
 import exceptions.NoChangeWasMadeException;
 import exceptions.NotAlphaException;
@@ -175,8 +177,15 @@ public class UserService {
     public boolean findEmail(String email){
         validateEmail(email);
         boolean result = userDAO.findEmail(email);
-        return result;
+       
+            return  result;
+       
+         
+        
     }
+    
+    
+    
     //this method validate if answer is true or false from getion data base
     public void validateInsertion ( boolean answer){
         if(answer){
@@ -207,8 +216,18 @@ public class UserService {
     //This method calls  findUser method from userDAO
     public User findUser (String email, String password){
        validateEmail(email);
-       User user = userDAO.findUser(email, password);
-       return user;
+       if(userDAO.findEmail(email)){
+           User user = userDAO.findUser(email, password);
+           
+           if(user!=null){
+               return  user;
+           }else{
+               throw  new IncorrectPasswordException();
+           }
+       }else{
+           throw  new EmailNotExistException();//Exception if email dont exist in Data base
+       }
+      
     }
     
     //This method calls  findUser method from userDAO

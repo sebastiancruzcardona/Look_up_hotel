@@ -8,7 +8,7 @@ package exceptions;
  *
  * @author lugo
  */
-public class IncorrectPasswordException extends Exception{
+public class IncorrectPasswordException extends RuntimeException{
     public IncorrectPasswordException(){
         super("The password entered is incorrect, please try again");
     }

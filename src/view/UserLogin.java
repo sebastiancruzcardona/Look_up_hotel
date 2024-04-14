@@ -7,6 +7,7 @@ package view;
 import daos.UserDAO;
 import exceptions.EmailNotExistException;
 import exceptions.EmptyFieldsException;
+import exceptions.IncorrectPasswordException;
 import exceptions.NotAnEmailException;
 import interfaces.UserDAOInterface;
 import javax.swing.JOptionPane;
@@ -158,20 +159,8 @@ public class UserLogin extends javax.swing.JFrame {
             userService.validateEmail(email);
             User user = userService.findUser(email, password);
 
-            if (user != null) {
-                if (user.getRol() == 2) {
-
-                    UserHome userHome = new UserHome(user);
-                    userHome.setVisible(true);
-                    this.dispose();
-                }else{
-                    AdminHome adminHome = new AdminHome(user);
-                    adminHome.setVisible(true);
-                    this.dispose();
-                    
-                }
-            }
-        } catch (NotAnEmailException | EmptyFieldsException e) {
+            validateLogin(user);
+        } catch (NotAnEmailException | EmptyFieldsException | IncorrectPasswordException | EmailNotExistException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
 
         }
@@ -236,4 +225,22 @@ public class UserLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
+    
+    //this method validate if user is client or admin
+    public void validateLogin(User user) {
+        if (user != null) {
+            if (user.getRol() == 2) {
+
+                UserHome userHome = new UserHome(user);
+                userHome.setVisible(true);
+                this.dispose();
+            } else {
+                AdminHome adminHome = new AdminHome(user);
+                adminHome.setVisible(true);
+                this.dispose();
+
+            }
+        }
+    }
+
 }
