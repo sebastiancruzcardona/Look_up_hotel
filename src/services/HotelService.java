@@ -16,6 +16,7 @@ import exceptions.NotValidClassificationExcpetion;
 import helper.RegularExpressions;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import model.Hotel;
 
 /**
@@ -35,7 +36,7 @@ public class HotelService {
         validateAlphaNumericPointComma(comforts);
         validateAddress(address);
         validateClassification(classification);
-        hotelDAO.insert(name, address, classification, comforts);
+        validateInsertion(hotelDAO.insert(name, address, classification, comforts));
     }
     
     //This method validates if there have been made changes to the values brought out from database.
@@ -47,7 +48,7 @@ public class HotelService {
             validateAlphaNumericPointComma(comforts);
             validateAddress(address);
             validateClassification(classification);
-            hotelDAO.update(name, address, classification, comforts, id);
+            validateUpdate(hotelDAO.update(name, address, classification, comforts, id));
         }else{
             throw new NoChangeWasMadeException();
         }
@@ -61,7 +62,7 @@ public class HotelService {
     
     //This method calls delete method from HotelDAO
     public void delete(int id){
-        hotelDAO.delete(id);
+        validateDelete(hotelDAO.delete(id));
     }
     
     //This method calls findHotel method from HotelDAO
@@ -125,6 +126,33 @@ public class HotelService {
             hotelDAO.validateHotelNameAvailability(name);
         }
         return true;
+    }
+    
+    //this method validates if answer is true or false for insertion
+    public void validateInsertion(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Hotel successfully created");
+        }else{
+            JOptionPane.showMessageDialog(null,"No insertion was made");
+        }
+    }
+    
+    //this method validates if answer is true or false for update
+    public void validateUpdate(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Hotel successfully updated");
+        }else{
+            JOptionPane.showMessageDialog(null,"No update was made");
+        }
+    }
+    
+    //this method validates if answer is true or false for deletion
+    public void validateDelete(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Hotel successfully deleted");
+        }else{
+            JOptionPane.showMessageDialog(null,"No deletion was made");
+        }
     }
     
     /**

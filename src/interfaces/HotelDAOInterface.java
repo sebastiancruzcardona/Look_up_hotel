@@ -14,13 +14,13 @@ import model.Hotel;
  */
 public interface HotelDAOInterface {
     
-    void insert(String name, String address, int classification, String comforts);
+    boolean insert(String name, String address, int classification, String comforts);
     
-    void update(String name, String address, int classification, String comforts, int id);
+    boolean update(String name, String address, int classification, String comforts, int id);
     
     Map<String,Object> select(String query);
     
-    void delete(int id);
+    boolean delete(int id);
     
     ArrayList<String> selectNameHotels ();
     

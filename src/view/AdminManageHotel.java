@@ -5,6 +5,7 @@
 package view;
 
 import exceptions.EmptySearchFieldException;
+import exceptions.ThisHotelDoesNotExistException;
 import helper.TextPrompt;
 import java.awt.BorderLayout;
 import java.util.List;
@@ -341,9 +342,13 @@ public class AdminManageHotel extends javax.swing.JPanel {
         if (idTable == 0) {
             JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
         } else {
-            Hotel hotel = hotelService.findHotel(id);
-            System.out.println(hotel.getId() + hotel.getName());
-            ShowJPanel(new AdminUpdateHotel(hotel));
+            try {
+                Hotel hotel = hotelService.findHotel(id);
+                System.out.println(hotel.getId() + hotel.getName());
+                ShowJPanel(new AdminUpdateHotel(hotel));
+            }catch (ThisHotelDoesNotExistException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }
 }

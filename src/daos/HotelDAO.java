@@ -8,6 +8,7 @@ import connection.DataBaseSingleton;
 import connection.MySQLConnection;
 import exceptions.HotelNameAlreadyInDataBase;
 import exceptions.NullConnectionException;
+import exceptions.ThisHotelDoesNotExistException;
 import interfaces.HotelDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,7 +39,7 @@ public class HotelDAO implements HotelDAOInterface {
 
     @Override
     //This method inserts a new row in table "hotels" with de provided data of a new hotel
-    public void insert(String name, String address, int classification, String comforts) {
+    public boolean insert(String name, String address, int classification, String comforts) {
         String insertSQL = "INSERT INTO hotels (name,address,classification,comforts) VALUES (?,?,?,?)";
         try ( PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
@@ -50,19 +51,21 @@ public class HotelDAO implements HotelDAOInterface {
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
-                JOptionPane.showMessageDialog(null, "Successfully created hotel");
+                return true;
             } else {
                 System.out.println("No insertion was made");
+                return false;
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
     //This method modifies information of a previously registered hotel in table "hotels", searching by its id
-    public void update(String name, String address, int classification, String comforts, int id) {
+    public boolean update(String name, String address, int classification, String comforts, int id) {
         String updateSQL = "UPDATE hotels SET name = ?,  address = ?, classification = ?, comforts = ?  WHERE id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, name);
@@ -76,15 +79,17 @@ public class HotelDAO implements HotelDAOInterface {
 
             if (rowsAffected > 0) {
                 System.out.println("Successfull update");
-                JOptionPane.showMessageDialog(null, "Successfully updated hotel");
+                return true;
             } else {
                 System.out.println("No update was made");
+                return false;
             }
 
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data update");
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -144,16 +149,17 @@ public class HotelDAO implements HotelDAOInterface {
 
     @Override
     //This method deletes a row of a previously registered hotel in table "hotels" searching by its id
-    public void delete(int id) {
+    public boolean delete(int id) {
         String deleteSQL = "DELETE FROM hotels WHERE id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Successfully deleted hotel");
+            return true;
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -206,7 +212,7 @@ public class HotelDAO implements HotelDAOInterface {
                 Hotel hotel = new Hotel(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getInt("classification"), rs.getString("comforts"), findHotelImages(id));
                 return hotel;
             } else {
-                JOptionPane.showMessageDialog(null, "This hotel does not exist in database");
+                throw new ThisHotelDoesNotExistException();
             }
 
         } catch (SQLException | NullConnectionException e) {
@@ -251,7 +257,6 @@ public class HotelDAO implements HotelDAOInterface {
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return false;
     }
