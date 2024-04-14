@@ -195,14 +195,14 @@ public class UserDAO implements UserDAOInterface{
                 return true;
             }
             else{
-                throw  new EmailNotExistException();//Exception if email dont exist in Data base
+                return false;
                 
                 
             
             }
         } catch (SQLException  | NullConnectionException  | EmailNotExistException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            System.out.println(e.getMessage());
         }
         return false;
         
@@ -217,9 +217,9 @@ public class UserDAO implements UserDAOInterface{
     @Override
     public User findUser(String email, String password){
         
-        boolean aux = findEmail(email);
         
-        if(aux){
+        
+        
             String serchSQL = "SELECT * FROM users WHERE email = ? AND password = ? ";
             try (PreparedStatement pstmt = connection.prepareStatement(serchSQL)){
             pstmt.setString(1, email);
@@ -234,19 +234,19 @@ public class UserDAO implements UserDAOInterface{
                 
                 }
                 else{
-                    throw new IncorrectPasswordException();
+                    return null;
                 
                 
                 
             
                 }
-             } catch (SQLException  | NullConnectionException | IncorrectPasswordException e) {
+             } catch (SQLException  | NullConnectionException  e) {
                 System.out.println("An error occurred while connecting to database for deletion of data");
                 
-                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.out.println( e.getMessage());
                 
         }
-        }
+        
         return null;
     }
     //This method inserts a new row in table "users" with de provided data of a new user
