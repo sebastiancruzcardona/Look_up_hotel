@@ -13,15 +13,15 @@ import model.Room;
  */
 public interface RoomDAOInterface {
     
-    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel);
+    boolean insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel);
     
-    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,  int id);
+    boolean update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails,  int id);
     
-    public Map<String,Object> select(String query);
+    Map<String,Object> select(String query);
     
-    public void delete(int id);
+    boolean delete(int id);
     
-    void deleteByHotel(int id_hotel);
+    boolean deleteByHotel(int id_hotel);
     
     Room findRoom(int id);
 }

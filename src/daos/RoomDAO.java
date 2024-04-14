@@ -5,6 +5,7 @@
 package daos;
 import connection.DataBaseSingleton;
 import connection.MySQLConnection;
+import exceptions.NoSuchRoomExcpetion;
 import exceptions.NullConnectionException;
 import interfaces.RoomDAOInterface;
 
@@ -36,7 +37,7 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method inserts a new row in table "rooms" with de provided data of a new room
     @Override
-    public void insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel) { //paste: 
+    public boolean insert(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, String idHotel) { //paste: 
         String insertSQL = "INSERT INTO rooms (room_number,id_type_room,price_per_night,availability,amenities_details, id_hotel) VALUES (?,(SELECT id FROM type_rooms WHERE type_room = ?),?,?,?,(SELECT id FROM hotels WHERE name =?))";
         try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, roomNumber);
@@ -48,19 +49,22 @@ public class RoomDAO implements RoomDAOInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null,"Successful insertion");
+                System.out.println("Successful insertion");
+                return true;
             } else {
                 System.out.println("No insertion was made");
+                return false;
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
             e.printStackTrace();
         }
+        return false;
     }
 
     //This method modifies information of a previously registered user in table "rooms"
     @Override
-    public void update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id) {
+    public boolean update(String roomNumber, String typeRoom, double pricePerNigth, boolean availability, String amenitiesDetails, int id) {
         String updateSQL = "UPDATE rooms SET room_number = ?,  id_type_room = (SELECT id FROM type_rooms WHERE type_room = ?), price_per_night = ?, availability = ?, amenities_details = ? WHERE id = ?";
         try ( PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
             pstmt.setString(1, roomNumber);
@@ -75,15 +79,18 @@ public class RoomDAO implements RoomDAOInterface {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null,"Successfull update");
+                System.out.println("Successful update");
+                return true;
             } else {
-                JOptionPane.showMessageDialog(null,"No update was made");
+                System.out.println("No update was made");
+                return false;
             }
 
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data update");
             e.printStackTrace();
         }
+        return false;
     }
 
     //This method returns a HashMap that contains data and metadata from table "rooms"  
@@ -143,30 +150,39 @@ public class RoomDAO implements RoomDAOInterface {
 
     //This method deletes a row of a previously registered user in table "rooms" searching by it's id
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String deleteSQL = "DELETE FROM rooms WHERE id = ?";
         try ( PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Successfully deleted room");
+            return true;
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+        return false;
     }
 
     //This method deletes all rooms of a hotel that is being deleted
     @Override
-    public void deleteByHotel(int id_hotel) {
+    public boolean deleteByHotel(int id_hotel) {
         String deleteSQL = "DELETE FROM rooms WHERE id_hotel = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id_hotel);
-            pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Successfully deleted rooms");
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Rooms deleted");
+                return true;
+            } else {
+                System.out.println("No roms where deleted");
+                return false;
+            }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+        return false;
     }
     
     
@@ -184,16 +200,13 @@ public class RoomDAO implements RoomDAOInterface {
             
             ResultSet rs = pstm.executeQuery();
             
-            if(rs.next()) {
-                
-               Room room = new Room(rs.getInt("id"), rs.getString("room_number"), rs.getString("id_type_room"),rs.getDouble("price_per_night"), rs.getBoolean("availability"), rs.getString("amenities_details"), null);
-                
+            if(rs.next()) {                
+               Room room = new Room(rs.getInt("id"), rs.getString("room_number"), rs.getString("id_type_room"),rs.getDouble("price_per_night"), rs.getBoolean("availability"), rs.getString("amenities_details"), null);                
                return room;
             }
             else{
-                JOptionPane.showMessageDialog(null, "es null");
-            }
-            
+                throw new NoSuchRoomExcpetion();
+            }            
             
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");

@@ -14,6 +14,7 @@ import exceptions.NotDoubleNumberException;
 import helper.RegularExpressions;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import model.Room;
 
 /**
@@ -36,7 +37,7 @@ public class RoomService {
         validateNumericDouble(String.valueOf(pricePerNigth));
         validateAlphaNumericPointComma(amenitiesDetails);
         validateHotel(idHotel);
-        roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel);
+        validateInsertion(roomDAO.insert(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,idHotel));
     }
     
     //This method calls update method from RoomDAO
@@ -46,10 +47,9 @@ public class RoomService {
             validateTypeRoom(typeRoom);
             validateNumericDouble(String.valueOf(pricePerNigth));
             validateAlphaNumericPointComma(amenitiesDetails);
-            roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id);
+            validateUpdate(roomDAO.update(roomNumber, typeRoom, pricePerNigth, availability, amenitiesDetails,id));
         }else{
-           throw new NoChangeWasMadeException();
-           
+           throw new NoChangeWasMadeException();           
        }
        
     }
@@ -61,12 +61,12 @@ public class RoomService {
     
     //This method calls delete method from RoomDAO
     public void delete(int id){
-        roomDAO.delete(id);
+        validateDelete(roomDAO.delete(id));
     }
     
     //This method calls deleteByHotel method from RoomDAO
     public void deleteByHotel(int id_hotel){
-        roomDAO.deleteByHotel(id_hotel);
+        validateDelete(roomDAO.deleteByHotel(id_hotel));
     }
     //This method calls findRoom method from RoomDAO
     public Room findRoom(int id){
@@ -113,6 +113,33 @@ public class RoomService {
     public void validateHotel(String string){
         if(!RegularExpressions.validateHotel(string, createRegularExpression())){
             throw new NotAlphaNumericException();
+        }
+    }
+    
+    //this method validates if answer is true or false for insertion
+    public void validateInsertion(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Room successfully created");
+        }else{
+            JOptionPane.showMessageDialog(null,"No insertion was made");
+        }
+    }
+    
+    //this method validates if answer is true or false for update
+    public void validateUpdate(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Room successfully updated");
+        }else{
+            JOptionPane.showMessageDialog(null,"No update was made");
+        }
+    }
+    
+    //this method validates if answer is true or false for deletion
+    public void validateDelete(boolean answer){
+        if(answer){
+            JOptionPane.showMessageDialog(null,"Hotel successfully deleted");
+        }else{
+            JOptionPane.showMessageDialog(null,"No deletion was made");
         }
     }
     /**
