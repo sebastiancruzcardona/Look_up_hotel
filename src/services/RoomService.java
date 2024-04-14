@@ -137,7 +137,7 @@ public class RoomService {
     //this method validates if answer is true or false for deletion
     public void validateDelete(boolean answer){
         if(answer){
-            JOptionPane.showMessageDialog(null,"Hotel successfully deleted");
+            JOptionPane.showMessageDialog(null,"Room successfully deleted");
         }else{
             JOptionPane.showMessageDialog(null,"No deletion was made");
         }
