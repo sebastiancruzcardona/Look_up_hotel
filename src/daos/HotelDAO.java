@@ -195,8 +195,8 @@ public class HotelDAO implements HotelDAOInterface {
     @Override
     /**
      * This method finds a hotel registered in table "hotels" and returns it. If
-     * it finds a hotel, this method calls findHotelImages method to set the
-     * hotel's ArrayList of images
+     * it finds a hotel
+     * 
      *
      * @param id
      * @return A Hotel if the hotel exists, or null, if there is not a hotel
@@ -221,6 +221,7 @@ public class HotelDAO implements HotelDAOInterface {
         }
         return null;
     }
+    
     
     @Override
     // This method creates an ArrayList with hotel names from table "hotels"
@@ -259,6 +260,27 @@ public class HotelDAO implements HotelDAOInterface {
             System.out.println("An error occurred while connecting to database for deletion of data");
         }
         return false;
+    }
+
+    @Override
+    public Hotel findHotel(String name) {
+        String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels WHERE name = ?";
+        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+            pstm.setString(1, name);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                Hotel hotel = new Hotel(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getInt("classification"), rs.getString("comforts"), null);
+                return hotel;
+            } else {
+                throw new ThisHotelDoesNotExistException();
+            }
+
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for finding hotel");
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

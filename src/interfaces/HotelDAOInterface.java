@@ -28,6 +28,8 @@ public interface HotelDAOInterface {
     
     Hotel findHotel(int id);
     
+    Hotel findHotel(String name);
+    
     boolean validateHotelNameAvailability(String name);
 }
 
