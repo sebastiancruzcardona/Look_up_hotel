@@ -56,6 +56,11 @@ public class HotelService {
     }
     
     //This method returns a HashMap calling HotelDAO select method
+    public Map<String, Object> selectUserHome(String name){
+        return hotelDAO.select(createSelectQueryClient(name));
+    }
+    
+//This method returns a HashMap calling HotelDAO select method
     public Map<String, Object> select(String name){
         return hotelDAO.select(createSelectQuery(name));
     }
@@ -63,6 +68,11 @@ public class HotelService {
     //This method calls delete method from HotelDAO
     public void delete(int id){
         validateDelete(hotelDAO.delete(id));
+    }
+    
+    //This method calls findHotel method from HotelDAO
+    public Hotel findHotel(String hotelName){
+        return hotelDAO.findHotel(hotelName);
     }
     
     //This method calls findHotel method from HotelDAO
@@ -176,4 +186,25 @@ public class HotelService {
                 //query += " WHERE name ="  +"'"+ name + "'";        
     }
    
+    
+    /**
+     * This method creates the appropriate query for the select method
+     * 
+     * @param String name
+     * @return The standar select query if name == null. The select query with a LIKE condition if !name == null.
+     * If name.equals(""), thows an EmptySearchFieldException
+     */
+    public String createSelectQueryClient(String name){
+        String query = "SELECT  name, address, classification, comforts FROM hotels";
+        if(name == null){
+            return query;
+        }else if (name.equals("")){
+            throw new EmptySearchFieldException();
+        }
+        //This query allows finding non-exact matches
+        return query += " WHERE name LIKE '%" + name + "%'";
+                
+                //This query is only for exact matches
+                //query += " WHERE name ="  +"'"+ name + "'";        
+    }
 }
