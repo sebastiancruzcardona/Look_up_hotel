@@ -4,8 +4,14 @@
  */
 package view;
 
+import helper.TextPrompt;
+import java.util.List;
+import java.util.Map;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import model.Hotel;
 import model.User;
+import services.RoomService;
 
 /**
  *
@@ -15,10 +21,13 @@ public class UserReserveRoom extends javax.swing.JPanel {
 
    User user;
    Hotel hotel;
+    RoomService roomService;
     public UserReserveRoom(User user , Hotel hotel) {
         this.user = user;
         this.hotel = hotel;
+        roomService=new RoomService();
         initComponents();
+        initTable();
     }
 
     /**
@@ -241,11 +250,11 @@ public class UserReserveRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-      //  try {
-        //    reloadTable(txt_search.getText());
-        //    txt_search.setText("");
-       // } catch (EmptySearchFieldException e) {
-       //     JOptionPane.showMessageDialog(null, e.getMessage());
+       //try {
+       //   reloadTable(txt_search.getText());
+          // txt_search.setText("");
+      //  } catch (EmptySearchFieldException e) {
+          // JOptionPane.showMessageDialog(null, e.getMessage());
         //}
     }//GEN-LAST:event_btn_searchActionPerformed
 
@@ -263,4 +272,52 @@ public class UserReserveRoom extends javax.swing.JPanel {
     private javax.swing.JPanel search;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
+
+    public void reloadTable(String name) {
+        //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
+        Map<String, Object> result = roomService.select(name);
+
+        //Get the names of the columns from the results map. The column names are returned as a list of strings.
+        List<String> columnNames = (List<String>) result.get("columnNames");
+
+        //Get data from the result map table. The table data is returned as a list of lists of objects. Each inner list represents a row in the table and contains the data for that row.
+        List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
+
+        //Create a new tableModel. A tableModel is an object that manages the data in a table
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            //Override isCellEditable method making all cells uneditables
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        //Iterate through the list of column names
+        for (String columnName : columnNames) {
+            //Add each column name to the tableModel. This creates table's columns.
+            model.addColumn(columnName);
+        }
+
+        //Iterate through the list of table date
+        for (List<Object> rowData : tableData) {
+            //Add each row of data to the tableModel. This adds the data to the corresponding columns in the table
+            model.addRow(rowData.toArray());
+        }
+
+        //Set tableModel. This updates the table to show data stored in tableModel
+        rooms_table.setModel(model);
+
+        //Make table cells uneditable
+        rooms_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+    }
+    
+    public void initTable() {
+        reloadTable(hotel.getName());
+        TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
+
+    }
+
 }
+
+

@@ -398,7 +398,9 @@ public class UserHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_homeMouseExited
 
     private void btn_homeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMousePressed
-
+          UserHome userHome = new UserHome(user);
+        userHome.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_homeMousePressed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
