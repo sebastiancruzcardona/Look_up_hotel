@@ -17,7 +17,7 @@ public interface ReservationDAOInterface {
     
     public void update(int status, int id);
     
-    void selectReservatedRooms(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel);
+    public Map<String,Object> selectReservatedRooms(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel, int numberPerson);
     
     public Map<String,Object> clientSelect(int id);
     

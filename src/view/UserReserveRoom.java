@@ -4,13 +4,18 @@
  */
 package view;
 
+import exceptions.NoSuchRoomExcpetion;
 import helper.TextPrompt;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel;
+import model.Reservation;
+import model.Room;
 import model.User;
+import services.ReservationService;
 import services.RoomService;
 
 /**
@@ -18,14 +23,18 @@ import services.RoomService;
  * @author lugo
  */
 public class UserReserveRoom extends javax.swing.JPanel {
-
+     int idTable;
+    int typeRoom; 
    User user;
    Hotel hotel;
+   Reservation preReservation;
+   ReservationService reservationService;
     RoomService roomService;
-    public UserReserveRoom(User user , Hotel hotel) {
-        this.user = user;
-        this.hotel = hotel;
+    public UserReserveRoom(Reservation preReservation,int typeRoom) {
+        this.preReservation = preReservation;
+       this.typeRoom = typeRoom;
         roomService=new RoomService();
+        reservationService = new ReservationService();
         initComponents();
         initTable();
     }
@@ -47,7 +56,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
         txt_search = new javax.swing.JTextField();
         btn_allfilter = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
-        btn_insert = new javax.swing.JButton();
+        btn_reserve = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
         btn_search = new javax.swing.JButton();
 
@@ -131,14 +140,14 @@ public class UserReserveRoom extends javax.swing.JPanel {
             }
         });
 
-        btn_insert.setBackground(new java.awt.Color(54, 37, 89));
-        btn_insert.setForeground(new java.awt.Color(255, 255, 255));
-        btn_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
-        btn_insert.setText("Add");
-        btn_insert.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_insert.addActionListener(new java.awt.event.ActionListener() {
+        btn_reserve.setBackground(new java.awt.Color(54, 37, 89));
+        btn_reserve.setForeground(new java.awt.Color(255, 255, 255));
+        btn_reserve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
+        btn_reserve.setText("Reserve");
+        btn_reserve.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_reserve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_insertActionPerformed(evt);
+                btn_reserveActionPerformed(evt);
             }
         });
 
@@ -175,7 +184,8 @@ public class UserReserveRoom extends javax.swing.JPanel {
                     .addGroup(back_groundLayout.createSequentialGroup()
                         .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(back_groundLayout.createSequentialGroup()
-                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_reserve)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -202,12 +212,12 @@ public class UserReserveRoom extends javax.swing.JPanel {
                         .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_allfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                 .addGap(40, 40, 40)
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111))
         );
 
@@ -230,7 +240,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_rooms_tableMousePressed
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
-
+        
     }//GEN-LAST:event_txt_searchActionPerformed
 
     private void btn_allfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_allfilterActionPerformed
@@ -241,9 +251,9 @@ public class UserReserveRoom extends javax.swing.JPanel {
        // validateUpdateId(idTable);
     }//GEN-LAST:event_btn_updateActionPerformed
 
-    private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
+    private void btn_reserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reserveActionPerformed
         //ShowJPanel(new InsertRoom());
-    }//GEN-LAST:event_btn_insertActionPerformed
+    }//GEN-LAST:event_btn_reserveActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
        // validateDeleteId(idTable);
@@ -263,7 +273,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
     private javax.swing.JPanel back_ground;
     private javax.swing.JButton btn_allfilter;
     private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_insert;
+    private javax.swing.JButton btn_reserve;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel10;
@@ -273,9 +283,19 @@ public class UserReserveRoom extends javax.swing.JPanel {
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 
-    public void reloadTable(String name) {
-        //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
-        Map<String, Object> result = roomService.select(name);
+    public void reloadTable( Reservation reservation) {
+        
+         long entry_long = reservation.getEntryDate().getTime();
+         long departure_long = reservation.getDepartureDate().getTime();
+         
+         java.sql.Date entry_date = new java.sql.Date(entry_long);
+         java.sql.Date departure_date = new java.sql.Date(departure_long); 
+         
+         System.out.println(entry_date );
+         System.out.println(departure_date);
+    //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
+        
+        Map<String, Object> result = reservationService.select(entry_date, departure_date, reservation.getHotel().getId(),typeRoom);
 
         //Get the names of the columns from the results map. The column names are returned as a list of strings.
         List<String> columnNames = (List<String>) result.get("columnNames");
@@ -301,23 +321,44 @@ public class UserReserveRoom extends javax.swing.JPanel {
         //Iterate through the list of table date
         for (List<Object> rowData : tableData) {
             //Add each row of data to the tableModel. This adds the data to the corresponding columns in the table
+            
             model.addRow(rowData.toArray());
         }
-
+        
         //Set tableModel. This updates the table to show data stored in tableModel
         rooms_table.setModel(model);
 
         //Make table cells uneditable
         rooms_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        
+        if(model.getRowCount()==0){
+            JOptionPane.showMessageDialog(null, "no available rooms found");
+            
+        }
     }
     
     public void initTable() {
-        reloadTable(hotel.getName());
+        reloadTable(preReservation);
         TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
 
     }
 
+    //This method validate if there is a selecto arrow from table and show panel AdminUpdateRoom
+    public void validateRoomid(int id) {
+     
+        if (idTable == 0) {
+            JOptionPane.showMessageDialog(null, "Please select the room you wish to reserve");
+        } else {
+            try {
+                Room room = roomService.findRoom(id);
+                System.out.println(room.getNumber() + room.getId());
+                ShowJPanel(new AdminUpdateRoom(room));
+            } catch (NoSuchRoomExcpetion e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
+        }
+    }
 }
 
 

@@ -89,7 +89,7 @@ public class ReservationDAO implements ReservationDAOInterface{
     }
 
     @Override
-    public void selectReservatedRooms(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel) {
+    public Map<String, Object> selectReservatedRooms(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel, int namberPerson) {
         /*String selectSQL = "SELECT id_room FROM reservations WHERE id_hotel = " + id_hotel + 
                 " NOT (entry_date BETWEEN " + entry_date + " AND " + departure_date + 
                 " OR departure_date BETWEEN " + entry_date + " AND " + departure_date + ")";*/
@@ -102,9 +102,26 @@ public class ReservationDAO implements ReservationDAOInterface{
         
         //LA OTRA FORMA QUE SE ME OCURRE SERÍA CON UNA RESTA DE CONJUNTOS
         
-        String selectSQL = "SELECT id_room FROM reservations WHERE id_hotel = " + id_hotel + 
-                " AND (entry_date BETWEEN " + entry_date + " AND " + departure_date + 
-                " OR departure_date BETWEEN " + entry_date + " AND " + departure_date + ")";
+        String selectSQL = "SELECT r.id, r.room_number, t.type_room, r.price_per_night, r.availability, r.amenities_details, h.name\n"
+                + " FROM rooms r \n"
+                + "JOIN type_rooms t ON r.id_type_room = t.id \n "
+                + "JOIN hotels h ON r.id_hotel = h.id \n "
+                + "WHERE r.id_hotel = "+ id_hotel + " AND r.id_type_room = "+namberPerson+" AND r.id NOT IN ( "
+                + " SELECT reserve.id_room "
+                + " FROM reservations  reserve " +
+                "WHERE( reserve.id_hotel = "+ id_hotel + "\n"
+                + " AND  (" 
+                + "(reserve.entry_date BETWEEN '" + entry_date + "' AND '" + departure_date + "') \n"+
+                " OR( reserve.departure_date BETWEEN '" + entry_date + "' AND '"+ departure_date +"')\n"
+                   
+                
+                
+                + ")))";
+                
+        
+          
+        
+         System.out.println(selectSQL);
         //ESTA CONSULTA ENCONTRARÍA LOS ID DE LAS HABITACIONES QUE SON DE UN HOTEL ESPECÍFICO QUE SI ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
         //ES DECIR, ES CONTRARIA A LA OTRA
         //LA VUELTA CON ESTA ES QUE FALTA ESCRIBIR LO DEMÁS, QUE SERÍA LA PROYECCIÓN DEL ID DE ROOMS DONDE ID_HOTEL SEA IGUAL A id_hotel
@@ -112,7 +129,58 @@ public class ReservationDAO implements ReservationDAOInterface{
         //y AHÍ HACER UN JOIN CON ROOMS PARA SACAR TODOS LOS DATOS DE ESOS ROOMS.
         //oBVIAMENTE TODO ESO QUEDA EN UNA SOLA CONSULTA, PORQUE AQUÍ NO SE PUEDE HACER POR TEMPORALES, 
         //PERO ESTOY MUY TOSTADO Y EN ESTE MOMENTO NO ME DA PARA HACER ESO, PORQUE SE AGRANDA BASTANTE Y TOCA PENSARLA BIEN
+        
+        Map<String, Object> result = new HashMap<>();
+        
+        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
+            //Execute query and get the results in a ResultSet 
+            ResultSet rs = pstmt.executeQuery();
+
+            //Get metadata from ResultSet. Metadata contains information about results such as number of columns an column names
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            //Get number of columns from metadata
+            int numColumns = rsmd.getColumnCount();
+
+            //Create a list to save column names
+            List<String> columnNames = new ArrayList<>();
+            for (int i = 1; i <= numColumns; i++) {
+                //Get each column name from metadata and add them to columnNames list
+                columnNames.add(rsmd.getColumnName(i));
+            }
+
+            //Create a list of lists to save table data
+            List<List<Object>> tableData = new ArrayList<>();
+            while (rs.next()) {
+                //Create a list to save data from the current row
+                List<Object> rowData = new ArrayList<>();
+                for (int i = 1; i <= numColumns; i++) {
+                    //Get every colum data and add it them to list
+                    rowData.add(rs.getObject(i));
+                }
+                //Add data list (that represents a row from table) to de tableData list
+                tableData.add(rowData);
+            }
+
+            //Add number of columns, column names and table data to de result HasMap
+            result.put("numColumns", numColumns);
+            result.put("columnNames", columnNames);
+            result.put("tableData", tableData);
+            
+        }catch (SQLException | NullConnectionException e) {
+            //If an exception occurs
+            System.out.println("An error occurred while connecting to database for selection");
+        e.printStackTrace();
+        }
+        
+        //Print the result map for debugging
+        System.out.println (result);
+
+        //Return the result Map
+        return result ;
     }
+    
+    
     
     
 
