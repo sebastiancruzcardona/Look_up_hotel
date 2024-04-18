@@ -417,8 +417,11 @@ public class UserPreReservation extends javax.swing.JPanel {
 
 //This method fills the test fields with the current hotel information
     public void initPanel(){
-        txt_full_name.setText(hotel.getName());
-        txt_email.setText(hotel.getAddress());
+        txt_full_name.setText(user.getUserName());
+        txt_email.setText(user.getEmail());
+        txt_contact_number.setText(user.getDetails());
+        txt_hotel.setText(hotel.getName());
+        txt_address.setText(hotel.getAddress());
         fillComboBox();
         combobox_number_guests.setSelectedIndex(hotel.getClassification() - 1);
         //txt_comforts.setText(hotel.getComforts());
