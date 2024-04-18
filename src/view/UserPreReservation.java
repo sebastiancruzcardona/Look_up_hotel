@@ -19,6 +19,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Hotel;
+import model.Reservation;
+import model.Room;
 import model.User;
 import services.HotelService;
 
@@ -27,9 +29,10 @@ import services.HotelService;
  * @author Fabián Lugo - Sebastián Cruz
  */
 public class UserPreReservation extends javax.swing.JPanel {
-
+    Reservation preReservation;
     User user;
     Hotel hotel;
+    Room room;
     java.sql.Date today_date;
     HotelService hotelService; //Here will be ReservationService
 
@@ -371,8 +374,9 @@ public class UserPreReservation extends javax.swing.JPanel {
             } else if (departure_date.before(entry_date) || departure_date.toString().equals(entry_date.toString())) {
                 throw new DepartureDateException();
             }
-
-            ShowJPanel(new UserReserveRoom(user, hotel));
+            
+            preReservation = new Reservation(user, hotel, room, entry, departure,"pending" ,1);
+            ShowJPanel(new UserReserveRoom(preReservation,number_of_guests));
 
         } catch (EntryDateException | DepartureDateException | NotSelectedDatesException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
