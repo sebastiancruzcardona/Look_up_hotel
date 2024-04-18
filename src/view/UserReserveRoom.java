@@ -5,6 +5,7 @@
 package view;
 
 import helper.TextPrompt;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ListSelectionModel;
@@ -50,6 +51,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
         btn_insert = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
         btn_search = new javax.swing.JButton();
+        calendar_fecha_inicio = new com.toedter.calendar.JDateChooser();
 
         back_ground.setBackground(new java.awt.Color(255, 255, 255));
         back_ground.setPreferredSize(new java.awt.Dimension(1140, 1024));
@@ -189,20 +191,26 @@ public class UserReserveRoom extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_allfilter)
                         .addGap(39, 39, 39))))
+            .addGroup(back_groundLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(calendar_fecha_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         back_groundLayout.setVerticalGroup(
             back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(back_groundLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(28, 28, 28)
+                .addComponent(calendar_fecha_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_allfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                 .addGap(40, 40, 40)
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,6 +264,10 @@ public class UserReserveRoom extends javax.swing.JPanel {
       //  } catch (EmptySearchFieldException e) {
           // JOptionPane.showMessageDialog(null, e.getMessage());
         //}
+        Date fechaInicio = calendar_fecha_inicio.getDate();
+        long fecha = fechaInicio.getTime();
+        java.sql.Date fecha1 = new java.sql.Date(fecha);
+        System.out.println(fecha1);
     }//GEN-LAST:event_btn_searchActionPerformed
 
 
@@ -266,6 +278,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
     private javax.swing.JButton btn_insert;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
+    private com.toedter.calendar.JDateChooser calendar_fecha_inicio;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable rooms_table;
