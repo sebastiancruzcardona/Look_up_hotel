@@ -4,7 +4,9 @@
  */
 package view;
 
+import exceptions.DepartureDateException;
 import exceptions.EmptyFieldsException;
+import exceptions.EntryDateException;
 import exceptions.HotelNameAlreadyInDataBase;
 import exceptions.NoChangeWasMadeException;
 import exceptions.NotAlphaNumericException;
@@ -29,6 +31,7 @@ public class UserPreReservation extends javax.swing.JPanel {
     Hotel hotel;
     java.sql.Date today_date;
     HotelService hotelService;
+
     public UserPreReservation(User user, Hotel hotel) {
         hotelService = new HotelService();
         this.user = user;
@@ -344,22 +347,29 @@ public class UserPreReservation extends javax.swing.JPanel {
         }catch (EmptyFieldsException | HotelNameAlreadyInDataBase | NoChangeWasMadeException | NotAlphaNumericException | NotAnAddressException | NotValidClassificationExcpetion e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }*/
-        
-        
+
         //Capture entry and departure dates and formate them in sql format
-        Date entry = calendar_entry_date.getDate();
-        Date departure = calendar_departure_date.getDate();
-        long entry_long = entry.getTime();
-        long departure_long = departure.getTime();        
-        java.sql.Date entry_date = new java.sql.Date(entry_long);
-        java.sql.Date departure_date = new java.sql.Date(departure_long);
-        System.out.println("" + entry_date + departure_date);
-        
-        
-        int number_of_guests = combobox_number_guests.getSelectedIndex() + 1;
-        System.out.println(number_of_guests);
-        
-        
+        try {
+            Date entry = calendar_entry_date.getDate();
+            Date departure = calendar_departure_date.getDate();
+            long entry_long = entry.getTime();
+            long departure_long = departure.getTime();
+            java.sql.Date entry_date = new java.sql.Date(entry_long);
+            java.sql.Date departure_date = new java.sql.Date(departure_long);
+            System.out.println("" + entry_date + departure_date);
+            int number_of_guests = combobox_number_guests.getSelectedIndex() + 1;
+            System.out.println(number_of_guests);
+            
+            if(entry_date.before(today_date) || entry_date.equals(today_date)){
+                throw new EntryDateException();
+            }else if(departure_date.before(entry_date) || departure_date.equals(entry_date)){
+                throw new DepartureDateException();
+            }
+        } catch (EntryDateException | DepartureDateException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+
     }//GEN-LAST:event_btn_find_roomActionPerformed
 
     private void combobox_number_guestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_number_guestsMouseClicked
@@ -377,11 +387,11 @@ public class UserPreReservation extends javax.swing.JPanel {
     private void txt_full_nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_full_nameKeyTyped
         int key = evt.getKeyChar();
         //Validate if pressed key is a number, upper case, lower case or space
-        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 ||key == 32;
+        boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32;
         //If is another thing do not put the character in the text field
-        if(!caracter){
+        if (!caracter) {
             evt.consume();
-        } 
+        }
     }//GEN-LAST:event_txt_full_nameKeyTyped
 
     private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
@@ -389,9 +399,9 @@ public class UserPreReservation extends javax.swing.JPanel {
         //Validate if pressed key is a number, upper case, lower case, space, "#", ",", "-", "." or "/"
         boolean caracter = key >= 48 && key <= 57 || key >= 65 && key <= 90 || key >= 97 && key <= 122 || key == 32 || key == 35 || key >= 44 && key <= 47;
         //If is another thing do not put the character in the text field
-        if(!caracter){
+        if (!caracter) {
             evt.consume();
-        }   
+        }
     }//GEN-LAST:event_txt_emailKeyTyped
 
     private void txt_contact_numberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_contact_numberKeyTyped
@@ -431,7 +441,7 @@ public class UserPreReservation extends javax.swing.JPanel {
     private javax.swing.JTextField txt_full_name;
     private javax.swing.JTextField txt_hotel;
     // End of variables declaration//GEN-END:variables
-    
+
 //This methods fill dates in hotel_comboBox
     public void fillComboBox() {
         String[] classificationNumbers = new String[]{"1", "2", "3", "4", "5"};
@@ -439,10 +449,10 @@ public class UserPreReservation extends javax.swing.JPanel {
         for (String number : classificationNumbers) {
             combobox_number_guests.addItem(number);
         }
-    }    
+    }
 
 //This method fills the test fields with the current hotel information
-    public void initPanel(){
+    public void initPanel() {
         txt_full_name.setText(user.getUserName());
         txt_email.setText(user.getEmail());
         txt_contact_number.setText(user.getDetails());
@@ -451,18 +461,19 @@ public class UserPreReservation extends javax.swing.JPanel {
         fillComboBox();
         combobox_number_guests.setSelectedIndex(0);
         //txt_comforts.setText(hotel.getComforts());
-}
+    }
+
     //This method cleans txtfields after update
-    public void clear(){
+    public void clear() {
         txt_full_name.setText("");
-        txt_email.setText("");      
+        txt_email.setText("");
         //txt_comforts.setText("");
     }
-    
-    private void ShowJPanel(JPanel panel){
+
+    private void ShowJPanel(JPanel panel) {
         panel.setSize(1140, 1024);
         panel.setLocation(0, 0);
-        
+
         bg.removeAll();
         bg.add(panel, BorderLayout.CENTER);
         bg.revalidate();
