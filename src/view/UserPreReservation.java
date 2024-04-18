@@ -30,7 +30,7 @@ public class UserPreReservation extends javax.swing.JPanel {
     User user;
     Hotel hotel;
     java.sql.Date today_date;
-    HotelService hotelService;
+    HotelService hotelService; //Here will be ReservationService
 
     public UserPreReservation(User user, Hotel hotel) {
         hotelService = new HotelService();
@@ -357,13 +357,16 @@ public class UserPreReservation extends javax.swing.JPanel {
             java.sql.Date entry_date = new java.sql.Date(entry_long);
             java.sql.Date departure_date = new java.sql.Date(departure_long);
             System.out.println("" + entry_date + departure_date);
-            int number_of_guests = combobox_number_guests.getSelectedIndex() + 1;
+            int number_of_guests = combobox_number_guests.getSelectedIndex() + 1;  
             
             if(entry_date.before(today_date) || entry_date.toString().equals(today_date.toString())){
                 throw new EntryDateException();
             }else if(departure_date.before(entry_date) || departure_date.toString().equals(entry_date.toString())){
                 throw new DepartureDateException();
             }
+            
+            ShowJPanel(new UserReserveRoom(user ,hotel));
+            
         } catch (EntryDateException | DepartureDateException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
