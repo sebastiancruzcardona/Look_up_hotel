@@ -102,12 +102,12 @@
                                           <Component id="lbl_hotel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lbl_entry_date" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="calendar_entry_date" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbl_entry_date" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="calendar_entry_date" min="-2" pref="145" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="calendar_departure_date" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="calendar_departure_date" min="-2" pref="145" max="-2" attributes="0"/>
                                                   <Component id="lbl_entry_date1" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>

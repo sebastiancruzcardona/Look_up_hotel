@@ -242,10 +242,10 @@ public class UserPreReservation extends javax.swing.JPanel {
                                     .addGroup(bgLayout.createSequentialGroup()
                                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbl_entry_date)
-                                            .addComponent(calendar_entry_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(136, 136, 136)
+                                            .addComponent(calendar_entry_date, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(70, 70, 70)
                                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(calendar_departure_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(calendar_departure_date, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lbl_entry_date1)))
                                     .addComponent(lbl_address)
                                     .addComponent(lbl_number_guests))
@@ -358,11 +358,10 @@ public class UserPreReservation extends javax.swing.JPanel {
             java.sql.Date departure_date = new java.sql.Date(departure_long);
             System.out.println("" + entry_date + departure_date);
             int number_of_guests = combobox_number_guests.getSelectedIndex() + 1;
-            System.out.println(number_of_guests);
             
-            if(entry_date.before(today_date) || entry_date.equals(today_date)){
+            if(entry_date.before(today_date) || entry_date.toString().equals(today_date.toString())){
                 throw new EntryDateException();
-            }else if(departure_date.before(entry_date) || departure_date.equals(entry_date)){
+            }else if(departure_date.before(entry_date) || departure_date.toString().equals(entry_date.toString())){
                 throw new DepartureDateException();
             }
         } catch (EntryDateException | DepartureDateException e) {
