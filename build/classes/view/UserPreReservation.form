@@ -89,34 +89,32 @@
                                   <Component id="txt_hotel" alignment="0" pref="500" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                      <Component id="btn_edit" pref="345" max="32767" attributes="0"/>
+                                      <Component id="btn_find_room" pref="345" max="32767" attributes="0"/>
                                       <EmptySpace min="78" pref="78" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="txt_address" alignment="0" pref="500" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="combobox_number_guests" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbl_full_name" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_email" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_contact_number" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_hotel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="lbl_entry_date" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="calendar_entry_date" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="calendar_departure_date" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lbl_entry_date1" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
+                                  <Component id="combobox_number_guests" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbl_full_name" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_email" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_contact_number" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_hotel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lbl_entry_date" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="calendar_entry_date" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="lbl_address" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lbl_number_guests" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="calendar_departure_date" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbl_entry_date1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="lbl_address" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_number_guests" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -164,12 +162,12 @@
                           </Group>
                           <Component id="calendar_departure_date" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="lbl_number_guests" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="combobox_number_guests" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace pref="47" max="32767" attributes="0"/>
-                      <Component id="btn_edit" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="btn_find_room" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -304,7 +302,7 @@
                 <Property name="text" type="java.lang.String" value="Entry date"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_edit">
+            <Component class="javax.swing.JButton" name="btn_find_room">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="59" green="25" red="36" type="rgb"/>
@@ -319,7 +317,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_find_roomActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="combobox_number_guests">

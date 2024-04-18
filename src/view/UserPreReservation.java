@@ -11,6 +11,8 @@ import exceptions.NotAlphaNumericException;
 import exceptions.NotAnAddressException;
 import exceptions.NotValidClassificationExcpetion;
 import java.awt.BorderLayout;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Hotel;
@@ -25,11 +27,16 @@ public class UserPreReservation extends javax.swing.JPanel {
 
     User user;
     Hotel hotel;
+    java.sql.Date today_date;
     HotelService hotelService;
     public UserPreReservation(User user, Hotel hotel) {
         hotelService = new HotelService();
         this.user = user;
         this.hotel = hotel;
+        //Get today's DATE
+        Date today = new Date();
+        long today_long = today.getTime();
+        today_date = new java.sql.Date(today_long);
         initComponents();
         initPanel();
     }
@@ -54,7 +61,7 @@ public class UserPreReservation extends javax.swing.JPanel {
         txt_email = new javax.swing.JTextField();
         lbl_number_guests = new javax.swing.JLabel();
         lbl_entry_date = new javax.swing.JLabel();
-        btn_edit = new javax.swing.JButton();
+        btn_find_room = new javax.swing.JButton();
         combobox_number_guests = new javax.swing.JComboBox<>();
         lbl_contact_number = new javax.swing.JLabel();
         txt_contact_number = new javax.swing.JTextField();
@@ -132,14 +139,14 @@ public class UserPreReservation extends javax.swing.JPanel {
         lbl_entry_date.setForeground(new java.awt.Color(153, 153, 153));
         lbl_entry_date.setText("Entry date");
 
-        btn_edit.setBackground(new java.awt.Color(54, 37, 89));
-        btn_edit.setForeground(new java.awt.Color(255, 255, 255));
-        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
-        btn_edit.setText("Find a room");
-        btn_edit.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+        btn_find_room.setBackground(new java.awt.Color(54, 37, 89));
+        btn_find_room.setForeground(new java.awt.Color(255, 255, 255));
+        btn_find_room.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
+        btn_find_room.setText("Find a room");
+        btn_find_room.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_find_room.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editActionPerformed(evt);
+                btn_find_roomActionPerformed(evt);
             }
         });
 
@@ -219,28 +226,27 @@ public class UserPreReservation extends javax.swing.JPanel {
                             .addComponent(txt_hotel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addGap(77, 77, 77)
-                                .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                                .addComponent(btn_find_room, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                                 .addGap(78, 78, 78))
                             .addComponent(txt_address, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(combobox_number_guests, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(bgLayout.createSequentialGroup()
-                                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbl_full_name)
-                                        .addComponent(lbl_email)
-                                        .addComponent(lbl_contact_number)
-                                        .addComponent(lbl_hotel)
-                                        .addGroup(bgLayout.createSequentialGroup()
-                                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lbl_entry_date)
-                                                .addComponent(calendar_entry_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(136, 136, 136)
-                                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(calendar_departure_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lbl_entry_date1)))
-                                        .addComponent(lbl_address)
-                                        .addComponent(lbl_number_guests))
-                                    .addGap(0, 0, Short.MAX_VALUE))))))
+                            .addComponent(combobox_number_guests, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_full_name)
+                                    .addComponent(lbl_email)
+                                    .addComponent(lbl_contact_number)
+                                    .addComponent(lbl_hotel)
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbl_entry_date)
+                                            .addComponent(calendar_entry_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(136, 136, 136)
+                                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(calendar_departure_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_entry_date1)))
+                                    .addComponent(lbl_address)
+                                    .addComponent(lbl_number_guests))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(512, 512, 512))
         );
         bgLayout.setVerticalGroup(
@@ -279,12 +285,12 @@ public class UserPreReservation extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(calendar_entry_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(calendar_departure_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(lbl_number_guests)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(combobox_number_guests, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_find_room, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
         );
 
@@ -321,8 +327,8 @@ public class UserPreReservation extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        try{
+    private void btn_find_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_find_roomActionPerformed
+        /*try{
             String name = txt_full_name.getText();
             String address = txt_email.getText();
             int classification = combobox_number_guests.getSelectedIndex() + 1;
@@ -337,10 +343,24 @@ public class UserPreReservation extends javax.swing.JPanel {
             
         }catch (EmptyFieldsException | HotelNameAlreadyInDataBase | NoChangeWasMadeException | NotAlphaNumericException | NotAnAddressException | NotValidClassificationExcpetion e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        }*/
         
         
-    }//GEN-LAST:event_btn_editActionPerformed
+        //Capture entry and departure dates and formate them in sql format
+        Date entry = calendar_entry_date.getDate();
+        Date departure = calendar_departure_date.getDate();
+        long entry_long = entry.getTime();
+        long departure_long = departure.getTime();        
+        java.sql.Date entry_date = new java.sql.Date(entry_long);
+        java.sql.Date departure_date = new java.sql.Date(departure_long);
+        System.out.println("" + entry_date + departure_date);
+        
+        
+        int number_of_guests = combobox_number_guests.getSelectedIndex() + 1;
+        System.out.println(number_of_guests);
+        
+        
+    }//GEN-LAST:event_btn_find_roomActionPerformed
 
     private void combobox_number_guestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combobox_number_guestsMouseClicked
 
@@ -389,7 +409,7 @@ public class UserPreReservation extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_find_room;
     private com.toedter.calendar.JDateChooser calendar_departure_date;
     private com.toedter.calendar.JDateChooser calendar_entry_date;
     private javax.swing.JComboBox<String> combobox_number_guests;
