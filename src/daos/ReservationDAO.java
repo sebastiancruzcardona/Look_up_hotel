@@ -88,6 +88,34 @@ public class ReservationDAO implements ReservationDAOInterface{
         }
     }
 
+    @Override
+    public void selectReservatedRooms(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel) {
+        /*String selectSQL = "SELECT id_room FROM reservations WHERE id_hotel = " + id_hotel + 
+                " NOT (entry_date BETWEEN " + entry_date + " AND " + departure_date + 
+                " OR departure_date BETWEEN " + entry_date + " AND " + departure_date + ")";*/
+        //ESTA PRIMERA CONSULTA ENCONTRARÍA LOS ID DE LAS HABITACIONES QUE SON DE UN HOTEL ESPECÍFICO QUE NO ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
+        //FABIÁN, ESTA FORMA DE HACER LA CONSULTA REQUERIRÍA LA CREACION INICIAL DE RESERVAS CON TODOS LOS ROOMS
+        //PODRÍA HACERSE, AL CREAR UN ROOM, POR DEFECTO Y DE MANERA NO VISIBLE, LA CREACION DE UNA RESERVA "INICIAL" DE ESE ROOM
+        //PARA QUE TODO ID DE ROOM ESTÉ EN LAS RESERVAS Y ESTO PUEDA FUNCIONAR
+        //PARA QUE LOS PUEDA ENCONTRAR TODOS EN LAS RESERVAS
+        //y LUEGO REQUERIRÍA UN JOIN CON LA TABLA ROOMS PARA OBTENER LA INFO DE LOS ROOMS DISPONIBLES
+        
+        //LA OTRA FORMA QUE SE ME OCURRE SERÍA CON UNA RESTA DE CONJUNTOS
+        
+        String selectSQL = "SELECT id_room FROM reservations WHERE id_hotel = " + id_hotel + 
+                " AND (entry_date BETWEEN " + entry_date + " AND " + departure_date + 
+                " OR departure_date BETWEEN " + entry_date + " AND " + departure_date + ")";
+        //ESTA CONSULTA ENCONTRARÍA LOS ID DE LAS HABITACIONES QUE SON DE UN HOTEL ESPECÍFICO QUE SI ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
+        //ES DECIR, ES CONTRARIA A LA OTRA
+        //LA VUELTA CON ESTA ES QUE FALTA ESCRIBIR LO DEMÁS, QUE SERÍA LA PROYECCIÓN DEL ID DE ROOMS DONDE ID_HOTEL SEA IGUAL A id_hotel
+        //A ESA PROYECCION RESTARLE ESTA SELECTSQL, PORA QUE QUEDEN LOS ID DE LAS ROOMS QUE NO ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
+        //y AHÍ HACER UN JOIN CON ROOMS PARA SACAR TODOS LOS DATOS DE ESOS ROOMS.
+        //oBVIAMENTE TODO ESO QUEDA EN UNA SOLA CONSULTA, PORQUE AQUÍ NO SE PUEDE HACER POR TEMPORALES, 
+        //PERO ESTOY MUY TOSTADO Y EN ESTE MOMENTO NO ME DA PARA HACER ESO, PORQUE SE AGRANDA BASTANTE Y TOCA PENSARLA BIEN
+    }
+    
+    
+
     //This method returns a HashMap that contains data and metadata from table "reservations". The shown data is de corresponding to one client
     @Override
     public Map<String, Object> clientSelect(int id) {
