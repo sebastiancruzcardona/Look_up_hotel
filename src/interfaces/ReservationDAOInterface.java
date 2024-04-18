@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface ReservationDAOInterface {
     
-    public void insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice);
+    public boolean insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice);
     
     public void update(int status, int id);
     

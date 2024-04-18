@@ -6,9 +6,11 @@ package view;
 
 import exceptions.NoSuchRoomExcpetion;
 import helper.TextPrompt;
+import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel;
@@ -48,20 +50,18 @@ public class UserReserveRoom extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        back_ground = new javax.swing.JPanel();
+        bg = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         rooms_table = new javax.swing.JTable();
-        txt_search = new javax.swing.JTextField();
-        btn_allfilter = new javax.swing.JButton();
-        btn_update = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
         btn_reserve = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
-        btn_search = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
-        back_ground.setBackground(new java.awt.Color(255, 255, 255));
-        back_ground.setPreferredSize(new java.awt.Dimension(1140, 1024));
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setPreferredSize(new java.awt.Dimension(1140, 1024));
 
         search.setBackground(new java.awt.Color(166, 118, 163));
 
@@ -108,35 +108,15 @@ public class UserReserveRoom extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(rooms_table);
 
-        txt_search.setBackground(new java.awt.Color(255, 255, 255));
-        txt_search.setForeground(new java.awt.Color(51, 51, 51));
-        txt_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txt_search.setName(""); // NOI18N
-        txt_search.addActionListener(new java.awt.event.ActionListener() {
+        btn_back.setBackground(new java.awt.Color(54, 37, 89));
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/log-out-solid-24.png"))); // NOI18N
+        btn_back.setText("back");
+        btn_back.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_back.setMaximumSize(new java.awt.Dimension(100, 30));
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_searchActionPerformed(evt);
-            }
-        });
-
-        btn_allfilter.setBackground(new java.awt.Color(54, 37, 89));
-        btn_allfilter.setForeground(new java.awt.Color(255, 255, 255));
-        btn_allfilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/filter-regular-24.png"))); // NOI18N
-        btn_allfilter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_allfilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_allfilterActionPerformed(evt);
-            }
-        });
-
-        btn_update.setBackground(new java.awt.Color(54, 37, 89));
-        btn_update.setForeground(new java.awt.Color(255, 255, 255));
-        btn_update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/edit-alt-regular-24.png"))); // NOI18N
-        btn_update.setText("Edit");
-        btn_update.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_update.setMaximumSize(new java.awt.Dimension(100, 30));
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
+                btn_backActionPerformed(evt);
             }
         });
 
@@ -162,125 +142,90 @@ public class UserReserveRoom extends javax.swing.JPanel {
             }
         });
 
-        btn_search.setBackground(new java.awt.Color(54, 37, 89));
-        btn_search.setForeground(new java.awt.Color(255, 255, 255));
-        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/search-regular-24.png"))); // NOI18N
-        btn_search.setText("Search");
-        btn_search.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
+        jLabel11.setBackground(new java.awt.Color(54, 37, 89));
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Chouse room");
 
-        javax.swing.GroupLayout back_groundLayout = new javax.swing.GroupLayout(back_ground);
-        back_ground.setLayout(back_groundLayout);
-        back_groundLayout.setHorizontalGroup(
-            back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, back_groundLayout.createSequentialGroup()
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(bgLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(back_groundLayout.createSequentialGroup()
-                        .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(back_groundLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btn_reserve)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_delete))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE))
-                        .addGap(47, 47, 47))
-                    .addGroup(back_groundLayout.createSequentialGroup()
-                        .addComponent(txt_search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_allfilter)
-                        .addGap(39, 39, 39))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(754, 754, 754)
+                .addComponent(btn_reserve)
+                .addGap(18, 18, 18)
+                .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_delete))
         );
-        back_groundLayout.setVerticalGroup(
-            back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(back_groundLayout.createSequentialGroup()
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_allfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel11)
+                .addGap(102, 102, 102)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(111, 111, 111))
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back_ground, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back_ground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void rooms_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rooms_tableMousePressed
-        //DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
+        DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
 
-        //idTable = (int) tblMode1.getValueAt(rooms_table.getSelectedRow(), 0);
+        idTable = (int) tblMode1.getValueAt(rooms_table.getSelectedRow(), 0);
     }//GEN-LAST:event_rooms_tableMousePressed
 
-    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
-        
-    }//GEN-LAST:event_txt_searchActionPerformed
-
-    private void btn_allfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_allfilterActionPerformed
-      //  reloadTable(null);
-    }//GEN-LAST:event_btn_allfilterActionPerformed
-
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-       // validateUpdateId(idTable);
-    }//GEN-LAST:event_btn_updateActionPerformed
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+       UserHome userHome = new UserHome(preReservation.getUser());
+        userHome.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_reserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reserveActionPerformed
         //ShowJPanel(new InsertRoom());
+        validateRoomid(idTable);
     }//GEN-LAST:event_btn_reserveActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
        // validateDeleteId(idTable);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-       //try {
-       //   reloadTable(txt_search.getText());
-          // txt_search.setText("");
-      //  } catch (EmptySearchFieldException e) {
-          // JOptionPane.showMessageDialog(null, e.getMessage());
-        //}
-    }//GEN-LAST:event_btn_searchActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel back_ground;
-    private javax.swing.JButton btn_allfilter;
+    private javax.swing.JPanel bg;
+    private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_reserve;
-    private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable rooms_table;
     private javax.swing.JPanel search;
-    private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 
     public void reloadTable( Reservation reservation) {
@@ -339,7 +284,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
     
     public void initTable() {
         reloadTable(preReservation);
-        TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
+      //  TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
 
     }
 
@@ -352,12 +297,29 @@ public class UserReserveRoom extends javax.swing.JPanel {
             try {
                 Room room = roomService.findRoom(id);
                 System.out.println(room.getNumber() + room.getId());
-                ShowJPanel(new AdminUpdateRoom(room));
+                room.setHotel(hotel);
+                preReservation.setRoom(room);
+                
+                ShowJPanel(new UserConfirmReservation(preReservation));
             } catch (NoSuchRoomExcpetion e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
 
         }
+    }
+    
+    private void ShowJPanel(JPanel panel) {
+        panel.setSize(1140, 1024);
+        panel.setLocation(0, 0);
+
+        bg.removeAll();
+        bg.add(panel, BorderLayout.CENTER);
+        bg.revalidate();
+        bg.repaint();
+    }
+
+    private void dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 

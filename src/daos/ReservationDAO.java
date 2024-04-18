@@ -37,8 +37,10 @@ public class ReservationDAO implements ReservationDAOInterface{
 
     //This method inserts a new row in table "reservations" with de provided data of a new reservation 
     @Override
-    public void insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice) { //paste: 
-        String insertSQL = "INSERT INTO reservations (id_user,id_hotel,id_room,entry_date,departure_date,status,total_price) VALUES (?,?,?,?,?,?,?)";
+    public boolean insert(int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice) { //paste: 
+       
+        
+        String insertSQL = "INSERT INTO reservations (id_user, id_hotel, id_room, entry_date, departure_date, id_reservation_statuses, total_price) VALUES (?,?,?,?,?,?,?)";
         try ( PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setInt(1, idUser);
             pstmt.setInt(2, idHotel);
@@ -52,15 +54,18 @@ public class ReservationDAO implements ReservationDAOInterface{
 
             if (rowsAffected > 0) {
                 System.out.println("Successful insertion");
-                JOptionPane.showMessageDialog(null,"Reservation succesfully created");
+                System.out.println("Reservation succesfully created");
+                return true;
             } else {
                 System.out.println("No insertion was made");
-                JOptionPane.showMessageDialog(null,"Reservation was not created");
+               
+                return false;
             }
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for data insertion");
             e.printStackTrace();
         }
+        return false;
     }
 
     //This method modifies the status of a previously registered reservation in table "reservations"
@@ -87,20 +92,12 @@ public class ReservationDAO implements ReservationDAOInterface{
             e.printStackTrace();
         }
     }
-
+    /*
+    This method searches for rooms that are not available on a reservation date and filters by hotel and room type
+    */
     @Override
     public Map<String, Object> selectReservatedRooms(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel, int namberPerson) {
-        /*String selectSQL = "SELECT id_room FROM reservations WHERE id_hotel = " + id_hotel + 
-                " NOT (entry_date BETWEEN " + entry_date + " AND " + departure_date + 
-                " OR departure_date BETWEEN " + entry_date + " AND " + departure_date + ")";*/
-        //ESTA PRIMERA CONSULTA ENCONTRARÍA LOS ID DE LAS HABITACIONES QUE SON DE UN HOTEL ESPECÍFICO QUE NO ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
-        //FABIÁN, ESTA FORMA DE HACER LA CONSULTA REQUERIRÍA LA CREACION INICIAL DE RESERVAS CON TODOS LOS ROOMS
-        //PODRÍA HACERSE, AL CREAR UN ROOM, POR DEFECTO Y DE MANERA NO VISIBLE, LA CREACION DE UNA RESERVA "INICIAL" DE ESE ROOM
-        //PARA QUE TODO ID DE ROOM ESTÉ EN LAS RESERVAS Y ESTO PUEDA FUNCIONAR
-        //PARA QUE LOS PUEDA ENCONTRAR TODOS EN LAS RESERVAS
-        //y LUEGO REQUERIRÍA UN JOIN CON LA TABLA ROOMS PARA OBTENER LA INFO DE LOS ROOMS DISPONIBLES
-        
-        //LA OTRA FORMA QUE SE ME OCURRE SERÍA CON UNA RESTA DE CONJUNTOS
+       
         
         String selectSQL = "SELECT r.id, r.room_number, t.type_room, r.price_per_night, r.availability, r.amenities_details, h.name\n"
                 + " FROM rooms r \n"
@@ -121,14 +118,7 @@ public class ReservationDAO implements ReservationDAOInterface{
         
           
         
-         System.out.println(selectSQL);
-        //ESTA CONSULTA ENCONTRARÍA LOS ID DE LAS HABITACIONES QUE SON DE UN HOTEL ESPECÍFICO QUE SI ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
-        //ES DECIR, ES CONTRARIA A LA OTRA
-        //LA VUELTA CON ESTA ES QUE FALTA ESCRIBIR LO DEMÁS, QUE SERÍA LA PROYECCIÓN DEL ID DE ROOMS DONDE ID_HOTEL SEA IGUAL A id_hotel
-        //A ESA PROYECCION RESTARLE ESTA SELECTSQL, PORA QUE QUEDEN LOS ID DE LAS ROOMS QUE NO ESTÁN RESERVADAS EN ESE PERIODO DE TIEMPO
-        //y AHÍ HACER UN JOIN CON ROOMS PARA SACAR TODOS LOS DATOS DE ESOS ROOMS.
-        //oBVIAMENTE TODO ESO QUEDA EN UNA SOLA CONSULTA, PORQUE AQUÍ NO SE PUEDE HACER POR TEMPORALES, 
-        //PERO ESTOY MUY TOSTADO Y EN ESTE MOMENTO NO ME DA PARA HACER ESO, PORQUE SE AGRANDA BASTANTE Y TOCA PENSARLA BIEN
+      
         
         Map<String, Object> result = new HashMap<>();
         
