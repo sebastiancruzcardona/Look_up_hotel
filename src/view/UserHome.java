@@ -532,7 +532,7 @@ public class UserHome extends javax.swing.JFrame {
             try {
                 Hotel hotel = hotelService.findHotel(idTable);
                 System.out.println(hotel.getId() + hotel.getName());
-                ShowJPanel(new UserReserveRoom(user ,hotel));
+                ShowJPanel(new UserPreReservation(user ,hotel));
             }catch (ThisHotelDoesNotExistException e){
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
