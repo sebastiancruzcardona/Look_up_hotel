@@ -139,7 +139,7 @@ public class RoomService {
         if(answer){
             JOptionPane.showMessageDialog(null,"Room successfully deleted");
         }else{
-            JOptionPane.showMessageDialog(null,"Now you can not delete this room because is reservated");
+            JOptionPane.showMessageDialog(null,"Now you can not delete this room because is reserved");
         }
     }
     
@@ -148,7 +148,7 @@ public class RoomService {
         if(answer){
             JOptionPane.showMessageDialog(null,"Rooms successfully deleted");
         }else{
-            JOptionPane.showMessageDialog(null,"Now you can not delete this hotel because there are rooms reservated");
+            JOptionPane.showMessageDialog(null,"Now you can not delete this hotel because there are reserved rooms");
         }
     }
     /**

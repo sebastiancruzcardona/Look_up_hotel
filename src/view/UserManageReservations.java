@@ -222,7 +222,7 @@ public class UserManageReservations extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
     private void btn_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detailsActionPerformed
-        ShowJPanel(new InsertRoom());
+        //ShowJPanel(new UserReservationDetails());
     }//GEN-LAST:event_btn_detailsActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
