@@ -282,6 +282,8 @@ public class UserReserveRoom extends javax.swing.JPanel {
         if(model.getRowCount()==0){
             JOptionPane.showMessageDialog(null, "no available rooms found");
             
+            ShowJPanel(new UserPreReservation(preReservation.getUser(), preReservation.getHotel()));
+            
         }
     }
     
