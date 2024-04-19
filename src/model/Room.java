@@ -17,6 +17,12 @@ public class Room {
     private boolean availability;
     private String amenities;
     private Hotel hotel;
+
+    public Room() {
+    }
+    
+    
+
     //Constructor to create the object
     public Room(String number, String type, double pricePerNight, String amenities, Hotel hotel) {
         this.number = number;

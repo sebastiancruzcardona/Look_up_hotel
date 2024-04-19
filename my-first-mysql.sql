@@ -68,6 +68,10 @@ CREATE TABLE `reservations` (
   CONSTRAINT `reservations_ibfk_4` FOREIGN KEY (`id_reservation_statuses`) REFERENCES `reservation_statuses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `reservations` (`id`, `id_user`, `id_hotel`, `id_room`, `entry_date`, `departure_date`, `total_Price`, `id_reservation_statuses`) VALUES
+(1,	28,	2,	7,	'2024-04-19',	'2024-04-21',	20000,	2),
+(2,	28,	1,	10,	'2024-04-23',	'2024-04-25',	20000,	2),
+(4,	28,	2,	7,	'2024-04-25',	'2024-04-27',	426,	2);
 
 DROP TABLE IF EXISTS `rols`;
 CREATE TABLE `rols` (
@@ -100,7 +104,8 @@ CREATE TABLE `rooms` (
 INSERT INTO `rooms` (`id`, `room_number`, `id_type_room`, `price_per_night`, `availability`, `amenities_details`, `id_hotel`) VALUES
 (6,	'2b',	4,	12,	1,	'dsad',	1),
 (7,	'12',	5,	213,	1,	'sadas',	2),
-(9,	'12b',	2,	3233,	1,	'dsad',	2);
+(9,	'12b',	2,	3233,	1,	'dsad',	2),
+(10,	'3b',	1,	2000,	1,	'hg',	1);
 
 DROP TABLE IF EXISTS `type_rooms`;
 CREATE TABLE `type_rooms` (
@@ -146,12 +151,11 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `contact`, `id_rol`
 (18,	'prueba11',	'prueba11',	'prueba11',	'prueba11',	NULL),
 (19,	'prueba12',	'prueba12',	'prueba12',	'prueba12',	NULL),
 (20,	'prueba13',	'prueba13',	'prueba13',	'prueba13',	2),
-(21,	'prueba14',	'prueba14',	'prueba14',	'prueba14',	2),
 (23,	'prueba15',	'prueba15',	'prueba15',	'prueba15',	2),
 (24,	'prueba16',	'prueba16',	'prueba16',	'prueba16',	2),
-(26,	'fabian',	'feibian@gmail.com',	'admin',	'3004215235',	1),
+(26,	'fabian',	'feibian@gmail.com',	'admin',	'300421523',	1),
 (27,	'sebastian',	'sebastian@gmail.com',	'admin',	'3187492128',	1),
 (28,	'andres',	'prueba@gmail.com',	'prueba',	'3234',	2),
-(29,	'alberto',	'prueba1@gmail.com',	'1',	'hola prueba hola otravez',	2);
+(29,	'alberto lopez',	'prueba1@gmail.com',	'1',	'hola prueba hola otravez',	2);
 
--- 2024-04-11 15:14:43
+-- 2024-04-19 05:49:55

@@ -46,8 +46,7 @@ public class UserManageReservations extends javax.swing.JPanel {
         rooms_table = new javax.swing.JTable();
         txt_search = new javax.swing.JTextField();
         btn_allfilter = new javax.swing.JButton();
-        btn_update = new javax.swing.JButton();
-        btn_insert = new javax.swing.JButton();
+        btn_details = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
         btn_search = new javax.swing.JButton();
 
@@ -119,26 +118,14 @@ public class UserManageReservations extends javax.swing.JPanel {
             }
         });
 
-        btn_update.setBackground(new java.awt.Color(54, 37, 89));
-        btn_update.setForeground(new java.awt.Color(255, 255, 255));
-        btn_update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/edit-alt-regular-24.png"))); // NOI18N
-        btn_update.setText("Edit");
-        btn_update.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_update.setMaximumSize(new java.awt.Dimension(100, 30));
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
+        btn_details.setBackground(new java.awt.Color(54, 37, 89));
+        btn_details.setForeground(new java.awt.Color(255, 255, 255));
+        btn_details.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
+        btn_details.setText("Details");
+        btn_details.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_details.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
-            }
-        });
-
-        btn_insert.setBackground(new java.awt.Color(54, 37, 89));
-        btn_insert.setForeground(new java.awt.Color(255, 255, 255));
-        btn_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
-        btn_insert.setText("Add");
-        btn_insert.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_insert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_insertActionPerformed(evt);
+                btn_detailsActionPerformed(evt);
             }
         });
 
@@ -183,10 +170,8 @@ public class UserManageReservations extends javax.swing.JPanel {
                         .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(back_groundLayout.createSequentialGroup()
-                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(btn_details, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
                                 .addComponent(btn_delete)))
                         .addGap(47, 47, 47))))
         );
@@ -205,9 +190,8 @@ public class UserManageReservations extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                 .addGap(40, 40, 40)
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_details, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111))
         );
 
@@ -237,13 +221,9 @@ public class UserManageReservations extends javax.swing.JPanel {
        // reloadTable(null);
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-      //  validateUpdateId(idTable);
-    }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
+    private void btn_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detailsActionPerformed
         ShowJPanel(new InsertRoom());
-    }//GEN-LAST:event_btn_insertActionPerformed
+    }//GEN-LAST:event_btn_detailsActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         validateDeleteId(idTable);
@@ -265,9 +245,8 @@ public class UserManageReservations extends javax.swing.JPanel {
     private javax.swing.JPanel back_ground;
     private javax.swing.JButton btn_allfilter;
     private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_insert;
+    private javax.swing.JButton btn_details;
     private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable rooms_table;

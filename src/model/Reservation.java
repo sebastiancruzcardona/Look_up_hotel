@@ -21,6 +21,11 @@ public class Reservation {
     private String reservationStatus;
     private double totalPrice;
 
+    public Reservation() {
+    }
+ 
+    
+    
 //Constructor to create the object
     public Reservation(User user, Hotel hotel, Room room, Date entryDate, Date departureDate, String reservationStatus, double totalPrice) {
         this.user = user;
