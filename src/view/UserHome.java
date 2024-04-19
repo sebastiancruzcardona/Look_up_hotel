@@ -62,6 +62,9 @@ public class UserHome extends javax.swing.JFrame {
         lb_username = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         sing_off = new javax.swing.JButton();
+        btn_MyReservations = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
         btn_search = new javax.swing.JButton();
@@ -72,6 +75,7 @@ public class UserHome extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         rooms_table = new javax.swing.JTable();
         btn_Reserve = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1450, 1024));
@@ -192,6 +196,49 @@ public class UserHome extends javax.swing.JFrame {
             }
         });
 
+        btn_MyReservations.setBackground(new java.awt.Color(54, 37, 89));
+        btn_MyReservations.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btn_MyReservationsMouseMoved(evt);
+            }
+        });
+        btn_MyReservations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_MyReservationsMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_MyReservationsMousePressed(evt);
+            }
+        });
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/hotel-regular-24.png"))); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setText("My reservations");
+
+        javax.swing.GroupLayout btn_MyReservationsLayout = new javax.swing.GroupLayout(btn_MyReservations);
+        btn_MyReservations.setLayout(btn_MyReservationsLayout);
+        btn_MyReservationsLayout.setHorizontalGroup(
+            btn_MyReservationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_MyReservationsLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel6)
+                .addGap(55, 55, 55)
+                .addComponent(jLabel9)
+                .addContainerGap(101, Short.MAX_VALUE))
+        );
+        btn_MyReservationsLayout.setVerticalGroup(
+            btn_MyReservationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_MyReservationsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btn_MyReservationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
+        );
+
         javax.swing.GroupLayout navLayout = new javax.swing.GroupLayout(nav);
         nav.setLayout(navLayout);
         navLayout.setHorizontalGroup(
@@ -214,7 +261,8 @@ public class UserHome extends javax.swing.JFrame {
                     .addGroup(navLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(sing_off))
-                    .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_MyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
         navLayout.setVerticalGroup(
@@ -226,6 +274,8 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btn_MyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(471, 471, 471)
                 .addComponent(btn_setting, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
@@ -237,7 +287,7 @@ public class UserHome extends javax.swing.JFrame {
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
-        content.setPreferredSize(new java.awt.Dimension(2690, 1024));
+        content.setPreferredSize(new java.awt.Dimension(1150, 1024));
 
         search.setBackground(new java.awt.Color(166, 118, 163));
         search.setPreferredSize(new java.awt.Dimension(606, 168));
@@ -288,7 +338,7 @@ public class UserHome extends javax.swing.JFrame {
                         .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(99, 99, 99)
                         .addComponent(btn_search)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,29 +392,37 @@ public class UserHome extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setBackground(new java.awt.Color(54, 37, 89));
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Available hotels");
+
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentLayout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE))
-                .addGap(1411, 1411, 1411))
-            .addGroup(contentLayout.createSequentialGroup()
-                .addGap(838, 838, 838)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
+            .addGroup(contentLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(24, 24, 24)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel11)
+                .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(39, 39, 39)
                 .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -376,7 +434,7 @@ public class UserHome extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1259, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1239, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,9 +494,22 @@ public class UserHome extends javax.swing.JFrame {
         validateReserveName(idTable);
     }//GEN-LAST:event_btn_ReserveActionPerformed
 
+    private void btn_MyReservationsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MyReservationsMouseMoved
+        setColor(btn_MyReservations);
+    }//GEN-LAST:event_btn_MyReservationsMouseMoved
+
+    private void btn_MyReservationsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MyReservationsMouseExited
+        resetColor(btn_MyReservations);
+    }//GEN-LAST:event_btn_MyReservationsMouseExited
+
+    private void btn_MyReservationsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MyReservationsMousePressed
+        ShowJPanel(new UserManageReservations(user));
+    }//GEN-LAST:event_btn_MyReservationsMousePressed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btn_MyReservations;
     private javax.swing.JButton btn_Reserve;
     private javax.swing.JPanel btn_home;
     private javax.swing.JButton btn_search;
@@ -448,12 +519,15 @@ public class UserHome extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser innerDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -527,7 +601,7 @@ public class UserHome extends javax.swing.JFrame {
     //This method validate if there is a selecto arrow from table and show panel AdminUpdateRoom
     public void validateReserveName(String hotel_name) {
         if (idTable == null) {
-            JOptionPane.showMessageDialog(null, "Please select the table row you want to Update");
+            JOptionPane.showMessageDialog(null, "Please select the hotel you want to book");
         } else {
             try {
                 Hotel hotel = hotelService.findHotel(idTable);

@@ -89,5 +89,9 @@ public class Hotel {
     public void setImages(ArrayList<String> images) {
         this.images = images;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
 }

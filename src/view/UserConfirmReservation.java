@@ -423,7 +423,7 @@ public class UserConfirmReservation extends javax.swing.JPanel {
     private void btn_confirm_reservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirm_reservationActionPerformed
         double totalPrice = Double.parseDouble(txt_total_price.getText());
 
-        reservationService.insert(reservation.getUser().getId(), reservation.getHotel().getId(), reservation.getRoom().getId(), reservation.getEntryDate(), reservation.getDepartureDate(), 2, totalPrice);
+        reservationService.insert(reservation.getUser().getId(), reservation.getHotel().getId(), reservation.getRoom().getId(), reservation.getEntryDate(), reservation.getDepartureDate(), 1, totalPrice);
 
         // preReservation = new Reservation(user, hotel, room, entry, departure,"pending" ,1);
         //ShowJPanel(new UserReserveRoom(preReservation,number_of_guests));
@@ -500,10 +500,11 @@ public class UserConfirmReservation extends javax.swing.JPanel {
         txt_number_room.setText(reservation.getRoom().getNumber());
         txt_typeRoom.setText(reservation.getRoom().getType());
         txt_price_per_night1.setText(String.valueOf(reservation.getRoom().getPricePerNight()));
-       txt_full_name.setText(reservation.getUser().getUserName());
-       txt_email.setText(reservation.getUser().getEmail());
-       txt_contact_number.setText(reservation.getUser().getDetails());
+        txt_full_name.setText(reservation.getUser().getUserName());
+        txt_email.setText(reservation.getUser().getEmail());
+        txt_contact_number.setText(reservation.getUser().getDetails());
         txt_hotel.setText(reservation.getHotel().getName());
+        txt_address.setText(reservation.getHotel().getAddress());
       
        calendar_entry_date.setDate(reservation.getEntryDate());
        calendar_departure_date.setDate(reservation.getDepartureDate());

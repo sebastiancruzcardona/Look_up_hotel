@@ -48,6 +48,10 @@ public class Room {
         return number;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setNumber(String number) {
         this.number = number;
     }

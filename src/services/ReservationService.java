@@ -24,8 +24,10 @@ public class ReservationService {
     public Map<String, Object> select(java.sql.Date entry_date, java.sql.Date departure_date, int id_hotel, int numberPerson) {
         return reservationDAO.selectReservatedRooms(entry_date, departure_date, id_hotel, numberPerson);
     }
-
-    
+    //This method callas clientSelect from ReservationDAO
+    public Map<String, Object> clientSelect (int id){
+       return reservationDAO.clientSelect(id);
+    }
     //This method calls insert method from ReservactionDAO
     public void insert (int idUser, int idHotel, int idRoom, Date entryDate, Date departureDate, int status, double totalPrice){
         long entry_long = entryDate.getTime();
@@ -39,15 +41,27 @@ public class ReservationService {
     }
     
     
+    //This method calls delete from reservationDAO
+    public void deleteReservation(int id){
+        validateDelete(reservationDAO.delete(id));
+    }
+    
     //this method validate if answer is true or false from getion data base
     public void validateInsertion(boolean answer) {
         if (answer) {
-            JOptionPane.showMessageDialog(null, "User successfully created");
+            JOptionPane.showMessageDialog(null, "Reservation successfully created");
         } else {
             JOptionPane.showMessageDialog(null, "No insertion was made");
         }
     }
     
+    public void validateDelete(boolean answer){
+        if (answer) {
+            JOptionPane.showMessageDialog(null, "the reservation was canceled");
+        } else {
+            JOptionPane.showMessageDialog(null, "the reservation was not canceled");
+        }
+    }
     
     // this method calculate the total price to reservation
     
