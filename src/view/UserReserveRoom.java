@@ -25,8 +25,8 @@ import services.RoomService;
  * @author lugo
  */
 public class UserReserveRoom extends javax.swing.JPanel {
-     int idTable;
-    int typeRoom; 
+   int idTable;
+   int typeRoom; 
    User user;
    Hotel hotel;
    Reservation preReservation;
@@ -57,7 +57,6 @@ public class UserReserveRoom extends javax.swing.JPanel {
         rooms_table = new javax.swing.JTable();
         btn_back = new javax.swing.JButton();
         btn_reserve = new javax.swing.JButton();
-        btn_delete = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
@@ -131,17 +130,6 @@ public class UserReserveRoom extends javax.swing.JPanel {
             }
         });
 
-        btn_delete.setBackground(new java.awt.Color(54, 37, 89));
-        btn_delete.setForeground(new java.awt.Color(255, 255, 255));
-        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/x-regular-24.png"))); // NOI18N
-        btn_delete.setText("Delete");
-        btn_delete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
-
         jLabel11.setBackground(new java.awt.Color(54, 37, 89));
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -155,18 +143,16 @@ public class UserReserveRoom extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(754, 754, 754)
-                        .addComponent(btn_reserve)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_delete))
-                    .addGroup(bgLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(btn_reserve)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 47, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
@@ -179,10 +165,9 @@ public class UserReserveRoom extends javax.swing.JPanel {
                 .addGap(103, 103, 103)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -204,9 +189,9 @@ public class UserReserveRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_rooms_tableMousePressed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-       UserHome userHome = new UserHome(preReservation.getUser());
-        userHome.setVisible(true);
-        this.dispose();
+//       UserHome userHome = new UserHome(preReservation.getUser());
+//       userHome.setVisible(true);
+       ShowJPanel(new UserPreReservation(preReservation.getUser(), preReservation.getHotel()));
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_reserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reserveActionPerformed
@@ -214,15 +199,10 @@ public class UserReserveRoom extends javax.swing.JPanel {
         validateRoomid(idTable);
     }//GEN-LAST:event_btn_reserveActionPerformed
 
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-       // validateDeleteId(idTable);
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btn_back;
-    private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_reserve;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -305,7 +285,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
                 room.setHotel(hotel);
                 preReservation.setRoom(room);
                 
-                ShowJPanel(new UserConfirmReservation(preReservation));
+                ShowJPanel(new UserConfirmReservation(preReservation, typeRoom));
             } catch (NoSuchRoomExcpetion e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
@@ -323,9 +303,9 @@ public class UserReserveRoom extends javax.swing.JPanel {
         bg.repaint();
     }
 
-    private void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    private void dispose() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 }
 
 

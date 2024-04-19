@@ -19,12 +19,15 @@ public class UserConfirmReservation extends javax.swing.JPanel {
     
     Reservation reservation;
     ReservationService reservationService;
+    int typeRoom;
 
-    public UserConfirmReservation(Reservation preReservation) {
+    public UserConfirmReservation(Reservation preReservation, int typeRoom) {
          initComponents();
         this.reservation = preReservation;
         
         reservationService = new ReservationService();
+        
+        this.typeRoom = typeRoom;
      
         initPanel();
     }
@@ -459,7 +462,7 @@ public class UserConfirmReservation extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_price_per_night1KeyTyped
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        //ShowJPanel(new UserReserveRoom(reservation));
+        ShowJPanel(new UserReserveRoom(reservation, typeRoom));
     }//GEN-LAST:event_btn_backActionPerformed
 
 
