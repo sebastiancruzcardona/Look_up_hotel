@@ -17,6 +17,9 @@ public class User {
     private String details;
     private int rol;
 
+    public User() {
+    }
+
 //Constructor to create the object
     public User(String userName, String email, String password, String details) {
         this.userName = userName;
