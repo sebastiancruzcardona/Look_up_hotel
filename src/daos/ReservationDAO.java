@@ -112,13 +112,9 @@ public class ReservationDAO implements ReservationDAOInterface{
                 + " SELECT reserve.id_room "
                 + " FROM reservations  reserve " +
                 "WHERE( reserve.id_hotel = "+ id_hotel + "\n"
-                + " AND  (" 
-                + "(reserve.entry_date BETWEEN '" + entry_date + "' AND '" + departure_date + "') \n"+
-                " OR( reserve.departure_date BETWEEN '" + entry_date + "' AND '"+ departure_date +"')\n"
-                   
-                
-                
-                + ")))";
+                + " AND " 
+                + "(reserve.entry_date < '" + departure_date + "' AND " + "reserve.departure_date > '" + entry_date + "')\n"
+                + "))";
                 
         
           
