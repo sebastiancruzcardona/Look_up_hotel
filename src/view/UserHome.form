@@ -3,6 +3,9 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1450, 1024]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -25,8 +28,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="nav" min="-2" pref="320" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="content" pref="1259" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="content" pref="1239" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,6 +78,7 @@
                           <Component id="sing_off" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btn_home" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_MyReservations" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
@@ -89,6 +93,8 @@
                   <Component id="jSeparator2" min="-2" pref="20" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="btn_home" min="-2" pref="70" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="btn_MyReservations" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
                   <Component id="btn_setting" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
@@ -312,6 +318,65 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sing_offActionPerformed"/>
           </Events>
         </Component>
+        <Container class="javax.swing.JPanel" name="btn_MyReservations">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="59" green="25" red="36" type="rgb"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="btn_MyReservationsMouseMoved"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_MyReservationsMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_MyReservationsMousePressed"/>
+          </Events>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="101" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel9" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Resources/hotel-regular-24.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Liberation Sans" size="15" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="My reservations"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="content">
@@ -320,24 +385,25 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[2690, 1024]"/>
+          <Dimension value="[1150, 1024]"/>
         </Property>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      <Component id="search" pref="941" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="1411" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btn_Reserve" min="-2" pref="123" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="838" max="-2" attributes="0"/>
-                  <Component id="btn_Reserve" min="-2" pref="123" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel11" min="-2" pref="458" max="-2" attributes="0"/>
+                      <Component id="search" alignment="0" min="-2" pref="1173" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="1173" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -345,11 +411,13 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="search" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="455" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="btn_Reserve" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -387,7 +455,7 @@
                               <Component id="btn_search" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="222" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -412,7 +480,7 @@
                           </Group>
                           <Component id="btn_search" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -526,6 +594,20 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ReserveActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel11">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="59" green="25" red="36" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Liberation Sans" size="24" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Available hotels"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

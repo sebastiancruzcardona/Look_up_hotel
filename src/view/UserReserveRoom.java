@@ -75,16 +75,16 @@ public class UserReserveRoom extends javax.swing.JPanel {
         searchLayout.setHorizontalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addGap(43, 43, 43))
+                .addGap(44, 44, 44))
         );
 
         rooms_table.setBackground(new java.awt.Color(255, 255, 255));
@@ -145,7 +145,7 @@ public class UserReserveRoom extends javax.swing.JPanel {
         jLabel11.setBackground(new java.awt.Color(54, 37, 89));
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Chouse room");
+        jLabel11.setText("Choose room");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -153,27 +153,30 @@ public class UserReserveRoom extends javax.swing.JPanel {
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(bgLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(754, 754, 754)
-                .addComponent(btn_reserve)
-                .addGap(18, 18, 18)
-                .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_delete))
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(754, 754, 754)
+                        .addComponent(btn_reserve)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_delete))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 47, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel11)
-                .addGap(102, 102, 102)
+                .addGap(103, 103, 103)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

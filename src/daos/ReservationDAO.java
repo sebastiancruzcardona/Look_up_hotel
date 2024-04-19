@@ -6,6 +6,7 @@ package daos;
 
 import connection.DataBaseSingleton;
 import connection.MySQLConnection;
+import exceptions.NoSuchRoomExcpetion;
 import exceptions.NullConnectionException;
 import interfaces.ReservationDAOInterface;
 import java.sql.Connection;
@@ -19,6 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import model.Hotel;
+import model.Reservation;
+import model.Room;
+import model.User;
 
 /**
  *
@@ -180,7 +185,14 @@ public class ReservationDAO implements ReservationDAOInterface{
         //Initialize result HashMap. This map wil contain column names, number of columns and table data
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
-        String selectSQL = "SELECT id_user, id_hotel, id_room, entry_date, departure_date, total_price id_reservation_statuses FROM reservations WHERE id_user =" + id;
+        String selectSQL = "SELECT reserve.id ,u.full_name, h.name, r.room_number, entry_date, departure_date, total_price,  s.name "
+                + "FROM reservations reserve "
+                + "JOIN users u ON reserve.id_user = u.id "
+                + "JOIN hotels h ON reserve.id_hotel = h.id "
+                + "JOIN rooms r ON reserve.id_room = r.id "
+                + "JOIN reservation_statuses s ON reserve.id_reservation_statuses = s.id "
+                + "WHERE reserve.id_user = "+id;
+                
         try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
@@ -288,15 +300,40 @@ public class ReservationDAO implements ReservationDAOInterface{
 
     //This method deletes a row of a previously registered user in table "reservations" searching by it's id
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String deleteSQL = "DELETE FROM reservations WHERE id = ?";
         try ( PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Reservation succesfully deleted");
+            System.out.println("Reservation succesfully deleted");
+            return true;
         } catch (SQLException | NullConnectionException e) {
             System.out.println("An error occurred while connecting to database for deletion of data");
             e.printStackTrace();
         }
+        return false;
+    }
+    //This method searches by reservation id and returns the reservation
+    @Override
+    public Reservation findReservation(int id) {
+         String selectSQL = "SELECT r.id, r.id_user , r.id_hotel , r.id_room , r.entry_date, r.departure_date, r.total_price, s.name FROM reservations r JOIN reservation_statuses s ON r.id = s.id WHERE r.id = ?";
+        try(PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+            pstm.setInt(1, id);
+            
+            ResultSet rs = pstm.executeQuery();
+            
+            if(rs.next()) {                
+                  
+                 
+            }
+            else{
+                throw new NoSuchRoomExcpetion();
+            }            
+            
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }
+        return null;
     }
 }

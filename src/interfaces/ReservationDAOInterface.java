@@ -6,6 +6,7 @@ package interfaces;
 
 import java.util.Date;
 import java.util.Map;
+import model.Reservation;
 
 /**
  *
@@ -23,5 +24,7 @@ public interface ReservationDAOInterface {
     
     public Map<String,Object> adminSelect(int status);
     
-    public void delete(int id);
+    public boolean delete(int id);
+    
+    Reservation findReservation(int id);
 }
