@@ -31,5 +31,7 @@ public interface HotelDAOInterface {
     Hotel findHotel(String name);
     
     boolean validateHotelNameAvailability(String name);
+    
+    ArrayList<Hotel> selectHotels();
 }
 

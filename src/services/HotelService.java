@@ -165,6 +165,10 @@ public class HotelService {
         }
     }
     
+    public ArrayList<Hotel> selectHotels(){
+        return hotelDAO.selectHotels();
+    }
+    
     /**
      * This method creates the appropriate query for the select method
      * 

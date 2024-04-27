@@ -8,11 +8,24 @@ import exceptions.ThisHotelDoesNotExistException;
 import helper.TextPrompt;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel;
 import model.User;
@@ -26,9 +39,10 @@ public class UserHome extends javax.swing.JFrame {
 
     User user;
     Hotel hotel;
-    
+
     HotelService hotelService;
     String idTable;
+
     public UserHome(User user) {
         hotelService = new HotelService();
         this.user = user;
@@ -65,17 +79,15 @@ public class UserHome extends javax.swing.JFrame {
         btn_MyReservations = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        content = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
         btn_search = new javax.swing.JButton();
         txt_city = new javax.swing.JTextField();
         innerDate = new com.toedter.calendar.JDateChooser();
         calendar_out_date = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        rooms_table = new javax.swing.JTable();
-        btn_Reserve = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        btn_Reserve = new javax.swing.JButton();
+        content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1559, 1000));
@@ -286,9 +298,6 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(sing_off))
         );
 
-        content.setBackground(new java.awt.Color(255, 255, 255));
-        content.setPreferredSize(new java.awt.Dimension(1150, 1024));
-
         search.setBackground(new java.awt.Color(166, 118, 163));
         search.setPreferredSize(new java.awt.Dimension(606, 168));
 
@@ -320,66 +329,10 @@ public class UserHome extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("find the perfect hotel today");
 
-        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
-        search.setLayout(searchLayout);
-        searchLayout.setHorizontalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel10))
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(btn_search)))
-                .addContainerGap(238, Short.MAX_VALUE))
-        );
-        searchLayout.setVerticalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel10)
-                .addGap(22, 22, 22)
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        rooms_table.setBackground(new java.awt.Color(255, 255, 255));
-        rooms_table.setForeground(new java.awt.Color(0, 0, 0));
-        rooms_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        rooms_table.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        rooms_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                rooms_tableMousePressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(rooms_table);
+        jLabel11.setBackground(new java.awt.Color(54, 37, 89));
+        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Available hotels");
 
         btn_Reserve.setBackground(new java.awt.Color(54, 37, 89));
         btn_Reserve.setForeground(new java.awt.Color(255, 255, 255));
@@ -392,43 +345,67 @@ public class UserHome extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setBackground(new java.awt.Color(54, 37, 89));
-        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Available hotels");
+        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
+        search.setLayout(searchLayout);
+        searchLayout.setHorizontalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel10))
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addComponent(btn_search)
+                .addGap(85, 85, 85)
+                .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        searchLayout.setVerticalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel10)
+                .addGap(22, 22, 22)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(searchLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel11))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setPreferredSize(new java.awt.Dimension(1150, 1024));
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
-                        .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(125, 125, 125))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+            .addGap(0, 1239, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel11)
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 915, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -437,13 +414,21 @@ public class UserHome extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1239, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 1239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 1229, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
-            .addComponent(nav, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
+            .addComponent(nav, javax.swing.GroupLayout.DEFAULT_SIZE, 1132, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -451,22 +436,22 @@ public class UserHome extends javax.swing.JFrame {
 
     private void btn_homeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseMoved
         setColor(btn_home);
-        
+
     }//GEN-LAST:event_btn_homeMouseMoved
 
     private void btn_homeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseExited
         resetColor(btn_home);
-     
+
     }//GEN-LAST:event_btn_homeMouseExited
 
     private void btn_homeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMousePressed
-          UserHome userHome = new UserHome(user);
+        UserHome userHome = new UserHome(user);
         userHome.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_homeMousePressed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        
+
 
     }//GEN-LAST:event_btn_searchActionPerformed
 
@@ -483,19 +468,13 @@ public class UserHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_settingMouseExited
 
     private void sing_offActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sing_offActionPerformed
-       UserLogin userLogin = new UserLogin();
-       userLogin.setVisible(true);
-       this.dispose();
+        UserLogin userLogin = new UserLogin();
+        userLogin.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_sing_offActionPerformed
 
-    private void rooms_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rooms_tableMousePressed
-        DefaultTableModel tblMode1 = (DefaultTableModel) rooms_table.getModel();
-
-        idTable = (String) tblMode1.getValueAt(rooms_table.getSelectedRow(), 0);
-    }//GEN-LAST:event_rooms_tableMousePressed
-
     private void btn_ReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReserveActionPerformed
-        validateReserveName(idTable);
+        //validateReserveName(idTable);
     }//GEN-LAST:event_btn_ReserveActionPerformed
 
     private void btn_MyReservationsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MyReservationsMouseMoved
@@ -510,7 +489,6 @@ public class UserHome extends javax.swing.JFrame {
         ShowJPanel(new UserManageReservations(user));
     }//GEN-LAST:event_btn_MyReservationsMousePressed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_MyReservations;
@@ -533,96 +511,130 @@ public class UserHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lb_username;
     private javax.swing.JPanel nav;
-    private javax.swing.JTable rooms_table;
     private javax.swing.JPanel search;
     private javax.swing.JButton sing_off;
     private javax.swing.JTextField txt_city;
     // End of variables declaration//GEN-END:variables
 
-    
-
-     public void reloadTable(String name) {
-        //Call the select method from tvDao. This method returns a map with the column names, the number of columns, and the table data.
-        Map<String, Object> result = hotelService.selectUserHome(name);
-
-        //Get the names of the columns from the results map. The column names are returned as a list of strings.
-        List<String> columnNames = (List<String>) result.get("columnNames");
-
-        //Get data from the result map table. The table data is returned as a list of lists of objects. Each inner list represents a row in the table and contains the data for that row.
-        List<List<Object>> tableData = (List<List<Object>>) result.get("tableData");
-
-        //Create a new tableModel. A tableModel is an object that manages the data in a table
-        DefaultTableModel model = new DefaultTableModel() {
-            @Override
-            //Override isCellEditable method making all cells uneditables
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
-        //Iterate through the list of column names
-        for (String columnName : columnNames) {
-            //Add each column name to the tableModel. This creates table's columns.
-            model.addColumn(columnName);
-        }
-
-        //Iterate through the list of table date
-        for (List<Object> rowData : tableData) {
-            //Add each row of data to the tableModel. This adds the data to the corresponding columns in the table
-            model.addRow(rowData.toArray());
-        }
-
-        //Set tableModel. This updates the table to show data stored in tableModel
-        rooms_table.setModel(model);
-
-        //Make table cells uneditable
-        rooms_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-    }
-
     //This methods change color in the nav buttons
     private void setColor(JPanel panel) {
-        panel.setBackground(new Color(67,45,115));    
+        panel.setBackground(new Color(67, 45, 115));
     }
 
     private void resetColor(JPanel panel) {
-        panel.setBackground(new Color(54,37,89));
+        panel.setBackground(new Color(54, 37, 89));
     }
-    
+
     //this methods reload all methods when start jpanel 
-
     public void initTable() {
-        reloadTable(null);
+
         //TextPrompt tp7 = new TextPrompt("Enter hotel name's ", txt_search);
+        // Obtén el número de registros de la base de datos
+        final ArrayList<Hotel> hotels = hotelService.selectHotels();
+        int numRegistros = hotels.size();
+
+        // Crea un JPanel para contener las tarjetas
+        JPanel cardsPanel = new JPanel();
+        cardsPanel.setLayout(new GridLayout(numRegistros / 3 + 1, 3, 10, 10));
+
+        content.setLayout(new GridLayout(numRegistros / 3 + 1, 3, 10, 10));
+
+        // Crea las tarjetas dinámicamente y añádelas al JPanel
+        for (int i = 0; i < numRegistros; i++) {
+            // Crea un nuevo JPanel para la tarjeta
+            JPanel card = new JPanel();
+            card.setBorder(new EmptyBorder(10, 10, 10, 10));  // Agrega un borde vacío para simular un padding
+            card.setBackground(Color.WHITE);  // Establece el color de fondo de la tarjeta
+            card.setLayout(new BorderLayout());  // Establece el layout de la tarjeta
+
+            // Crea un JLabel para el título de la tarjeta y añádelo al JPanel
+            JLabel title = new JLabel("Tarjeta " + (i + 1));
+            title.setFont(new Font("Arial", Font.BOLD, 14));  // Establece la fuente del título
+            card.add(title, BorderLayout.NORTH);
+
+            // Crea un JLabel para el contenido de la tarjeta y añádelo al JPanel
+            JLabel content = new JLabel("Contenido de la tarjeta " + (i + 1));
+            card.add(content, BorderLayout.CENTER);
+
+            // Crea un JTextField para el campo de texto adicional y añádelo al JPanel
+            JLabel textField = new JLabel("Texto adicional " + (i + 1));
+            card.add(textField, BorderLayout.SOUTH);
+
+            // Crea una variable final que contenga el valor de i
+            final int index = i;
+
+            // Crea un borde compuesto con un borde vacío y un borde de línea
+            Border padding = new EmptyBorder(10, 10, 10, 10);
+            Border borderLine = BorderFactory.createLineBorder(Color.BLACK, 1);
+            Border border = new CompoundBorder(borderLine, padding);
+            card.setBorder(border);
+
+            // Agrega un MouseListener al JPanel
+            card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // Este código se ejecutará cuando se haga clic en el JPanel
+                    System.out.println("Se hizo clic en la tarjeta " + (index + 1));
+                    Hotel hotel = hotels.get(index);
+                    validateReserveName(hotel);
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    // Cambia el color del borde a azul cuando el ratón entra en el JPanel
+                    Border blueBorder = BorderFactory.createLineBorder(Color.BLUE, 1);
+                    Border compound = new CompoundBorder(blueBorder, padding);
+                    card.setBorder(compound);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    // Cambia el color del borde al color inicial cuando el ratón sale del JPanel
+                    card.setBorder(border);
+                }
+            });
+
+            // Cambia el cursor a un puntero de mano cuando el ratón está sobre el JPanel
+            card.setCursor(Cursor.getDefaultCursor().getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            cardsPanel.add(card);
+        }
+
+        // Crea un JScrollPane y añade el JPanel a él
+        JScrollPane scrollPane = new JScrollPane(cardsPanel);
+        scrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight()));
+
+        // Añade el JScrollPane a tu panel principal
+        content.setLayout(new BorderLayout());
+        content.add(scrollPane, BorderLayout.CENTER);
+
+        // Actualiza el JPanel para mostrar los nuevos botones
+        content.revalidate();
+        content.repaint();
 
     }
-    
+
     //This method validate if there is a selecto arrow from table and show panel AdminUpdateRoom
-    public void validateReserveName(String hotel_name) {
-        if (idTable == null) {
-            JOptionPane.showMessageDialog(null, "Please select the hotel you want to book");
-        } else {
-            try {
-                Hotel hotel = hotelService.findHotel(idTable);
-                System.out.println(hotel.getId() + hotel.getName());
-                ShowJPanel(new UserPreReservation(user ,hotel));
-            }catch (ThisHotelDoesNotExistException e){
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
+    public void validateReserveName(Hotel hotel) {
+
+        try {
+            ShowJPanel(new UserPreReservation(user, hotel));
+        } catch (ThisHotelDoesNotExistException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
+
     }
-    
-    
+
     //This method show the new  panel in content
-    private void ShowJPanel(JPanel panel){
+    private void ShowJPanel(JPanel panel) {
         panel.setSize(1140, 1024);
         panel.setLocation(0, 0);
-        
+
         content.removeAll();
         content.add(panel, BorderLayout.CENTER);
         content.revalidate();

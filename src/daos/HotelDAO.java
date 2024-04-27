@@ -35,13 +35,11 @@ public class HotelDAO implements HotelDAOInterface {
         connection = DataBaseSingleton.getInstance().getConnection();
     }
 
-   
-
     @Override
     //This method inserts a new row in table "hotels" with de provided data of a new hotel
     public boolean insert(String name, String address, int classification, String comforts) {
         String insertSQL = "INSERT INTO hotels (name,address,classification,comforts) VALUES (?,?,?,?)";
-        try ( PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             pstmt.setString(1, name);
             pstmt.setString(2, address);
             pstmt.setInt(3, classification);
@@ -99,7 +97,7 @@ public class HotelDAO implements HotelDAOInterface {
         //Map<keyDataType, valueDataType>
         Map<String, Object> result = new HashMap<>();
         String selectSQL = query;
-        try ( PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
             //Execute query and get the results in a ResultSet 
             ResultSet rs = pstmt.executeQuery();
 
@@ -177,7 +175,7 @@ public class HotelDAO implements HotelDAOInterface {
     public ArrayList<String> findHotelImages(int id) {
         ArrayList<String> images = new ArrayList<>();
         String selectSQL = "SELECT uri FROM images WHERE id_hotel = ?";
-        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+        try (PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
 
@@ -196,7 +194,7 @@ public class HotelDAO implements HotelDAOInterface {
     /**
      * This method finds a hotel registered in table "hotels" and returns it. If
      * it finds a hotel
-     * 
+     *
      *
      * @param id
      * @return A Hotel if the hotel exists, or null, if there is not a hotel
@@ -204,7 +202,7 @@ public class HotelDAO implements HotelDAOInterface {
      */
     public Hotel findHotel(int id) {
         String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels WHERE id = ?";
-        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+        try (PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
 
@@ -221,14 +219,13 @@ public class HotelDAO implements HotelDAOInterface {
         }
         return null;
     }
-    
-    
+
     @Override
     // This method creates an ArrayList with hotel names from table "hotels"
     public ArrayList<String> selectNameHotels() {
         String selectSQL = "SELECT name FROM hotels";
         ArrayList<String> hotelsName = new ArrayList<>();
-        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+        try (PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 hotelsName.add(rs.getString("name"));
@@ -245,7 +242,7 @@ public class HotelDAO implements HotelDAOInterface {
     //This method validates if the name provided for a hotel is available. If the name is not available throws a HotelNameAlreadyInDataBase exception
     public boolean validateHotelNameAvailability(String name) {
         String consultationSQL = "SELECT *  FROM hotels WHERE name = ? ";
-        try ( PreparedStatement pstmt = connection.prepareStatement(consultationSQL)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(consultationSQL)) {
             pstmt.setString(1, name);
 
             ResultSet rs = pstmt.executeQuery();
@@ -265,7 +262,7 @@ public class HotelDAO implements HotelDAOInterface {
     @Override
     public Hotel findHotel(String name) {
         String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels WHERE name = ?";
-        try ( PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+        try (PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
             pstm.setString(1, name);
             ResultSet rs = pstm.executeQuery();
 
@@ -281,6 +278,26 @@ public class HotelDAO implements HotelDAOInterface {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<Hotel> selectHotels() {
+        ArrayList<Hotel> hotels = new ArrayList<>();
+        String selectSQL = "SELECT id, name, address, classification, comforts FROM hotels";
+        try (PreparedStatement pstm = connection.prepareStatement(selectSQL)) {
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Hotel hotel = new Hotel(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getInt("classification"), rs.getString("comforts"), null);
+                hotels.add(hotel);
+            }
+            
+
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for finding hotel");
+            e.printStackTrace();
+        }
+        return hotels;
     }
 
 }
