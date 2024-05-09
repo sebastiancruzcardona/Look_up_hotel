@@ -32,13 +32,13 @@ public class DataBaseSingleton {
     //private static final String PORT = "3306";
 
     //Path to our database (disable SSL use with "?useSSL=false")
-    private static final String URL = "jdbc:mysql://localhost:3306/my-first-mysql?useSSL=false&allowPublicKeyRetrieval=True";
+    private static final String URL = "jdbc:mysql://bkzs0rxzta3lj7qswadx-mysql.services.clever-cloud.com:3306/bkzs0rxzta3lj7qswadx?useSSL=false&allowPublicKeyRetrieval=True";
 
     //User name
-    private static final String USERNAME = "root";
+    private static final String USERNAME = "ucchmicdw0vrgpmh";
 
     //User password
-    private static final String PASSWORD = "clavecita1357";
+    private static final String PASSWORD = "FSlWZ6sTop6XdlbnjXqB";
 
     
     private DataBaseSingleton(){
