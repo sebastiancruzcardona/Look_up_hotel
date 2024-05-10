@@ -262,6 +262,63 @@ public class ReservationService {
         }
 
     }
+    
+    //this method create report of all reservations an user
+    public void generateReportPdfUser(int id) {
+        
+        ArrayList<Reservation> reservations = reservationDAO.findReservationsUser(id);
+
+        if (reservations.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "the hotel was not found try again");
+        } else {
+            try {
+                String ruta = System.getProperty("user.home");
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(ruta + "/Desktop/Report_All_Reservations.pdf"+ reservations.getFirst().getUser().getUserName()));
+
+                document.open();
+
+                // Agregar título al documento
+                Paragraph tittle = new Paragraph("All Reservations " + reservations.getFirst().getUser().getUserName());
+                document.add(tittle);
+                PdfPTable table = new PdfPTable(12);
+                table.addCell("id");
+                table.addCell("full_name");
+                table.addCell("email");
+                table.addCell("contact");
+                table.addCell("hotel");
+                table.addCell("address");
+                table.addCell("conforts");
+                table.addCell("room_number");
+                table.addCell("entry_date");
+                table.addCell("departure_date");
+                table.addCell("total_price");
+                table.addCell("status");
+                for (Reservation reservation : reservations) {
+
+                    table.addCell(String.valueOf(reservation.getId()));
+                    table.addCell(reservation.getUser().getUserName());
+                    table.addCell(reservation.getUser().getEmail());
+                    table.addCell(reservation.getUser().getDetails());
+                    table.addCell(reservation.getHotel().getName());
+                    table.addCell(reservation.getHotel().getAddress());
+                    table.addCell(reservation.getHotel().getComforts());
+                    table.addCell(reservation.getRoom().getNumber());
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                    table.addCell(format.format(reservation.getEntryDate()));
+                    table.addCell(format.format(reservation.getDepartureDate()));
+                    table.addCell(String.valueOf(reservation.getTotalPrice()));
+                    table.addCell(reservation.getReservationStatus());
+
+                }
+                document.add(table);
+                document.close();
+                JOptionPane.showMessageDialog(null, "the report was created.");
+            } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+            }
+        }
+
+    }
 
     //This method calls validateNotJustSpaces from helper.RegularExpressions
     public void validateNotJustSpaces(String string) {

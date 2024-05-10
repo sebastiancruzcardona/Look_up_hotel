@@ -227,7 +227,7 @@ public class AdminReports extends javax.swing.JPanel {
 
             reservationService.createReportBetweenDates(entry, departure);
 
-        } catch (EntryDateException | DepartureDateException | NotSelectedDatesException e) {
+        } catch (EntryDateException | DepartureDateException | NotSelectedDatesException  e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 

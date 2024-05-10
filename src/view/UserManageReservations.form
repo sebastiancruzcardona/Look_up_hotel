@@ -80,8 +80,8 @@
                       <Component id="btn_allfilter" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="496" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="510" max="-2" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_delete" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="btn_details" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
@@ -221,7 +221,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Resources/plus-regular-24.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Details"/>
+            <Property name="text" type="java.lang.String" value="Pdf"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
           <Events>

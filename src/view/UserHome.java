@@ -79,18 +79,17 @@ public class UserHome extends javax.swing.JFrame {
         btn_MyReservations = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        search = new javax.swing.JPanel();
-        btn_search = new javax.swing.JButton();
-        txt_city = new javax.swing.JTextField();
-        innerDate = new com.toedter.calendar.JDateChooser();
-        calendar_out_date = new com.toedter.calendar.JDateChooser();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        btn_Reserve = new javax.swing.JButton();
         content = new javax.swing.JPanel();
+        cards = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        innerDate1 = new com.toedter.calendar.JDateChooser();
+        calendar_out_date1 = new com.toedter.calendar.JDateChooser();
+        btn_search1 = new javax.swing.JButton();
+        txt_city1 = new javax.swing.JTextField();
+        btn_Reserve1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1559, 1100));
+        setPreferredSize(new java.awt.Dimension(1450, 1024));
 
         nav.setBackground(new java.awt.Color(54, 37, 89));
         nav.setPreferredSize(new java.awt.Dimension(294, 1024));
@@ -126,7 +125,7 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(75, 75, 75)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btn_homeLayout.setVerticalGroup(
             btn_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +168,7 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(67, 67, 67)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btn_settingLayout.setVerticalGroup(
             btn_settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +238,7 @@ public class UserHome extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(55, 55, 55)
                 .addComponent(jLabel9)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btn_MyReservationsLayout.setVerticalGroup(
             btn_MyReservationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,23 +254,26 @@ public class UserHome extends javax.swing.JFrame {
         nav.setLayout(navLayout);
         navLayout.setHorizontalGroup(
             navLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel3))
-            .addGroup(navLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_MyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(navLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(navLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
-                .addComponent(sing_off))
+                .addComponent(sing_off)
+                .addGap(40, 40, 40))
+            .addGroup(navLayout.createSequentialGroup()
+                .addGroup(navLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(navLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel3))
+                    .addGroup(navLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_MyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(navLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
         navLayout.setVerticalGroup(
             navLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,129 +283,113 @@ public class UserHome extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(btn_MyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(471, 471, 471)
-                .addComponent(btn_setting, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addComponent(btn_MyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(421, 421, 421)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(38, 38, 38)
                 .addGroup(navLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(navLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(sing_off))))
-        );
-
-        search.setBackground(new java.awt.Color(166, 118, 163));
-        search.setPreferredSize(new java.awt.Dimension(606, 168));
-
-        btn_search.setBackground(new java.awt.Color(206, 236, 242));
-        btn_search.setFont(new java.awt.Font("AnjaliOldLipi", 1, 15)); // NOI18N
-        btn_search.setForeground(new java.awt.Color(54, 37, 89));
-        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/chevron-right-regular-24.png"))); // NOI18N
-        btn_search.setText("Search hotels");
-        btn_search.setToolTipText("");
-        btn_search.setBorderPainted(false);
-        btn_search.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btn_search.setIconTextGap(20);
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
-
-        txt_city.setBackground(new java.awt.Color(255, 255, 255));
-        txt_city.setToolTipText("enter");
-        txt_city.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_cityActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setBackground(new java.awt.Color(54, 37, 89));
-        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("find the perfect hotel today");
-
-        jLabel11.setBackground(new java.awt.Color(54, 37, 89));
-        jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Available hotels");
-
-        btn_Reserve.setBackground(new java.awt.Color(54, 37, 89));
-        btn_Reserve.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Reserve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
-        btn_Reserve.setText("Reserve");
-        btn_Reserve.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_Reserve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ReserveActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
-        search.setLayout(searchLayout);
-        searchLayout.setHorizontalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel10))
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(btn_search)
-                .addGap(85, 85, 85)
-                .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        searchLayout.setVerticalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel10)
-                .addGap(22, 22, 22)
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(searchLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(innerDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel11))
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(calendar_out_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btn_Reserve, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(sing_off)))
+                .addGap(71, 71, 71))
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
-        content.setPreferredSize(new java.awt.Dimension(1150, 1024));
+        content.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        content.setPreferredSize(new java.awt.Dimension(2690, 1000));
+
+        cards.setBackground(new java.awt.Color(255, 255, 255));
+        cards.setPreferredSize(new java.awt.Dimension(1150, 1024));
+        cards.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_search1.setBackground(new java.awt.Color(206, 236, 242));
+        btn_search1.setFont(new java.awt.Font("AnjaliOldLipi", 1, 15)); // NOI18N
+        btn_search1.setForeground(new java.awt.Color(54, 37, 89));
+        btn_search1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/chevron-right-regular-24.png"))); // NOI18N
+        btn_search1.setText("Search hotels");
+        btn_search1.setToolTipText("");
+        btn_search1.setBorderPainted(false);
+        btn_search1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btn_search1.setIconTextGap(20);
+        btn_search1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_search1ActionPerformed(evt);
+            }
+        });
+
+        txt_city1.setBackground(new java.awt.Color(255, 255, 255));
+        txt_city1.setToolTipText("enter");
+        txt_city1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_city1ActionPerformed(evt);
+            }
+        });
+
+        btn_Reserve1.setBackground(new java.awt.Color(54, 37, 89));
+        btn_Reserve1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Reserve1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
+        btn_Reserve1.setText("Reserve");
+        btn_Reserve1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_Reserve1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Reserve1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txt_city1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(innerDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(calendar_out_date1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_search1)
+                .addGap(28, 28, 28)
+                .addComponent(btn_Reserve1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_Reserve1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txt_city1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(calendar_out_date1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(innerDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1239, Short.MAX_VALUE)
+            .addGroup(contentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -411,23 +397,14 @@ public class UserHome extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1239, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 1229, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE))
-            .addComponent(nav, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(nav, javax.swing.GroupLayout.DEFAULT_SIZE, 1173, Short.MAX_VALUE)
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1173, Short.MAX_VALUE)
         );
 
         pack();
@@ -449,15 +426,6 @@ public class UserHome extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_homeMousePressed
 
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-
-
-    }//GEN-LAST:event_btn_searchActionPerformed
-
-    private void txt_cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_cityActionPerformed
-
     private void btn_settingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseEntered
         setColor(btn_setting);
     }//GEN-LAST:event_btn_settingMouseEntered
@@ -472,10 +440,6 @@ public class UserHome extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_sing_offActionPerformed
 
-    private void btn_ReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReserveActionPerformed
-        //validateReserveName(idTable);
-    }//GEN-LAST:event_btn_ReserveActionPerformed
-
     private void btn_MyReservationsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MyReservationsMouseMoved
         setColor(btn_MyReservations);
     }//GEN-LAST:event_btn_MyReservationsMouseMoved
@@ -488,19 +452,30 @@ public class UserHome extends javax.swing.JFrame {
         ShowJPanel(new UserManageReservations(user));
     }//GEN-LAST:event_btn_MyReservationsMousePressed
 
+    private void btn_search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_search1ActionPerformed
+
+    private void txt_city1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_city1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_city1ActionPerformed
+
+    private void btn_Reserve1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Reserve1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Reserve1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_MyReservations;
-    private javax.swing.JButton btn_Reserve;
+    private javax.swing.JButton btn_Reserve1;
     private javax.swing.JPanel btn_home;
-    private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_search1;
     private javax.swing.JPanel btn_setting;
-    private com.toedter.calendar.JDateChooser calendar_out_date;
+    private com.toedter.calendar.JDateChooser calendar_out_date1;
+    private javax.swing.JPanel cards;
     private javax.swing.JPanel content;
-    private com.toedter.calendar.JDateChooser innerDate;
+    private com.toedter.calendar.JDateChooser innerDate1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -509,14 +484,14 @@ public class UserHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lb_username;
     private javax.swing.JPanel nav;
-    private javax.swing.JPanel search;
     private javax.swing.JButton sing_off;
-    private javax.swing.JTextField txt_city;
+    private javax.swing.JTextField txt_city1;
     // End of variables declaration//GEN-END:variables
 
     //This methods change color in the nav buttons
@@ -606,15 +581,15 @@ public class UserHome extends javax.swing.JFrame {
 
         // Crea un JScrollPane y añade el JPanel a él
         JScrollPane scrollPane = new JScrollPane(cardsPanel);
-        scrollPane.setPreferredSize(new Dimension(content.getWidth(), content.getHeight()));
+        scrollPane.setPreferredSize(new Dimension(cards.getWidth(), cards.getHeight()));
 
         // Añade el JScrollPane a tu panel principal
-        content.setLayout(new BorderLayout());
-        content.add(scrollPane, BorderLayout.CENTER);
+        cards.setLayout(new BorderLayout());
+        cards.add(scrollPane, BorderLayout.CENTER);
 
         // Actualiza el JPanel para mostrar los nuevos botones
-        content.revalidate();
-        content.repaint();
+        cards.revalidate();
+        cards.repaint();
 
     }
 

@@ -34,4 +34,7 @@ public interface ReservationDAOInterface {
     ArrayList<Reservation> findReservationsBetweenDates(java.sql.Date entry_date, java.sql.Date departure_date);
     
     ArrayList<Reservation> selectAllReservations();
+    
+    ArrayList<Reservation> findReservationsUser(int id);
+    
 }
