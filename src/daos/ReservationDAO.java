@@ -332,4 +332,58 @@ public class ReservationDAO implements ReservationDAOInterface{
         }
         return null;
     }
+
+    @Override
+    public ArrayList<Reservation> findReservationsForHotelName(String hotelName) {
+         ArrayList<Reservation> reservations = new ArrayList<>();
+         
+        String selectSQL =  "SELECT reserve.id ,u.full_name,u.email,u.contact ,h.name ,h.address,h.comforts, r.room_number, entry_date, departure_date, total_price,  s.name "
+                + "FROM reservations reserve "
+                + "JOIN users u ON reserve.id_user = u.id "
+                + "JOIN hotels h ON reserve.id_hotel = h.id AND h.name ="+ "'"+hotelName + "' "
+                + " JOIN rooms r ON reserve.id_room = r.id "
+                + "JOIN reservation_statuses s ON reserve.id_reservation_statuses = s.id ";
+        
+        String selectall =  "SELECT reserve.id ,u.full_name,u.email,u.contact ,h.name ,h.address,h.comforts, r.room_number, entry_date, departure_date, total_price,  s.name "
+                + "FROM reservations reserve "
+                + "JOIN users u ON reserve.id_user = u.id "
+                + "JOIN hotels h ON reserve.id_hotel = h.id"
+                + " JOIN rooms r ON reserve.id_room = r.id "
+                + "JOIN reservation_statuses s ON reserve.id_reservation_statuses = s.id ";
+        
+        System.out.println(selectSQL);
+                
+        try(PreparedStatement pstm = connection.prepareStatement(selectall)) {
+            
+            
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()) {                
+                  User user = new User();
+                  Hotel hotel = new Hotel();
+                  Room room = new Room();
+                  
+                 int id = rs.getInt("id");
+                 String name = rs.getString("u.full_name");
+                 
+                 user.setUserName(rs.getString("u.full_name"));
+                 user.setEmail(rs.getString("u.email"));
+                 user.setDetails(rs.getString("u.contact"));
+                 hotel.setName(rs.getString("h.name"));
+                 hotel.setAddress(rs.getString("h.address"));
+                 hotel.setComforts(rs.getString("h.comforts"));
+                 room.setNumber(rs.getString("r.room_number"));
+                 
+                 Reservation reservation = new Reservation(rs.getInt("id"), user, hotel, room, rs.getDate("entry_date"), rs.getDate("departure_date"),rs.getString("s.name"),rs.getDouble("total_price") );
+                 
+                 reservations.add(reservation);
+            }
+          
+            
+        } catch (SQLException | NullConnectionException e) {
+            System.out.println("An error occurred while connecting to database for deletion of data");
+            e.printStackTrace();
+        }
+        return reservations;
+    }
 }

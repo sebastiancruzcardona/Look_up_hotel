@@ -124,6 +124,9 @@ public class AdminHome extends javax.swing.JFrame {
 
         btn_setting.setBackground(new java.awt.Color(54, 37, 89));
         btn_setting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_settingMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_settingMouseEntered(evt);
             }
@@ -137,7 +140,7 @@ public class AdminHome extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel5.setText("settings");
+        jLabel5.setText("Reports");
 
         javax.swing.GroupLayout btn_settingLayout = new javax.swing.GroupLayout(btn_setting);
         btn_setting.setLayout(btn_settingLayout);
@@ -474,6 +477,10 @@ public class AdminHome extends javax.swing.JFrame {
     private void btn_usersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usersMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_usersMousePressed
+
+    private void btn_settingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_settingMouseClicked
+        ShowJPanel(new AdminReports());
+    }//GEN-LAST:event_btn_settingMouseClicked
 
     
 

@@ -4,10 +4,22 @@
  */
 package services;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import daos.ReservationDAO;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import model.Reservation;
 
 /**
  *
@@ -68,6 +80,66 @@ public class ReservationService {
     public double calculateTotalPrice(double pricePorNight, int totalDays){
             
         return pricePorNight*totalDays;
+        
+    }
+    
+    //this method create report in pdf for hotel name
+    
+    public void generateReportPdfReservation (String hotelName){
+        
+        ArrayList<Reservation> reservations = reservationDAO.findReservationsForHotelName(hotelName);
+        
+        if(reservations.isEmpty()){
+            JOptionPane.showMessageDialog(null, "the hotel was not found try again");
+        }else{
+            try {
+            String ruta = System.getProperty("user.home");
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(ruta + "/Desktop/Report_Reservations.pdf"));
+            
+            document.open();
+            
+             // Agregar título al documento
+            Paragraph tittle = new Paragraph("Reservations of " + reservations.getFirst().getHotel().getName());
+            document.add(tittle);
+            PdfPTable table = new PdfPTable(12);
+                    table.addCell("id");
+                    table.addCell("full_name");
+                    table.addCell("email");    
+                    table.addCell("contact");    
+                    table.addCell("hotel");    
+                    table.addCell("address");    
+                    table.addCell("conforts");    
+                    table.addCell("room_number");    
+                    table.addCell("entry_date");    
+                    table.addCell("departure_date");    
+                    table.addCell("total_price");    
+                    table.addCell("status");    
+            for (Reservation reservation : reservations) {
+                    
+                    table.addCell(String.valueOf(reservation.getId()));
+                    table.addCell(reservation.getUser().getUserName());
+                    table.addCell(reservation.getUser().getEmail());    
+                    table.addCell(reservation.getUser().getDetails());    
+                    table.addCell(reservation.getHotel().getName());    
+                    table.addCell(reservation.getHotel().getAddress());    
+                    table.addCell(reservation.getHotel().getComforts());    
+                    table.addCell(reservation.getRoom().getNumber());    
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                    table.addCell(format.format(reservation.getEntryDate()));    
+                    table.addCell(format.format(reservation.getDepartureDate()));    
+                    table.addCell(String.valueOf(reservation.getTotalPrice()));    
+                    table.addCell(reservation.getReservationStatus());    
+                  
+
+                    
+                    }
+            document.add(table);
+            document.close();
+            JOptionPane.showMessageDialog(null, "the report was created.");
+        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+        }
+        }
         
     }
 }
