@@ -30,4 +30,8 @@ public interface ReservationDAOInterface {
     Reservation findReservation(int id);
     
     ArrayList<Reservation> findReservationsForHotelName(String hotelName);
+     
+    ArrayList<Reservation> findReservationsBetweenDates(java.sql.Date entry_date, java.sql.Date departure_date);
+    
+    ArrayList<Reservation> selectAllReservations();
 }

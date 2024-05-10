@@ -4,7 +4,12 @@
  */
 package view;
 
+import exceptions.DepartureDateException;
 import exceptions.EmptySearchFieldException;
+import exceptions.EntryDateException;
+import exceptions.NotSelectedDatesException;
+import java.util.Date;
+import static java.util.Map.entry;
 import javax.swing.JApplet;
 import javax.swing.JOptionPane;
 import model.Hotel;
@@ -17,11 +22,14 @@ import services.ReservationService;
  */
 public class AdminReports extends javax.swing.JPanel {
 
+    Date today;
     HotelService hotelService;
     ReservationService reservationService;
+
     public AdminReports() {
         hotelService = new HotelService();
         reservationService = new ReservationService();
+        today = new Date();
         initComponents();
     }
 
@@ -191,14 +199,13 @@ public class AdminReports extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_all_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_all_reportsActionPerformed
-        
+        reservationService.generateReportPdfAllReservation();
     }//GEN-LAST:event_btn_all_reportsActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try {
-             reservationService.generateReportPdfReservation(txt_searchHotel.getText());
-            
-            
+            reservationService.generateReportPdfReservation(txt_searchHotel.getText());
+
             txt_searchHotel.setText("");
         } catch (EmptySearchFieldException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -206,7 +213,25 @@ public class AdminReports extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_search1ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            Date entry = calendar_entry_date.getDate();
+            Date departure = calendar_departure_date.getDate();
+           
+
+            if (departure.before(entry) || departure.toString().equals(entry.toString())) {
+                throw new DepartureDateException();
+            }if(entry == null || departure==null){
+                throw new NotSelectedDatesException();
+            }
+
+            reservationService.createReportBetweenDates(entry, departure);
+
+        } catch (EntryDateException | DepartureDateException | NotSelectedDatesException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+
     }//GEN-LAST:event_btn_search1ActionPerformed
 
 
