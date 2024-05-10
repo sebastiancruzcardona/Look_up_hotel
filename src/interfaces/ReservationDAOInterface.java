@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import model.Reservation;
@@ -27,4 +28,13 @@ public interface ReservationDAOInterface {
     public boolean delete(int id);
     
     Reservation findReservation(int id);
+    
+    ArrayList<Reservation> findReservationsForHotelName(String hotelName);
+     
+    ArrayList<Reservation> findReservationsBetweenDates(java.sql.Date entry_date, java.sql.Date departure_date);
+    
+    ArrayList<Reservation> selectAllReservations();
+    
+    ArrayList<Reservation> findReservationsUser(int id);
+    
 }

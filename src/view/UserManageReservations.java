@@ -121,7 +121,7 @@ public class UserManageReservations extends javax.swing.JPanel {
         btn_details.setBackground(new java.awt.Color(54, 37, 89));
         btn_details.setForeground(new java.awt.Color(255, 255, 255));
         btn_details.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/plus-regular-24.png"))); // NOI18N
-        btn_details.setText("Details");
+        btn_details.setText("Pdf");
         btn_details.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_details.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,8 +187,8 @@ public class UserManageReservations extends javax.swing.JPanel {
                         .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_allfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(back_groundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_details, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,7 +222,7 @@ public class UserManageReservations extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_allfilterActionPerformed
 
     private void btn_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detailsActionPerformed
-        //ShowJPanel(new UserReservationDetails());
+        reservationService.generateReportPdfUser(user.getId());
     }//GEN-LAST:event_btn_detailsActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
